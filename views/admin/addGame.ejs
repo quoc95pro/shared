@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="page-header">Add Game</h2>
+                <form method="post" action="/games/addGame" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" name="name" type="text" placeholder="Enter Name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control" name="category">
+                            <% category.forEach(function(cate) { %>
+                                <option value="<%= cate.name %>"><%= cate.name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Download Link</label>
+                        <input class="form-control" name="downloadLink" type="text" placeholder="Download Link" />
+                    </div>
+                    <div class="form-group">
+                        <label>System Requirements</label>
+                        <input class="form-control" name="systemRequirements" type="text" placeholder="System Requirements" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input class="form-control" name="description" type="text" placeholder="Description" />
+                    </div>
+                    <div class="form-group">
+                        <label>Seri</label>
+                        <select class="form-control" name="seri">
+                            <% seri.forEach(function(sr) { %>
+                                <option value="<%= sr.name %>"><%= sr.name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Avatar</label>
+                        <input class="form-control" name="avatar" type="file" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="submit" value="Register" />
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
