@@ -5,19 +5,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 var expressValidator = require('express-validator');
-var multer = require('multer');
-var upload = multer({dest: './uploads'});
 var flash = require('connect-flash');
-var bcrypt = require('bcryptjs');
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
-var db = mongoose.connection;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var gamesRouter = require('./routes/game');
+var adminRouter = require('./routes/admin/admin');
+var gamesRouter = require('./routes/admin/game');
 
 var app = express();
 
@@ -79,6 +73,7 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/admin', adminRouter);
 app.use('/games', gamesRouter);
 
 // catch 404 and forward to error handler

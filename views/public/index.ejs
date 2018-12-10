@@ -2,8 +2,8 @@
         <% game.forEach(function(g) { %>
             <ul> 
                 <img src="/images/game/<%= g.avatar %>" width="600px">
-                <li><a href="/games/detail/<%= g._id %>">detail</a></li>
-                <li><a href="/games/category/<%= g.category %>"><%= g.category %></a></li>
+                <li><a href="/detail/<%= g._id %>">detail</a></li>
+                <li><a href="/category/<%= g.category %>"><%= g.category %></a></li>
                 <li><%= g.name %></li>
             </ul>
         <% }); %>

@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/shared');
 
-var db = mongoose.connection;
-
 // Seri Schema
 var SeriSchema = mongoose.Schema({
 	name: {

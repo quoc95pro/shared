@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/shared');
 
-var db = mongoose.connection;
-
 // Category Schema
 var CategorySchema = mongoose.Schema({
 	name: {

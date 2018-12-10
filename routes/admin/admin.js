@@ -5,26 +5,26 @@ var upload = multer({dest: './public/images/usr'});
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/user');
+var User = require('../../models/user');
 
-/* GET users listing. */
+/* GET admin page */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/register', function(req, res, next) {
-  res.render('public/register',{title:'Register'});
+  if(req.isAuthenticated()) {
+    res.render('admin/index');
+  } else {
+    res.redirect('admin/login');
+  }
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('public/login', {title:'Login'});
+  res.render('admin/login', {title:'Login'});
 });
 
 router.post('/login',
-  passport.authenticate('local',{failureRedirect:'/users/login', failureFlash: 'Invalid username or password'}),
+  passport.authenticate('local',{failureRedirect:'/admin/login', failureFlash: 'Invalid username or password'}),
   function(req, res) {
    req.flash('success_msg', 'You are now logged in');
-   res.redirect('/');
+   res.redirect('/admin');
 });
 
 passport.serializeUser(function(user, done) {
@@ -60,7 +60,7 @@ router.post('/register', upload.single('profileimage') ,function(req, res, next)
   var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
-  var userType = 1;
+  var userType = 'user';
   var status = 'inactive';
 
   if(req.file){
@@ -103,6 +103,8 @@ router.post('/register', upload.single('profileimage') ,function(req, res, next)
     });
 
     req.flash('success_msg', 'You are now registered and can login');
+
+    res.location('/');
     res.redirect('/');
   }
 });
@@ -111,7 +113,7 @@ router.post('/register', upload.single('profileimage') ,function(req, res, next)
 router.get('/logout', function(req, res){
   req.logout();
   req.flash('success_msg', 'You are now logged out');
-  res.redirect('/users/login');
+  res.redirect('/admin/login');
 });
 
 module.exports = router;

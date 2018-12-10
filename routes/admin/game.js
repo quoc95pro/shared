@@ -3,9 +3,9 @@ var router = express.Router();
 var multer = require('multer');
 var upload = multer({dest: './public/images/game'});
 
-var Game = require('../models/game');
-var Category = require('../models/category');
-var Seri = require('../models/seri');
+var Game = require('../../models/game');
+var Category = require('../../models/category');
+var Seri = require('../../models/seri');
 
 /* GET Game listing. */
 router.get('/', function(req, res, next) {
@@ -89,25 +89,6 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
 });
 
 
-router.get('/detail/:id', function(req, res){
-    Game.findById(req.params.id, function(err, game){
-      if(err){
-        console.log(err);
-      }
 
-      res.render('public/detail', {game: game});
-    })
-});
-
-router.get('/category/:cate', function(req, res){
-  Game.getGameByCategory(req.params.id, function(err, game){
-    if(err){
-      console.log(err);
-    }
-    console.log(game);
-    
-    res.render('public/category', {game: game});
-  })
-});
 
 module.exports = router;

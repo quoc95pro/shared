@@ -1,9 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-
 mongoose.connect('mongodb://localhost/shared');
-
-var db = mongoose.connection;
 
 // User Schema
 var UserSchema = mongoose.Schema({
@@ -24,7 +21,7 @@ var UserSchema = mongoose.Schema({
 		type: String
     },
     userType:{
-        type: String
+        type: Number
     },
     status:{
         type: String
