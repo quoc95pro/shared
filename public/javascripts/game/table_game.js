@@ -1,52 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/bootstrap-table.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <script src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script src="/javascripts/popper.min.js"></script>
-    <script src="/javascripts/bootstrap.min.js"></script>
-    <script src="/javascripts/bootstrap-table.js"></script>
-    <script src="/javascripts/ga.js"></script>
-
-</head>
-
-<body>
-    <div class="container">
-                    <h1>Boostrap v4.0</h1>
-                    <div id="toolbar">
-                        <button id="remove" class="btn btn-danger" disabled>
-                            <i class="glyphicon glyphicon-remove"></i> Delete
-                        </button>
-                    </div>
-                    <table id="table"
-                           data-toolbar="#toolbar"
-                           data-show-refresh="true"
-                           data-show-toggle="true"
-                           data-show-columns="true"
-                           data-detail-view="true"
-                           data-detail-formatter="detailFormatter"
-                           data-minimum-count-columns="2"
-                           data-show-pagination-switch="true"
-                           data-pagination="true"
-                           data-id-field="id"
-                           data-page-list="[10, 25, 50, 100, ALL]"
-                           data-show-footer="false"
-                          
-                           data-url="/data"
-                           data-response-handler="responseHandler">
-                    </table>
-                </div>
-                
-                <script>
-                    var $table = $('#table'),
+var $table = $('#table'),
                         $remove = $('#remove'),
                         selections = [];
                 
@@ -62,8 +14,8 @@
                                         align: 'center',
                                         valign: 'middle'
                                     }, {
-                                        title: 'Item ID',
-                                        field: 'id',
+                                        title: 'Item Name',
+                                        field: 'name',
                                         rowspan: 2,
                                         align: 'center',
                                         valign: 'middle',
@@ -77,14 +29,14 @@
                                 ],
                                 [
                                     {
-                                        field: 'name',
-                                        title: 'Item Name',
+                                        field: 'views',
+                                        title: 'Views',
                                         sortable: true,
                                         footerFormatter: totalNameFormatter,
                                         align: 'center'
                                     }, {
-                                        field: 'price',
-                                        title: 'Item Price',
+                                        field: 'downloadLink',
+                                        title: 'Download Link',
                                         sortable: true,
                                         align: 'center',
                                         footerFormatter: totalPriceFormatter
@@ -110,14 +62,7 @@
                             selections = getIdSelections();
                             // push or splice the selections if you want to save all data selections
                         });
-                        $table.on('expand-row.bs.table', function (e, index, row, $detail) {
-                            if (index % 2 == 1) {
-                                $detail.html('Loading from ajax request...');
-                                $.get('LICENSE', function (res) {
-                                    $detail.html(res.replace(/\n/g, '<br>'));
-                                });
-                            }
-                        });
+                       
                         $table.on('all.bs.table', function (e, name, args) {
                             console.log(name, args);
                         });
@@ -160,7 +105,7 @@
                     function operateFormatter(value, row, index) {
                         return [
                             '<a class="like" href="javascript:void(0)" title="Like">',
-                            '<i class="fa fa-heart-o"></i>',
+                            '<i class="fa fa-edit"></i>',
                             '</a>  ',
                             '<a class="remove" href="javascript:void(0)" title="Remove">',
                             '<i class="fa fa-trash"></i>',
@@ -170,12 +115,13 @@
                 
                     window.operateEvents = {
                         'click .like': function (e, value, row, index) {
-                            alert('You click like action, row: ' + JSON.stringify(row));
+                            $('#editModal').modal('show')
+                            //alert('You click like action, row: ' + JSON.stringify(row));
                         },
                         'click .remove': function (e, value, row, index) {
                             $table.bootstrapTable('remove', {
                                 field: 'id',
-                                values: [row.id]
+                                values: [row._id]
                             });
                         }
                     };
@@ -203,54 +149,3 @@
                     $(function () {
                         initTable();
                     });
-                </script>
-          
-        <!-- Table -->
-        <div class="row">
-            <div class="col-md-8">
-                <h2 class="page-header">Add Game</h2>
-                <form method="post" action="/games/addGame" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input class="form-control" name="name" type="text" placeholder="Enter Name" />
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
-                        <select class="form-control" name="category">
-                            <% category.forEach(function(cate) { %>
-                                <option value="<%= cate.name %>"><%= cate.name %></option>
-                            <% }); %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Download Link</label>
-                        <input class="form-control" name="downloadLink" type="text" placeholder="Download Link" />
-                    </div>
-                    <div class="form-group">
-                        <label>System Requirements</label>
-                        <input class="form-control" name="systemRequirements" type="text" placeholder="System Requirements" />
-                    </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input class="form-control" name="description" type="text" placeholder="Description" />
-                    </div>
-                    <div class="form-group">
-                        <label>Seri</label>
-                        <select class="form-control" name="seri">
-                            <% seri.forEach(function(sr) { %>
-                                <option value="<%= sr.name %>"><%= sr.name %></option>
-                            <% }); %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Avatar</label>
-                        <input class="form-control" name="avatar" type="file" />
-                    </div>
-                    <input class="btn btn-primary" type="submit" name="submit" value="Register" />
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>

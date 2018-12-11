@@ -1,0 +1,59 @@
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Game</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div >
+                    <form method="post" action="/games/addGame" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" name="name" type="text" placeholder="Enter Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-control" name="category">
+                                <% category.forEach(function(cate) { %>
+                                    <option value="<%= cate.name %>"><%= cate.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Download Link</label>
+                            <input class="form-control" name="downloadLink" type="text" placeholder="Download Link" />
+                        </div>
+                        <div class="form-group">
+                            <label>System Requirements</label>
+                            <input class="form-control" name="systemRequirements" type="text" placeholder="System Requirements" />
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input class="form-control" name="description" type="text" placeholder="Description" />
+                        </div>
+                        <div class="form-group">
+                            <label>Seri</label>
+                            <select class="form-control" name="seri">
+                                <% seri.forEach(function(sr) { %>
+                                    <option value="<%= sr.name %>"><%= sr.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Avatar</label>
+                            <input class="form-control" name="avatar" type="file" />
+                        </div>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Register" />
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>

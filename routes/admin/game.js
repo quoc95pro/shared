@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.get('/addGame', function(req, res, next) {
+router.get('/game', function(req, res, next) {
   Category.find({}, function(err, category){
 
     if(err){
@@ -23,9 +23,7 @@ router.get('/addGame', function(req, res, next) {
       if(err){
         console.log(err);
       }
-      console.log(seri);
-      
-      res.render('admin/addGame', {category: category, seri: seri});
+      res.render('admin/game', {category: category, seri: seri});
     });
 
   }); 
@@ -81,10 +79,7 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
       console.log(game);
     });
 
-    req.flash('success_msg', 'Create Game success');
-
-    res.location('/');
-    res.redirect('/');
+    req.send({success_msg: 'Create Game success'});
   }
 });
 

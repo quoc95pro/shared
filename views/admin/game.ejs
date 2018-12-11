@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-table.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/jquery-3.3.1.min.js"></script>
+    <script src="/javascripts/popper.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/bootstrap-table.js"></script>
+    <script src="/javascripts/ga.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Game Control</h1>
+        <div id="toolbar">
+            <button id="add" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
+                <i class="glyphicon glyphicon-add"></i> Add
+            </button>
+            <button id="remove" class="btn btn-danger">
+                <i class="glyphicon glyphicon-remove"></i> Delete
+            </button>
+        </div>
+        <table id="table" data-toolbar="#toolbar" data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
+            data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-show-pagination-switch="true"
+            data-pagination="true" data-id-field="id" data-page-list="[10, 25, 50, 100, ALL]" data-show-footer="false"
+            data-url="/data" data-response-handler="responseHandler">
+        </table>
+    </div>
+
+    <script src="/javascripts/game/table_game.js"></script>
+
+    <!-- Table -->
+
+
+    <!-- Edit Modal -->
+    <% include game/add %>
+    <!-- Edit Modal -->
+
+    <!-- Edit Modal -->
+    <% include game/edit %>
+    <!-- Edit Modal -->
+</body>
+
+</html>
