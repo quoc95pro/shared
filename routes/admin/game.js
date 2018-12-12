@@ -40,6 +40,8 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
   var systemRequirements = req.body.systemRequirements;
   var description = req.body.description;
   var seri = req.body.seri;
+  console.log(req.body.name);
+  
 
   if(req.file){
   	console.log('Uploading File...');
@@ -56,9 +58,7 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
   var errors = req.validationErrors();
 
   if(errors){
-  	res.render('admin/addGame', {
-  		errors: errors
-  	});
+  	res.send({errors: errors});
   } else{
   	var newGame = new Game({
       name: name,
@@ -75,11 +75,9 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
     });
 
     Game.createGame(newGame, function(err, game){
-      if(err) throw err;
-      console.log(game);
+      if(err) res.send({errors: err});
+      res.send({success_msg: 'Create Game success'});
     });
-
-    req.send({success_msg: 'Create Game success'});
   }
 });
 

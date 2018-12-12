@@ -1,3 +1,4 @@
+// table init
 var $table = $('#table'),
                         $remove = $('#remove'),
                         selections = [];
@@ -14,7 +15,7 @@ var $table = $('#table'),
                                         align: 'center',
                                         valign: 'middle'
                                     }, {
-                                        title: 'Item Name',
+                                        title: 'Name',
                                         field: 'name',
                                         rowspan: 2,
                                         align: 'center',
@@ -22,7 +23,7 @@ var $table = $('#table'),
                                         sortable: true,
                                         footerFormatter: totalTextFormatter
                                     }, {
-                                        title: 'Item Detail',
+                                        title: 'Detail',
                                         colspan: 3,
                                         align: 'center'
                                     }
@@ -104,7 +105,7 @@ var $table = $('#table'),
                 
                     function operateFormatter(value, row, index) {
                         return [
-                            '<a class="like" href="javascript:void(0)" title="Like">',
+                            '<a class="like" href="javascript:void(0)" title="Edit">',
                             '<i class="fa fa-edit"></i>',
                             '</a>  ',
                             '<a class="remove" href="javascript:void(0)" title="Remove">',
@@ -120,7 +121,7 @@ var $table = $('#table'),
                         },
                         'click .remove': function (e, value, row, index) {
                             $table.bootstrapTable('remove', {
-                                field: 'id',
+                                field: '_id',
                                 values: [row._id]
                             });
                         }
@@ -149,3 +150,37 @@ var $table = $('#table'),
                     $(function () {
                         initTable();
                     });
+
+// end table init
+
+// add
+function addGame(){
+
+      $.ajax({
+        url: "/games/addGame",
+        method: 'POST',
+        enctype: 'multipart/form-data',
+        processData: false, 
+        contentType: false,
+        cache: false,
+        data: { 
+            name: document.getElementById("addName").value, 
+            category: document.getElementById("addCategory").value,
+            downloadLink: document.getElementById("addDownloadLink").value,
+            systemRequirements: document.getElementById("addSystemRequirements").value,
+            description: document.getElementById("addDescription").value,
+            seri: document.getElementById("addSeri").value,
+            avatar: document.getElementById("addAvatar").value,
+        }
+      })
+        .done(function( msg ) {
+          if(msg.success_msg != null) alert( "Data Saved: " + msg.success_msg )
+          else{
+            // alert("Errors: " + msg.errors);
+            msg.errors.forEach(err => {
+                console.log(err.msg);
+            });
+          }
+        });
+
+}
