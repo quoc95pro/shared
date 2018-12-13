@@ -1,13 +1,13 @@
 <div class="modal" tabindex="-1" role="dialog" id="addModal">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Add Game</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Game</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
                 <div>
                     <form id="contactForm1" method="post" action="/games/addGame" enctype="multipart/form-data">
                         <div class="form-group">
@@ -18,17 +18,21 @@
                             <label>Category</label>
                             <select class="form-control" id="addCategory" name="category">
                                 <% category.forEach(function(cate) { %>
-                                    <option value="<%= cate.name %>"><%= cate.name %></option>
+                                <option value="<%= cate.name %>">
+                                    <%= cate.name %>
+                                </option>
                                 <% }); %>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Download Link</label>
-                            <input class="form-control" id="addDownloadLink" name="downloadLink" type="text" placeholder="Download Link" />
+                            <input class="form-control" id="addDownloadLink" name="downloadLink" type="text"
+                                placeholder="Download Link" />
                         </div>
                         <div class="form-group">
                             <label>System Requirements</label>
-                            <input class="form-control" id="addSystemRequirements" name="systemRequirements" type="text" placeholder="System Requirements" />
+                            <input class="form-control" id="addSystemRequirements" name="systemRequirements" type="text"
+                                placeholder="System Requirements" />
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -38,7 +42,9 @@
                             <label>Seri</label>
                             <select class="form-control" id="addSeri" name="seri">
                                 <% seri.forEach(function(sr) { %>
-                                    <option value="<%= sr.name %>"><%= sr.name %></option>
+                                <option value="<%= sr.name %>">
+                                    <%= sr.name %>
+                                </option>
                                 <% }); %>
                             </select>
                         </div>
@@ -46,14 +52,37 @@
                             <label>Avatar</label>
                             <input class="form-control" id="addAvatar" name="avatar" type="file" />
                         </div>
-                        <input class="btn btn-primary" type="submit" name="submit" value="Register" />
+                        <input class="btn btn-primary" type="submit" name="submit" value="Add" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="addGame()">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<script src="/javascripts/jquery.form.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#contactForm1').submit(function () {
+
+            $(this).ajaxSubmit({
+
+                error: function (xhr) {
+                    alert("err" + xhr);
+                },
+
+                success: function (response) {
+                    if (response.success_msg != null) alert("Data Saved: " + response.success_msg)
+                    else {
+                        response.errors.forEach(err => {
+                            alert(err.msg);
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>

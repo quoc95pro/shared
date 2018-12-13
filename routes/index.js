@@ -36,7 +36,6 @@ Game.getGameByCategory(req.params.cate, function(err, game){
   if(err){
     console.log(err);
   }
-  console.log(game);
   
   res.render('public/category', {game: game});
 })

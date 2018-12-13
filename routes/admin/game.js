@@ -9,10 +9,6 @@ var Seri = require('../../models/seri');
 
 /* GET Game listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/game', function(req, res, next) {
   Category.find({}, function(err, category){
 
     if(err){
@@ -23,11 +19,12 @@ router.get('/game', function(req, res, next) {
       if(err){
         console.log(err);
       }
-      res.render('admin/game', {category: category, seri: seri});
+      res.render('admin/game/index', {category: category, seri: seri});
     });
 
   }); 
 });
+
 
 router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
   var name = req.body.name;
@@ -40,19 +37,16 @@ router.post('/addGame', upload.single('avatar') ,function(req, res, next) {
   var systemRequirements = req.body.systemRequirements;
   var description = req.body.description;
   var seri = req.body.seri;
-  console.log(req.body.name);
   
-
   if(req.file){
-  	console.log('Uploading File...');
   	var avatar = req.file.filename;
   } else {
-  	console.log('No File Uploaded...');
   	var avatar = 'noimage.jpg';
   }
 
   // Form Validator
   req.checkBody('name','Name field is required').notEmpty();
+  req.checkBody('downloadLink','Download Link field is required').notEmpty();
 
   // Check Errors
   var errors = req.validationErrors();

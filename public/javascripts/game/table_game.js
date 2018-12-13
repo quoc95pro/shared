@@ -152,35 +152,3 @@ var $table = $('#table'),
                     });
 
 // end table init
-
-// add
-function addGame(){
-
-      $.ajax({
-        url: "/games/addGame",
-        method: 'POST',
-        enctype: 'multipart/form-data',
-        processData: false, 
-        contentType: false,
-        cache: false,
-        data: { 
-            name: document.getElementById("addName").value, 
-            category: document.getElementById("addCategory").value,
-            downloadLink: document.getElementById("addDownloadLink").value,
-            systemRequirements: document.getElementById("addSystemRequirements").value,
-            description: document.getElementById("addDescription").value,
-            seri: document.getElementById("addSeri").value,
-            avatar: document.getElementById("addAvatar").value,
-        }
-      })
-        .done(function( msg ) {
-          if(msg.success_msg != null) alert( "Data Saved: " + msg.success_msg )
-          else{
-            // alert("Errors: " + msg.errors);
-            msg.errors.forEach(err => {
-                console.log(err.msg);
-            });
-          }
-        });
-
-}
