@@ -105,7 +105,7 @@ var $table = $('#table'),
                 
                     function operateFormatter(value, row, index) {
                         return [
-                            '<a class="like" href="javascript:void(0)" title="Edit">',
+                            '<a class="edit" href="javascript:void(0)" title="Edit">',
                             '<i class="fa fa-edit"></i>',
                             '</a>  ',
                             '<a class="remove" href="javascript:void(0)" title="Remove">',
@@ -115,9 +115,15 @@ var $table = $('#table'),
                     }
                 
                     window.operateEvents = {
-                        'click .like': function (e, value, row, index) {
+                        'click .edit': function (e, value, row, index) {
+                            document.getElementById('editId').value = row._id;
+                            document.getElementById('editName').value = row.name;
+                            document.getElementById('editCategory').value = row.category;
+                            document.getElementById('editLinkDownload').value = row.downloadLink;
+                            document.getElementById('editSystemRequirements').value = row.systemRequirements;
+                            document.getElementById('editDescription').value = row.description;
+                            document.getElementById('editSeri').value = row.seri;
                             $('#editModal').modal('show')
-                            //alert('You click like action, row: ' + JSON.stringify(row));
                         },
                         'click .remove': function (e, value, row, index) {
                             $table.bootstrapTable('remove', {

@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="contactForm1" method="post" action="/games/addGame" enctype="multipart/form-data">
+                    <form id="addForm" method="post" action="/games" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Name</label>
                             <input class="form-control" id="addName" name="name" type="text" placeholder="Enter Name" />
@@ -65,12 +65,12 @@
 <script>
     $(document).ready(function () {
 
-        $('#contactForm1').submit(function () {
+        $('#addForm').submit(function () {
 
             $(this).ajaxSubmit({
 
                 error: function (xhr) {
-                    alert("err" + xhr);
+                    alert(xhr);
                 },
 
                 success: function (response) {

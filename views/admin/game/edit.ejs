@@ -9,14 +9,18 @@
             </div>
             <div class="modal-body">
                 <div >
-                    <form method="post" action="/games/addGame" enctype="multipart/form-data">
+                    <form method="put" id="editForm" action="/games" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Id</label>
+                            <input class="form-control" id="editId" name="id" type="text" placeholder="Enter Name" disabled/>
+                        </div>
                         <div class="form-group">
                             <label>Name</label>
-                            <input class="form-control" name="name" type="text" placeholder="Enter Name" />
+                            <input class="form-control" id="editName" name="name" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" name="category">
+                            <select class="form-control" id="editCategory" name="category">
                                 <% category.forEach(function(cate) { %>
                                     <option value="<%= cate.name %>"><%= cate.name %></option>
                                 <% }); %>
@@ -24,19 +28,19 @@
                         </div>
                         <div class="form-group">
                             <label>Download Link</label>
-                            <input class="form-control" name="downloadLink" type="text" placeholder="Download Link" />
+                            <input class="form-control" id="editLinkDownload" name="downloadLink" type="text" placeholder="Download Link" />
                         </div>
                         <div class="form-group">
                             <label>System Requirements</label>
-                            <input class="form-control" name="systemRequirements" type="text" placeholder="System Requirements" />
+                            <input class="form-control" id="editSystemRequirements" name="systemRequirements" type="text" placeholder="System Requirements" />
                         </div>
                         <div class="form-group">
                             <label>Description</label>
-                            <input class="form-control" name="description" type="text" placeholder="Description" />
+                            <input class="form-control" id="editDescription" name="description" type="text" placeholder="Description" />
                         </div>
                         <div class="form-group">
                             <label>Seri</label>
-                            <select class="form-control" name="seri">
+                            <select class="form-control" id="editSeri" name="seri">
                                 <% seri.forEach(function(sr) { %>
                                     <option value="<%= sr.name %>"><%= sr.name %></option>
                                 <% }); %>
@@ -44,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label>Avatar</label>
-                            <input class="form-control" name="avatar" type="file" />
+                            <input class="form-control" id="editAvatar" name="avatar" type="file" />
                         </div>
                         <input class="btn btn-primary" type="submit" name="submit" value="Register" />
                     </form>
@@ -57,3 +61,29 @@
           </div>
         </div>
       </div>
+
+      <script src="/javascripts/jquery.form.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#editForm').submit(function () {
+
+            $(this).ajaxSubmit({
+
+                error: function (xhr) {
+                    alert("err" + xhr);
+                },
+
+                success: function (response) {
+                    if (response.success_msg != null) alert("Data Saved: " + response.success_msg)
+                    else {
+                        response.errors.forEach(err => {
+                            alert(err.msg);
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
