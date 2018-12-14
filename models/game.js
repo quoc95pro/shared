@@ -56,6 +56,10 @@ module.exports.getGameByCategory = function (category, callback) {
 	Game.find(query, callback);
 }
 
+module.exports.updateGame = function(id, game, callback) {
+	Game.findByIdAndUpdate(id, game, callback);
+}
+
 module.exports.createGame = function (newGame, callback) {
 	newGame.save(callback);
 }
