@@ -122,7 +122,7 @@ router.delete('/', function(req, res,) {
   var id = req.body.id;
   Game.findByIdAndDelete(id, (err, a) =>{
     if(err) res.send({errors: err});
-    res.send({success_msg: 'Deleted : '+ a.name});
+    res.send({success_msg: 'Deleted : '+ a});
   });
 });
 

@@ -84,11 +84,21 @@ function initTable() {
             })
                 .done(function (response) {
                     if (response.success_msg != null) {
-                        // alert(response.success_msg);
+                        $.jnoty(response.success_msg, {
+                            theme: 'success',
+                              life: 3000,
+                              icon: 'fa fa-check-circle',
+                              position: 'top-right'
+                            });
                     }
                     else {
                         response.errors.forEach(err => {
-                            console.log(err);
+                            $.jnoty(err.msg, {
+                                theme: 'warning',
+                                  life: 3000,
+                                  icon: 'fa fa-check-circle',
+                                  position: 'top-right'
+                                });
                         });
                     }
                 });

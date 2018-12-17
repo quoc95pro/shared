@@ -78,7 +78,7 @@
                     if (response.success_msg != null) {
                         $.jnoty("Notification Message Here.", {
                             theme: 'success',
-                            life: 3000,
+                            sticky: true,
                             icon: 'fa fa-check-circle',
                             position: 'top-right'
                           });
@@ -88,7 +88,7 @@
                             //alert('error:' + err.msg);
                             $.jnoty("Notification Message Here.", {
                                   theme: 'danger',
-                                  life: 3000,
+                                  sticky: true,
                                   icon: 'fa fa-check-circle',
                                   position: 'top-right'
                                 });

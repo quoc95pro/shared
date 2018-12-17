@@ -74,11 +74,21 @@
                 },
                 success: function (response) {
                     if (response.success_msg != null) {
-                        alert(response.success_msg);
+                        $.jnoty(response.success_msg, {
+                            theme: 'success',
+                              life: 3000,
+                              icon: 'fa fa-check-circle',
+                              position: 'top-right'
+                            });
                     }
                     else {
                         response.errors.forEach(err => {
-                            alert('error:' + err.msg);
+                            $.jnoty(err.msg, {
+                                theme: 'success',
+                                  life: 3000,
+                                  icon: 'fa fa-check-circle',
+                                  position: 'top-right'
+                                });
                         });
                     }
                     $table.bootstrapTable('refresh');
