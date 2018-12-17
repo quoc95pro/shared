@@ -73,13 +73,15 @@
                     alert("err" + xhr);
                 },
                 success: function (response) {
-                    if (response.success_msg != null) alert("Data Saved: " + response.success_msg)
-                    else {
-                       // response.errors.forEach(err => {
-                      //      alert(err.msg);
-                      //  });
-                      console.log(response);
+                    if (response.success_msg != null) {
+                        alert(response.success_msg);
                     }
+                    else {
+                        response.errors.forEach(err => {
+                            alert('error:' + err.msg);
+                        });
+                    }
+                    $table.bootstrapTable('refresh');
                 }
             });
             return false;

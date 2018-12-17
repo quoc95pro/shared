@@ -110,12 +110,21 @@ router.put('/', upload.single('avatar') ,function(req, res, next) {
         }
         Game.updateGame(id, game, (err, g) => {
           if(err) res.send({errors: err});
-          res.send(g);
+          res.send({success_msg: 'Edit success'});
         });
     });
   }
 });
 
+// Delete game
+
+router.delete('/', function(req, res,) {
+  var id = req.body.id;
+  Game.findByIdAndDelete(id, (err, a) =>{
+    if(err) res.send({errors: err});
+    res.send({success_msg: 'Deleted : '+ a.name});
+  });
+});
 
 
 module.exports = router;

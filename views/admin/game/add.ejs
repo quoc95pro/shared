@@ -62,6 +62,7 @@
 </div>
 
 <script src="/javascripts/jquery.form.min.js"></script>
+<script src="/javascripts/jnoty.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -74,12 +75,28 @@
                 },
 
                 success: function (response) {
-                    if (response.success_msg != null) alert("Data Saved: " + response.success_msg)
+                    if (response.success_msg != null) {
+                        $.jnoty("Notification Message Here.", {
+                            theme: 'success',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                          });
+                    }
                     else {
                         response.errors.forEach(err => {
-                            alert(err.msg);
+                            //alert('error:' + err.msg);
+                            $.jnoty("Notification Message Here.", {
+                                  theme: 'danger',
+                                  life: 3000,
+                                  icon: 'fa fa-check-circle',
+                                  position: 'top-right'
+                                });
+                                
+
                         });
                     }
+                    $table.bootstrapTable('refresh');
                 }
             });
             return false;
