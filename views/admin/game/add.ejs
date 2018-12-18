@@ -76,19 +76,18 @@
 
                 success: function (response) {
                     if (response.success_msg != null) {
-                        $.jnoty("Notification Message Here.", {
-                            theme: 'success',
-                            sticky: true,
+                        $.jnoty(response.success_msg, {
+                            theme: 'jnoty-success',
+                            life: 3000,
                             icon: 'fa fa-check-circle',
                             position: 'top-right'
                           });
                     }
                     else {
                         response.errors.forEach(err => {
-                            //alert('error:' + err.msg);
-                            $.jnoty("Notification Message Here.", {
-                                  theme: 'danger',
-                                  sticky: true,
+                            $.jnoty(err.msg, {
+                                  theme: 'jnoty-danger',
+                                  life: 3000,
                                   icon: 'fa fa-check-circle',
                                   position: 'top-right'
                                 });

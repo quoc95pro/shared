@@ -85,7 +85,7 @@ function initTable() {
                 .done(function (response) {
                     if (response.success_msg != null) {
                         $.jnoty(response.success_msg, {
-                            theme: 'success',
+                            theme: 'jnoty-success',
                               life: 3000,
                               icon: 'fa fa-check-circle',
                               position: 'top-right'
@@ -94,7 +94,7 @@ function initTable() {
                     else {
                         response.errors.forEach(err => {
                             $.jnoty(err.msg, {
-                                theme: 'warning',
+                                theme: 'jnoty-warning',
                                   life: 3000,
                                   icon: 'fa fa-check-circle',
                                   position: 'top-right'

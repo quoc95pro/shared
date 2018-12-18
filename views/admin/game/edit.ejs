@@ -75,7 +75,7 @@
                 success: function (response) {
                     if (response.success_msg != null) {
                         $.jnoty(response.success_msg, {
-                            theme: 'success',
+                            theme: 'jnoty-success',
                               life: 3000,
                               icon: 'fa fa-check-circle',
                               position: 'top-right'
@@ -84,7 +84,7 @@
                     else {
                         response.errors.forEach(err => {
                             $.jnoty(err.msg, {
-                                theme: 'success',
+                                theme: 'jnoty-danger',
                                   life: 3000,
                                   icon: 'fa fa-check-circle',
                                   position: 'top-right'
