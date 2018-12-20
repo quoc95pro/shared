@@ -1,10 +1,100 @@
 <% include partials/header %>
-        <% game.forEach(function(g) { %>
-            <ul> 
-                <img src="/images/game/<%= g.avatar %>" width="600px">
-                <li><a href="/detail/<%= g._id %>">detail</a></li>
-                <li><a href="/category/<%= g.category %>"><%= g.category %></a></li>
-                <li><%= g.name %></li>
-            </ul>
-        <% }); %>
+<div id="main-header" class="side-menu">
+    <div>
+        <ul>
+            <li class="active"><a href="#section1"><span>Section 1</span></a></li>
+            <li><a href="#section2"><span>Section 2</span></a></li>
+        </ul>
+    </div>
+</div>
+
+<section id="section1">
+    <h1>Section 1</h1>
+    <div class="row row-index">
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<section id="section2">
+    <h1>Section 2</h1>
+    <div class="row row-index">
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+        <div class="col-md-4 col-index">
+            <% game.forEach(function(g) { %>
+            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
+                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+                <a class="category-index" href="/category/<%= g.category %>">
+                    <%= g.category %></a>
+                <p class="name-index">
+                    <%= g.name %>
+                </p>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<script src="/javascripts/menuspy.js"></script>
+  <script>
+    var elm = document.querySelector('#main-header');
+    var ms = new MenuSpy(elm);
+  </script>
 <% include partials/footer %>
