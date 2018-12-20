@@ -4,15 +4,16 @@
         <ul>
             <li class="active"><a href="#section1"><span>Section 1</span></a></li>
             <li><a href="#section2"><span>Section 2</span></a></li>
+            <li><a href="#section3"><span>Section 3</span></a></li>
         </ul>
     </div>
 </div>
 
 <section id="section1">
-    <h1>Section 1</h1>
+    <h1>Top</h1>
     <div class="row row-index">
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
+        <% game.forEach(function(g) { %>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
                 <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
                 <a class="category-index" href="/category/<%= g.category %>">
@@ -21,40 +22,16 @@
                     <%= g.name %>
                 </p>
             </div>
-            <% }); %>
         </div>
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
-            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
-                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
-                <a class="category-index" href="/category/<%= g.category %>">
-                    <%= g.category %></a>
-                <p class="name-index">
-                    <%= g.name %>
-                </p>
-            </div>
-            <% }); %>
-        </div>
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
-            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
-                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
-                <a class="category-index" href="/category/<%= g.category %>">
-                    <%= g.category %></a>
-                <p class="name-index">
-                    <%= g.name %>
-                </p>
-            </div>
-            <% }); %>
-        </div>
+        <% }); %>
     </div>
 </section>
 
 <section id="section2">
-    <h1>Section 2</h1>
+    <h1>Seri</h1>
     <div class="row row-index">
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
+        <% game.forEach(function(g) { %>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
                 <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
                 <a class="category-index" href="/category/<%= g.category %>">
@@ -63,10 +40,16 @@
                     <%= g.name %>
                 </p>
             </div>
-            <% }); %>
         </div>
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
+        <% }); %>
+    </div>
+</section>
+
+<section id="section3">
+    <h1>Action</h1>
+    <div class="row row-index">
+        <% game.forEach(function(g) { %>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
                 <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
                 <a class="category-index" href="/category/<%= g.category %>">
@@ -75,20 +58,8 @@
                     <%= g.name %>
                 </p>
             </div>
-            <% }); %>
         </div>
-        <div class="col-md-4 col-index">
-            <% game.forEach(function(g) { %>
-            <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
-                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
-                <a class="category-index" href="/category/<%= g.category %>">
-                    <%= g.category %></a>
-                <p class="name-index">
-                    <%= g.name %>
-                </p>
-            </div>
-            <% }); %>
-        </div>
+        <% }); %>
     </div>
 </section>
 

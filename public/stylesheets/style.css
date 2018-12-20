@@ -107,6 +107,10 @@ body{
     background-color: darkmagenta;
 }
 
+.container-index{
+    padding: 0 13%;
+}
+
 .nav-custom{
     background-color: white !important;
     height: 63px;
@@ -122,22 +126,21 @@ body{
 }
 
 .row-index{
-    margin: 0 7%;
+    margin-top: 30px;
 }
 
 .col-index{
     margin: auto;
-    padding: 7px;
+    padding: 13px;
 }
 
 .index-item{
     width: 100%;
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    height: 220px;
     background-position: center;
-    margin-top: 15px;
+    padding-top: 80%;
 }
 
 .detail-index{
@@ -167,6 +170,10 @@ body{
     bottom: 0;
     right: 0;
     color: white;
+}
+
+#section1, #section2, #section3{
+    margin-top: 155px;
 }
 
 /* scrollspy right */
