@@ -2,33 +2,34 @@
 <div id="main-header" class="side-menu">
     <div>
         <ul>
-            <li class="active"><a href="#section1"><span>Section 1</span></a></li>
-            <li><a href="#section2"><span>Section 2</span></a></li>
-            <li><a href="#section3"><span>Section 3</span></a></li>
+            <li><a href="#top-Game"><span>Section 1</span></a></li>
+            <li><a href="#top-Seri"><span>Section 2</span></a></li>
+            <li><a href="#action"><span>Section 3</span></a></li>
         </ul>
     </div>
 </div>
 
-<section id="section1">
-    <h1>Top</h1>
+<section id="top-Game">
     <div class="row row-index">
         <% game.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
-                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
-                <a class="category-index" href="/category/<%= g.category %>">
+                <a class="top-Game-Detail" href="/detail/<%= g._id %>">detail</a>
+                <a class="top-Game-Category" href="/category/<%= g.category %>">
                     <%= g.category %></a>
-                <p class="name-index">
+                <p class="top-Game-Name">
                     <%= g.name %>
                 </p>
             </div>
         </div>
         <% }); %>
+        <div class="col-md-12">
+            <h1>Top Game</h1>
+        </div>
     </div>
 </section>
 
-<section id="section2">
-    <h1>Seri</h1>
+<section id="top-Seri">
     <div class="row row-index">
         <% game.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
@@ -42,30 +43,35 @@
             </div>
         </div>
         <% }); %>
+        <div class="col-md-12">
+            <h1>Top Seri</h1>
+        </div>
     </div>
 </section>
 
-<section id="section3">
-    <h1>Action</h1>
+<section id="action">
     <div class="row row-index">
         <% game.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item" style="background-image: url('/images/game/<%= g.avatar %>')">
-                <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
-                <a class="category-index" href="/category/<%= g.category %>">
-                    <%= g.category %></a>
-                <p class="name-index">
-                    <%= g.name %>
-                </p>
             </div>
+            <a class="detail-index" href="/detail/<%= g._id %>">detail</a>
+            <a class="category-index" href="/category/<%= g.category %>">
+                <%= g.category %></a>
+            <p class="name-index">
+                <%= g.name %>
+            </p>
         </div>
         <% }); %>
+        <div class="col-md-12">
+            <h1>Action</h1>
+        </div>
     </div>
 </section>
 
 <script src="/javascripts/menuspy.js"></script>
-  <script>
+<script>
     var elm = document.querySelector('#main-header');
     var ms = new MenuSpy(elm);
-  </script>
+</script>
 <% include partials/footer %>
