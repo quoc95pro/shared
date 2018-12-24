@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Game = require('../models/game');
+var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,7 +9,7 @@ router.get('/', function(req, res, next) {
     if(err){
       console.log(err);
     }
-    res.render('public/index', { title: 'Index',game: game });
+    res.render('public/index', { title: 'Index',game: game, moment: moment });
   });
 });
 // Data test

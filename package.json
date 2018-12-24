@@ -16,6 +16,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.3.0",
     "http-errors": "~1.6.2",
+    "moment": "^2.23.0",
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.15",
     "morgan": "~1.9.0",
