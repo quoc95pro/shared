@@ -1,6 +1,7 @@
-@import "normalize.css";
 
-
+body{
+  background-color: #50dfdb;
+}
 
 .container-index{
     padding: 0 13%;
