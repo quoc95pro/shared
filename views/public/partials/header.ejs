@@ -5,33 +5,28 @@
   <title>Albumz</title>
   <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-  <link rel="stylesheet" href="/stylesheets/jquery.sectionmenu.css" />
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/fonts/font-awesome.min.css">
   <script src="/javascripts/jquery-3.3.1.min.js"></script>
   <script src="/javascripts/bootstrap.min.js"></script>
-  <!-- <script type="text/javascript" src="/javascripts/jquery.fragmentscroll.min.js"></script>
-  <script type="text/javascript" src="/javascripts/jquery.sectionmenu.min.js"></script>
-  <script type="text/javascript">
-
-    $(window).on('load', function () {
-      $('body').sectionMenu().fragmentScroll();
-    });
-
-  </script> -->
   <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
 </head>
 
 <body data-spy="scroll" data-target="#myScrollspy">
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light nav-custom">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-      aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <div class="left-menu-toggle">
-        <i class="fa fa-align-justify"></i>
+        <a href="#menu-header" id="toggle-header"><span></span></a>
+
+        <!-- <div id="menu-header">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div> -->
+
+        
       </div>
       <div class="main-logo">
         <h1>LOGO</h1>
@@ -63,7 +58,41 @@
 
     </div>
   </nav>
+  <script>
+    var theToggle = document.getElementById('toggle-header');
+
+
+// hasClass
+function hasClass(elem, className) {
+	return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+}
+
+// toggleClass
+function toggleClass(elem, className) {
+	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
+    if (hasClass(elem, className)) {
+        while (newClass.indexOf(" " + className + " ") >= 0 ) {
+            newClass = newClass.replace( " " + className + " " , " " );
+        }
+        elem.className = newClass.replace(/^\s+|\s+$/g, '');
+    } else {
+        elem.className += ' ' + className;
+    }
+}
+
+theToggle.onclick = function() {
+   toggleClass(this, 'on');
+   return false;
+}
+  </script>
 
 
 
   <div class="container-fluid container-index">
+      <div id="menu-header">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>

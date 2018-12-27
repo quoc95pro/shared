@@ -1,8 +1,21 @@
 <% include partials/header %>
-<section id="top-Game" data-section-menu="Top Game">
+<div class="right-menu-custom">
+    <ul class="list-group" id="myScrollspy">
+        <div class="list-group-it"><span class="list-group-left">Top Game</span><a class="list-group-right list-group-item"
+                href="#top-Game"></a></div>
+        <div class="list-group-it"><span class="list-group-left">Top Seri</span><a class="list-group-right list-group-item"
+                href="#top-Seri"></a></div>
+        <div class="list-group-it"><span class="list-group-left">Action</span><a class="list-group-right list-group-item"
+                href="#action"></a></div>
+    </ul>
+</div>
+<section>
     <div class="row row-index">
         <div class="col-md-12">
-            <h1>Top Game</h1>
+            <h1 id="top-Game">&nbsp;</h1>
+        </div>
+        <div class="col-md-12">
+            <h1 class="title">Top Game</h1>
         </div>
         <% game.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
@@ -35,75 +48,90 @@
     </div>
 </section>
 
-<section id="top-Seri">
-        <div class="row row-index">
-                <div class="col-md-12">
-                    <h1>Top Game</h1>
-                </div>
-                <% game.forEach(function(g) { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-index">
-                    <div class="index-item">
-                        <a href="/detail/<%= g._id %>">
-                            <div class='box' style="background-image: url('/images/game/<%= g.avatar %>')">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
-                                <%= g.name %></a></p>
-                        <p class="top-Game-Category"><a href="/category/<%= g.category %>">
-                                <%= g.category %></a></p>
-                        <p class="time-view">
-                            <span>
-                                <i class="fa fa-calendar">
-                                    <%= moment(g.postedDate).format( 'DD-MM-YYYY' ) %></i>
-                            </span>
-                            <span class="index-views">
-                                <i class="fa fa-eye">
-                                    <%= g.views %></i>
-                            </span>
-                        </p>
+<section>
+    <div class="row row-index">
+        <div class="col-md-12">
+            <h1 id="top-Seri">&nbsp;</h1>
+        </div>
+        <div class="col-md-12">
+            <h1 class="title">Top Seri</h1>
+        </div>
+        <% game.forEach(function(g) { %>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-index">
+            <div class="index-item">
+                <a href="/detail/<%= g._id %>">
+                    <div class='box' style="background-image: url('/images/game/<%= g.avatar %>')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-                </div>
-                <% }); %>
+                </a>
+                <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
+                        <%= g.name %></a></p>
+                <p class="top-Game-Category"><a href="/category/<%= g.category %>">
+                        <%= g.category %></a></p>
+                <p class="time-view">
+                    <span>
+                        <i class="fa fa-calendar">
+                            <%= moment(g.postedDate).format( 'DD-MM-YYYY' ) %></i>
+                    </span>
+                    <span class="index-views">
+                        <i class="fa fa-eye">
+                            <%= g.views %></i>
+                    </span>
+                </p>
             </div>
+        </div>
+        <% }); %>
+    </div>
 </section>
 
-<section id="action">
-        <div class="row row-index">
-                <div class="col-md-12">
-                    <h1>Top Game</h1>
-                </div>
-                <% game.forEach(function(g) { %>
-                <div class="col-md-4 col-lg-3 col-sm-6 col-index">
-                    <div class="index-item">
-                        <a href="/detail/<%= g._id %>">
-                            <div class='box' style="background-image: url('/images/game/<%= g.avatar %>')">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </a>
-                        <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
-                                <%= g.name %></a></p>
-                        <p class="top-Game-Category"><a href="/category/<%= g.category %>">
-                                <%= g.category %></a></p>
-                        <p class="time-view">
-                            <span>
-                                <i class="fa fa-calendar">
-                                    <%= moment(g.postedDate).format( 'DD-MM-YYYY' ) %></i>
-                            </span>
-                            <span class="index-views">
-                                <i class="fa fa-eye">
-                                    <%= g.views %></i>
-                            </span>
-                        </p>
+<section>
+    <div class="row row-index">
+        <div class="col-md-12">
+            <h1 id="action">&nbsp;</h1>
+        </div>
+        <div class="col-md-12">
+            <h1 class="title">Action</h1>
+        </div>
+        <% game.forEach(function(g) { %>
+        <div class="col-md-4 col-lg-3 col-sm-6 col-index">
+            <div class="index-item">
+                <a href="/detail/<%= g._id %>">
+                    <div class='box' style="background-image: url('/images/game/<%= g.avatar %>')">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-                </div>
-                <% }); %>
+                </a>
+                <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
+                        <%= g.name %></a></p>
+                <p class="top-Game-Category"><a href="/category/<%= g.category %>">
+                        <%= g.category %></a></p>
+                <p class="time-view">
+                    <span>
+                        <i class="fa fa-calendar">
+                            <%= moment(g.postedDate).format( 'DD-MM-YYYY' ) %></i>
+                    </span>
+                    <span class="index-views">
+                        <i class="fa fa-eye">
+                            <%= g.views %></i>
+                    </span>
+                </p>
             </div>
+        </div>
+        <% }); %>
+    </div>
 </section>
+<script>
+    $(".list-group-it").hover(
+        function () {
+            $(this).find("span").addClass("color-blue");
+        }, function () {
+            $(this).find("span").removeClass("color-blue");
+        }
+    );
+</script>
 <% include partials/footer %>
