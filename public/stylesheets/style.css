@@ -4,7 +4,7 @@ body{
 }
 
 .container-index{
-    padding: 0 13%;
+    padding: 0 10%;
     margin-top: 100px;
 }
 
@@ -12,14 +12,25 @@ body{
     background-color: white !important;
     height: 63px;
     border-bottom: 1px solid #e0e0e0;
+    padding-left: 0px;
 }     
 
 .main-logo{
-    margin-left: 50px;
+    margin-left: 10%;
 }
 
 .search-area{
     margin:auto; 
+    width: 100%;
+}
+
+.search-form{
+  margin:auto;
+  width: 80%;
+}
+
+.search-form input{
+  width: 100% !important;
 }
 
 
@@ -194,7 +205,8 @@ section{
   .right-menu-custom{
     position: fixed;
     top: 40%;
-    right: 5%;
+    right: 2%;
+    z-index: +10;
   }
 
   .list-group-right{
@@ -203,17 +215,19 @@ section{
     width: 10px;
     padding: 0;
     float: right;
-    margin: 8px 0 0 10px;
+    margin: 8px 0 0 5px;
     background: #c8c8c8;
   }
 
   .list-group-left{
     float: left;
     color: white;
+    opacity: 0;
   }
 
   .color-blue{
     color: blueviolet;
+    opacity: 1;
   }
 
   .list-group-item.active{
@@ -237,12 +251,17 @@ section{
     border-bottom: 3px solid #c8c8c8;
   }
   
-  /* flat header menu */
+/* flat header menu */
+
+.left-menu-toggle{
+  margin-left: 1.3%;
+}
+
 #toggle-header {
   display: block;
   width: 28px;
   height: 28px;
-  margin: 35px 100px 10px;
+  margin: 35px 0 10px 0;
 }
 
 #toggle-header span:after,
@@ -265,13 +284,12 @@ section{
 #toggle-header span:before {
   width: 100%;
   height: 5px;
-  background-color: #888;
+  background-color: #c8c8c8;
   transition: all 0.3s;
   backface-visibility: hidden;
   border-radius: 2px;
 }
 
-/* on activation */
 #toggle-header.on span {
   background-color: transparent;
 }
@@ -281,54 +299,55 @@ section{
 #toggle-header.on span:after {
   transform: rotate(-45deg) translate(8px, -8px);
 }
-#toggle-header.on ~ #menu-header {
-  opacity: 1;
-  visibility: visible;
-}
 
 /* menu appearance*/
 #menu-header {
+  z-index: +10;
   position: fixed;
-  top: 15%;
+  top: 100px;
   left: 1.3%;
   color: white;
-  width: 200px;
   padding: 10px;
   margin: auto;
   font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
   text-align: center;
-  border-radius: 4px;
-  background: #999;
+  border-radius: 0px 4px 4px 4px;
+  background: #c8c8c8;
   box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-  /* just for this demo */
-  /* opacity: 0; */
-  /* visibility: hidden; */
+  opacity: 0;
+  visibility: hidden;
   transition: opacity .4s;
 }
+
+.menu-header-toggled {
+  opacity: 0.9 !important;
+  visibility: visible !important;
+}
+
 #menu-header:after {
   position: absolute;
   top: -20px;
-  left: 84px;
+  left: 0px;
   content: "";
   display: block;
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
-  border-bottom: 20px solid #999;
+  border-bottom: 20px solid #c8c8c8;
 }
-ul, li, li a {
+#menu-header ul,#menu-header li,#menu-header li a {
   list-style: none;
   display: block;
   margin: 0;
   padding: 0;
 }
-li a {
+#menu-header li a {
   padding: 5px;
   color: white;
   text-decoration: none;
   transition: all .2s;
 }
-li a:hover,
-li a:focus {
+#menu-header li a:hover,
+#menu-header li a:focus {
   background: blueviolet;
   color: #fff;
   text-decoration: none;
