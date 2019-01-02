@@ -1,8 +1,143 @@
 <% include partials/header %>
-        <% game.forEach(function(g) { %>
-            <ul> 
-                <img src="/images/game/<%= g.avatar %>" width="600px">
-                <li><%= g.name %></li>
-            </ul>
-        <% }); %>
+<!-- <div class="row">
+            <% game.forEach(function(g) { %>
+                <div class="col-md-3">
+                    <ul> 
+                        <img src="/images/game/<%= g.avatar %>" width="600px">
+                        <li><%= g.name %></li>
+                    </ul>
+                </div>
+            <% }); %>
+        </div> -->
+
+<div class="col-md-9">
+        <div class="row">
+                <div class="col-md-9">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul>
+                        <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                        <li>
+                            <%= game[1].name %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row">
+                    <div class="col-md-3">
+                        <ul>
+                            <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                            <li>
+                                <%= game[1].name %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                            <li>
+                                <%= game[1].name %>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul>
+                            <img src="/images/game/<%= game[1].avatar %>" width="100%">
+                            <li>
+                                <%= game[1].name %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+</div>
+
 <% include partials/footer %>
