@@ -355,21 +355,78 @@ section{
 
 /* category */
 
-.row-category{
-  height: 200px;
-  margin-top: 10px;
-}
-
-.col-3-col{
+.col-31-col-left{
   width: 100%;
+  padding-top: 25%;
+  position: relative;
 }
 
-.col-3-col img{
+.col-31-col-left img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+}
+
+.col-other{
+  width: 100%;
+  padding: 15px;
+}
+
+.col-other img{
   height: 100%;
   width: 100%;
 }
 
-.col-2-col img{
+/* 2-2 */
+
+.col-22-col-left{
+  width: 100%;
+  padding-top: 20%;
+  position: relative;
+}
+
+.col-22-col-left img{
   height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+}
+
+/* 2-1-1 */
+
+.col-211-col-left{
+  width: 100%;
+  padding-top: 25%;
+  position: relative;
+}
+
+.col-211-col-left img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+}
+
+/* 1-1-1-1 1-1-1*/
+
+.col-1111-col-left{
+  width: 100%;
+  padding-top: 25%;
+  position: relative;
+}
+
+.col-1111-col-left img{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
 }
