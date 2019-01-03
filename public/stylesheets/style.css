@@ -353,4 +353,23 @@ section{
   text-decoration: none;
 }
 
+/* category */
 
+.row-category{
+  height: 200px;
+  margin-top: 10px;
+}
+
+.col-3-col{
+  width: 100%;
+}
+
+.col-3-col img{
+  height: 100%;
+  width: 100%;
+}
+
+.col-2-col img{
+  height: 100%;
+  width: 100%;
+}
