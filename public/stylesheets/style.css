@@ -548,44 +548,19 @@ section{
 	padding: 0;
 }
 
-body {
-	background: #2d2c41;
-	font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
-}
-
 ul {
 	list-style-type: none;
 }
 
-a {
-	color: #b63b4d;
-	text-decoration: none;
-}
-
-/** =======================
- * Contenedor Principal
- ===========================*/
-h1 {
- 	color: #FFF;
- 	font-size: 24px;
- 	font-weight: 400;
- 	text-align: center;
- 	margin-top: 80px;
- }
-
-h1 a {
- 	color: #c12c42;
- 	font-size: 16px;
- }
-
  .accordion {
  	width: 100%;
  	max-width: 360px;
- 	margin: 30px auto 20px;
+ 	margin: 15px auto 20px;
  	background: #FFF;
  	-webkit-border-radius: 4px;
  	-moz-border-radius: 4px;
- 	border-radius: 4px;
+   border-radius: 4px;
+   box-shadow: 0 0px 5px #4D4D4D;
  }
 
 .accordion .link {
