@@ -641,7 +641,7 @@ ul {
 
  .slider {
   width: 50%;
-  margin: 100px auto;
+  margin: auto auto;
 }
 
 .slick-slide {
@@ -669,4 +669,8 @@ opacity: .5;
 
 .slick-current {
 opacity: 1;
+}
+
+.slider-nav{
+  margin: auto;
 }
