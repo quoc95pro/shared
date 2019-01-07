@@ -7,10 +7,27 @@
 </div> -->
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-3">
+    <div style="box-shadow: 0 0px 5px #4D4D4D; text-align:center">
+      <p>CPU: Info</p>
+      <p>CPU SPEED: Dual Core 2.0 GHz or equivalent processor</p>
+      <p>RAM: 2 GB</p>
+      <p>OS: Windows 7/Vista/XP PC (32 or 64 bit)</p>
+      <p>VIDEO CARD: DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon
+          X1800.</p>
+      <p>PIXEL SHADER: 3.0</p>
+      <p>VERTEX SHADER: 3.0</p>
+      <p>SOUND CARD: Yes</p>
+      <p>FREE DISK SPACE: 6 GB</p>
+      <p>DEDICATED VIDEO RAM: 512 MB</p>
+      <p><%= game.systemRequirements %></p>
+      
+    </div>
+  </div>
+  <div class="col-md-6" style="box-shadow: 0 0px 5px #4D4D4D;">
     <section class="regular slider">
-      <div><img src="/images/game/<%= game.avatar %>"></div>
       <div><img src="http://placehold.it/350x300?text=1"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
       <div><img src="http://placehold.it/350x300?text=2"></div>
       <div><img src="http://placehold.it/350x300?text=3"></div>
       <div><img src="http://placehold.it/350x300?text=4"></div>
@@ -19,8 +36,8 @@
       <div><img src="http://placehold.it/650x300?text=1-650w"></div>
     </section>
     <section class="slider-nav">
-      <div><img src="/images/game/<%= game.avatar %>"></div>
       <div><img src="http://placehold.it/350x300?text=1"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
       <div><img src="http://placehold.it/350x300?text=2"></div>
       <div><img src="http://placehold.it/350x300?text=3"></div>
       <div><img src="http://placehold.it/350x300?text=4"></div>
@@ -28,6 +45,87 @@
       <div><img src="http://placehold.it/350x300?text=6"></div>
       <div><img src="http://placehold.it/650x300?text=1-650w"></div>
     </section>
+  </div>
+  <div class="col-md-3">
+    <ul id="accordion" class="accordion">
+      <li>
+        <div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu">
+          <li><a href="#">Photoshop</a></li>
+          <li><a href="#">HTML</a></li>
+          <li><a href="#">CSS</a></li>
+          <li><a href="#">Maquetacion web</a></li>
+        </ul>
+      </li>
+      <li class="default open">
+        <div class="link"><i class="fa fa-code"></i>Desarrollo front-end<i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu">
+          <li><a href="#">Javascript</a></li>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#">Frameworks javascript</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu">
+          <li><a href="#">Tablets</a></li>
+          <li><a href="#">Dispositivos mobiles</a></li>
+          <li><a href="#">Medios de escritorio</a></li>
+          <li><a href="#">Otros dispositivos</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="link"><i class="fa fa-globe"></i>Posicionamiento web<i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu">
+          <li><a href="#">Google</a></li>
+          <li><a href="#">Bing</a></li>
+          <li><a href="#">Yahoo</a></li>
+          <li><a href="#">Otros buscadores</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row" style="margin-top:30px;">
+  <div class="col-md-9" style="box-shadow: 0 0px 5px #4D4D4D;">
+    <div>
+      <div>
+        <h3>
+          <%= game.name %>
+        </h3>
+        <p class="time-view">
+          <span>
+            <i class="fa fa-calendar">
+              <%= moment(game.postedDate).format( 'DD-MM-YYYY' ) %></i>
+          </span>
+          <span class="index-views">
+            <i class="fa fa-eye">
+              <%= game.views %></i>
+          </span>
+        </p>
+      </div>
+
+      <div>
+        <div class="detail-downloadLink">
+          <a href="<%= game.downloadLink %>">TẢI XUỐNG</a>
+        </div>
+        <div class="detail-downloads">
+          <%= game.downloads %>
+        </div>
+        <div class="detail-uploadBy">
+          <%= game.uploadBy %> a
+        </div>
+      </div>
+
+      <div style="clear:both;">
+        <%= game.seri %>
+      </div>
+
+      <div>
+        <%= game.description %>
+      </div>
+    </div>
   </div>
 </div>
 <% include partials/footer %>

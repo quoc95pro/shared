@@ -550,7 +550,7 @@ ul {
  .accordion {
  	width: 100%;
  	max-width: 360px;
- 	margin: 15px auto 20px;
+ 	margin: 0 auto 20px;
  	background: #FFF;
  	-webkit-border-radius: 4px;
  	-moz-border-radius: 4px;
@@ -594,11 +594,11 @@ ul {
 }
 
 .accordion li.open .link {
-	color: #b63b4d;
+	color: blueviolet;
 }
 
 .accordion li.open i {
-	color: #b63b4d;
+	color: blueviolet;
 }
 .accordion li.open i.fa-chevron-down {
 	-webkit-transform: rotate(180deg);
@@ -633,7 +633,7 @@ ul {
  }
 
  .submenu a:hover {
- 	background: #b63b4d;
+ 	background: blueviolet;
  	color: #FFF;
  }
 
@@ -673,4 +673,39 @@ opacity: 1;
 
 .slider-nav{
   margin: auto;
+}
+
+/* detail pages */
+
+.detail-downloadLink{
+  background-color: #1caf5e;
+  width: 20%;
+  margin: 5% 0 5% 5%;
+  float: left;
+  padding: 15px;
+  text-align: center;
+}
+
+.detail-downloadLink > a{
+  color: #FFF;
+  margin: auto;
+  font-weight: 500;
+}
+
+.detail-downloads{
+  background-color: #c8c8c8;
+  width: 20%;
+  float: left;
+  margin: 5% 0 5% 5%;
+  padding: 15px;
+  text-align: center;
+}
+
+.detail-uploadBy{
+  background-color: #c8c8c8;
+  width: 20%;
+  float: left;
+  margin: 5% 0 5% 5%;
+  padding: 15px;
+  text-align: center;
 }

@@ -28,7 +28,7 @@ router.get('/detail/:id', function(req, res){
       console.log(err);
     }
 
-    res.render('public/detail', {game: game});
+    res.render('public/detail', {game: game, moment: moment});
   })
 });
 
