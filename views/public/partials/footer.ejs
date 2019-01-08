@@ -6,17 +6,18 @@
 <script type="text/javascript" src="/javascripts/slick.js"></script>
 <script src="/javascripts/main.js"></script>
 <script>
-    $(".regular").slick({
+    $(".vertical-center-4").slick({
+        vertical: true,
+        centerMode: true,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,
-        fade: true,
-        asNavFor: '.slider-nav'
-    });
+        asNavFor: '.slider-nav',
+      });
     $('.slider-nav').slick({
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 2,
-        asNavFor: '.regular',
+        asNavFor: '.vertical-center-4',
         dots: true,
         centerMode: true,
         focusOnSelect: true

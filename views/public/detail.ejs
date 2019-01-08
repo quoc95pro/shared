@@ -1,49 +1,39 @@
 <% include partials/header %>
-<!-- <div class="center">
-    <div><img src="/images/game/<%= game.avatar %>" width="600px"></div>
-    <div><img src="/images/game/<%= game.avatar %>" width="600px"></div>
-    <div><img src="/images/game/<%= game.avatar %>" width="600px"></div>
-    <div><img src="/images/game/<%= game.avatar %>" width="600px"></div>
-</div> -->
-
 <div class="row">
-  <div class="col-md-3">
-    <div style="box-shadow: 0 0px 5px #4D4D4D; text-align:center">
-      <p>CPU: Info</p>
-      <p>CPU SPEED: Dual Core 2.0 GHz or equivalent processor</p>
-      <p>RAM: 2 GB</p>
-      <p>OS: Windows 7/Vista/XP PC (32 or 64 bit)</p>
-      <p>VIDEO CARD: DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon
+  <div class="col-md-3 col-systemRequirements">
+    <div>
+      <h3>System Requirements</h3>
+      <div class="detail-systemRequirements">
+      <p><strong>CPU:</strong> Info</p>
+      <p><strong>CPU SPEED:</strong> Dual Core 2.0 GHz or equivalent processor</p>
+      <p><strong>RAM:</strong> 2 GB</p>
+      <p><strong>OS:</strong> Windows 7/Vista/XP PC (32 or 64 bit)</p>
+      <p><strong>VIDEO CARD:</strong> DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon
           X1800.</p>
-      <p>PIXEL SHADER: 3.0</p>
-      <p>VERTEX SHADER: 3.0</p>
-      <p>SOUND CARD: Yes</p>
-      <p>FREE DISK SPACE: 6 GB</p>
-      <p>DEDICATED VIDEO RAM: 512 MB</p>
-      <p><%= game.systemRequirements %></p>
-      
+      <p><strong>PIXEL SHADER:</strong> 3.0</p>
+      <p><strong>VERTEX SHADER:</strong> 3.0</p>
+      <p><strong>SOUND CARD:</strong> Yes</p>
+      <p><strong>FREE DISK SPACE:</strong> 6 GB</p>
+      <p><strong>DEDICATED VIDEO RAM:</strong> 512 MB</p>
+      </div>
     </div>
   </div>
-  <div class="col-md-6" style="box-shadow: 0 0px 5px #4D4D4D;">
-    <section class="regular slider">
-      <div><img src="http://placehold.it/350x300?text=1"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="http://placehold.it/350x300?text=2"></div>
-      <div><img src="http://placehold.it/350x300?text=3"></div>
-      <div><img src="http://placehold.it/350x300?text=4"></div>
-      <div><img src="http://placehold.it/350x300?text=5"></div>
-      <div><img src="http://placehold.it/350x300?text=6"></div>
-      <div><img src="http://placehold.it/650x300?text=1-650w"></div>
+  <div class="col-md-6 col-image-slider">
+    <section class="vertical-center-4 slider">
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
     </section>
     <section class="slider-nav">
-      <div><img src="http://placehold.it/350x300?text=1"></div>
       <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="http://placehold.it/350x300?text=2"></div>
-      <div><img src="http://placehold.it/350x300?text=3"></div>
-      <div><img src="http://placehold.it/350x300?text=4"></div>
-      <div><img src="http://placehold.it/350x300?text=5"></div>
-      <div><img src="http://placehold.it/350x300?text=6"></div>
-      <div><img src="http://placehold.it/650x300?text=1-650w"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
+      <div><img src="/images/game/<%= game.avatar %>"></div>
     </section>
   </div>
   <div class="col-md-3">
@@ -88,7 +78,7 @@
 </div>
 
 <div class="row" style="margin-top:30px;">
-  <div class="col-md-9" style="box-shadow: 0 0px 5px #4D4D4D;">
+  <div class="col-md-9 col-detail-content" >
     <div>
       <div>
         <h3>
@@ -123,7 +113,9 @@
       </div>
 
       <div>
-        <%= game.description %>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean facilisis, neque mattis cursus consectetur, sapien augue condimentum risus, eu ornare mi orci et neque. Aliquam lobortis blandit magna, eu posuere tortor accumsan eu. Suspendisse augue lorem, semper sit amet sollicitudin ac, maximus at quam. Morbi ut mollis ligula. Suspendisse elit diam, porttitor et ipsum a, rutrum tempor nibh. Morbi mattis, enim id pharetra venenatis, lorem tortor dictum urna, quis placerat purus eros at lacus. Suspendisse congue quam id finibus lobortis.
+
+          Integer eu augue sed purus interdum varius nec vitae magna. Nunc eget nisi lectus. Nulla at enim mauris. Praesent sit amet purus et ligula aliquet lobortis. Nulla eu eros finibus, luctus elit in, malesuada arcu. Ut tincidunt justo ligula, a tincidunt est dictum id. Donec sit amet velit neque. Mauris maximus rutrum enim, id ultricies ante commodo quis. Etiam rhoncus mi et eros tristique, ac tristique nulla feugiat. Sed in accumsan odio.
       </div>
     </div>
   </div>
