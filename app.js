@@ -7,6 +7,8 @@ var session = require('express-session');
 var passport = require('passport');
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
+var mongoose = require("mongoose");
+var config = require("./config");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +24,8 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
   next();
 });
+
+mongoose.connect(config.getDBConnectionString());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-mongoose.connect('mongodb://localhost/shared');
 
 // User Schema
 var UserSchema = mongoose.Schema({

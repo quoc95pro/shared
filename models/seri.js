@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/shared');
 
 // Seri Schema
 var SeriSchema = mongoose.Schema({
