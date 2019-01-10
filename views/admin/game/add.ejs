@@ -1,6 +1,6 @@
 <div class="modal" tabindex="-1" role="dialog" id="addModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  modal-lg">
             <div class="modal-header">
                 <h5 class="modal-title">Add Game</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -63,49 +63,40 @@
 
 <script src="/javascripts/jquery.form.min.js"></script>
 <script src="/javascripts/jnoty.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
 <script>
-    $(document).ready(function () {
+    $('#addForm').submit(function () {
+        for (instance in CKEDITOR.instances)
+            CKEDITOR.instances[instance].updateElement();
+        $(this).ajaxSubmit({
 
-        $('#addForm').submit(function () {
+            error: function (xhr) {
+                alert(xhr);
+            },
 
-            $(this).ajaxSubmit({
-
-                error: function (xhr) {
-                    alert(xhr);
-                },
-
-                success: function (response) {
-                    if (response.success_msg != null) {
-                        $.jnoty(response.success_msg, {
-                            theme: 'jnoty-success',
+            success: function (response) {
+                if (response.success_msg != null) {
+                    $.jnoty(response.success_msg, {
+                        theme: 'jnoty-success',
+                        life: 3000,
+                        icon: 'fa fa-check-circle',
+                        position: 'top-right'
+                    });
+                }
+                else {
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
                             life: 3000,
                             icon: 'fa fa-check-circle',
                             position: 'top-right'
-                          });
-                    }
-                    else {
-                        response.errors.forEach(err => {
-                            $.jnoty(err.msg, {
-                                  theme: 'jnoty-danger',
-                                  life: 3000,
-                                  icon: 'fa fa-check-circle',
-                                  position: 'top-right'
-                                });
-                                
-
                         });
-                    }
-                    $table.bootstrapTable('refresh');
-                }
-            });
-            return false;
-        });
-    });
 
-    ClassicEditor
-        .create( document.querySelector( '#addDescription' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+
+                    });
+                }
+                $table.bootstrapTable('refresh');
+            }
+        });
+        return false;
+    });
 </script>

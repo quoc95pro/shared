@@ -144,6 +144,8 @@ function operateFormatter(value, row, index) {
         '</a>'
     ].join('');
 }
+CKEDITOR.replace('addDescription');
+CKEDITOR.replace('editDescription');
 
 window.operateEvents = {
     'click .edit': function (e, value, row, index) {
@@ -152,7 +154,7 @@ window.operateEvents = {
         document.getElementById('editCategory').value = row.category;
         document.getElementById('editLinkDownload').value = row.downloadLink;
         document.getElementById('editSystemRequirements').value = row.systemRequirements;
-        document.getElementById('editDescription').value = row.description;
+        CKEDITOR.instances['editDescription'].setData(row.description)
         document.getElementById('editSeri').value = row.seri;
         $('#editModal').modal('show')
     },
