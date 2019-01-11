@@ -1,5 +1,16 @@
 <% include partials/header %>
 <div class="row">
+    <div class="main-container page__container">
+        <div class="page__section">
+            <ul class="breadcrumbs breadcrumbs_type5">
+                <li class="breadcrumbs__item"><a href="/" class="breadcrumbs__element">Trang chủ</a></li>
+                <li class="breadcrumbs__item breadcrumbs__item_active"><span class="breadcrumbs__element">
+                        <%= cate %></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-9" style="box-shadow: 0 0px 5px #4D4D4D; border-radius: 4px;">
         <div class="row row-category">
             <div class="col-md-9 col-31-col-left" style="background-image: url('/images/game/<%= game[1].avatar %>')">

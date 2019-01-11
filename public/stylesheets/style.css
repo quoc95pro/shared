@@ -737,3 +737,124 @@ ul {
   text-align: center;
 }
 
+
+/* Breadcrumbs */
+
+/*
+Hi! If my code is useful for you can you donate me some money? 
+https://www.paypal.me/melnik909
+*/
+
+.breadcrumbs{
+  --cssuiBreadcrumbsTextColor: var(--breadcrumbsTextColor);
+  --cssuiBreadcrumbsTextColorActive: var(--breadcrumbsTextColorActive);
+  --cssuiBreadcrumbsDivider: var(--breadcrumbsDivider);
+  --cssuiBreadcrumbsDividerColor: var(--breadcrumbsDividerColor, inherit);
+  --cssuiBreadcrumbsDividerSize: var(--breadcrumbsDividerSize, 16px);
+  --cssuiBreadcrumbsIndent:  var(--breadcrumbsIndent, 8px);
+  
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: none;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.breadcrumbs__item{
+  display: inline-block;
+  position: relative;
+ 
+  padding-right: calc(var(--cssuiBreadcrumbsDividerSize) + var(--cssuiBreadcrumbsIndent));
+  margin-right: var(--cssuiBreadcrumbsIndent);
+  
+  color: var(--cssuiBreadcrumbsTextColor);
+}
+
+.breadcrumbs__item > a:hover{
+  color: #fff;
+}
+
+.breadcrumbs__item:after{
+  content: var(--cssuiBreadcrumbsDivider);
+  width: var(--cssuiBreadcrumbsDividerSize);
+  height: var(--cssuiBreadcrumbsDividerSize);
+
+  line-height: 1;
+  text-align: center;
+  
+  font-family: "Arial", sans-serif;
+  font-size: var(--cssuiBreadcrumbsDividerSize);
+  color: var(--cssuiBreadcrumbsDividerColor);
+
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.breadcrumbs__item_active{
+  margin-right: 0;
+  padding-right: 0;
+  color: var(--cssuiBreadcrumbsTextColorActive);
+}
+
+.breadcrumbs__item_active:after{
+  display: none;
+}
+.breadcrumbs__element{
+  color: inherit;
+}
+
+/* examples */
+
+.breadcrumbs{
+  --breadcrumbsTextColor: #D1C4E9;  
+  --breadcrumbsTextColorActive: #fff;  
+}
+
+
+.breadcrumbs_type5{
+  --breadcrumbsDivider: "›";
+  --breadcrumbsDividerSize: 20px;
+}
+
+/*
+* demo page
+*/
+
+@media screen and (min-width: 768px){
+
+  html{
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 767px){
+
+  html{
+    font-size: 50%;
+  }
+}
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Open Sans", "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.5rem;
+}
+
+
+.page__container{
+  width: 600px;
+}
+
+.page__section{
+  margin-bottom: 5rem;
+  padding: 2rem 3rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+  background-color: blueviolet;
+  color: #fff;
+  border-radius: 2px;
+}
+
+
