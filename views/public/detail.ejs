@@ -4,7 +4,7 @@
         <div class="page__section">
             <ul class="breadcrumbs breadcrumbs_type5">
                 <li class="breadcrumbs__item"><a href="/" class="breadcrumbs__element">Trang chủ</a></li>
-                <li class="breadcrumbs__item"><a href="/<%= breadcrumbs %>/<%= link %>" class="breadcrumbs__element"><%= link %></a></li>
+                <li class="breadcrumbs__item"><a  class="breadcrumbs__element" id="brc"></a></li>
                 <li class="breadcrumbs__item breadcrumbs__item_active"><span class="breadcrumbs__element"><%= game.name %></span></li>
             </ul>
         </div>
@@ -129,4 +129,9 @@
     </div>
   </div>
 </div>
+
+<script>
+document.getElementById("brc").innerHTML = localStorage.getItem("middleName");
+document.getElementById("brc").setAttribute("href",'/'+localStorage.getItem("firstName")+'/'+localStorage.getItem("middleName"));
+</script>
 <% include partials/footer %>
