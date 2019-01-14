@@ -93,6 +93,7 @@
     <div>
       <div>
         <h3>
+          <p id="gameId"><%= game._id%></p>
           <%= game.name %>
         </h3>
         <p class="time-view">
@@ -131,7 +132,19 @@
 </div>
 
 <script>
-document.getElementById("brc").innerHTML = localStorage.getItem("middleName");
-document.getElementById("brc").setAttribute("href",'/'+localStorage.getItem("firstName")+'/'+localStorage.getItem("middleName"));
+  var breadcumb = localStorage.getItem("breadcumbValue");
+  if(breadcumb == ''){
+    document.getElementById("brc").parentElement.style.display = "none";
+  }
+  else {
+    document.getElementById("brc").innerHTML = localStorage.getItem("breadcumbValue");
+    document.getElementById("brc").setAttribute("href",'/'+localStorage.getItem("breadcumbType")+'/'+localStorage.getItem("breadcumbValue"));
+  }
+var id = document.getElementById('gameId').innerHTML;
+  $.ajax({
+    url: "/countViews/"+id
+  }).done(function() {
+  })
+
 </script>
 <% include partials/footer %>
