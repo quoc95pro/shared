@@ -74,30 +74,40 @@ function onfocusSearch() {
 }
 
 function outfocusSearch() {
-    document.getElementById("seach-result").style.display = "block";
+    document.getElementById("seach-result").style.display = "none";
+}
+
+function resultMouseOut() {
+    document.getElementById("txtSearch").setAttribute("onfocusout","outfocusSearch()");
+}
+
+function resultMouseOver() {
+    document.getElementById("txtSearch").setAttribute("onfocusout","");
 }
 
 function search() {
-    var keyWord =  document.getElementById("txtSearch").value;
-    var listResult =  document.getElementById("list-result");
+    var keyWord = document.getElementById("txtSearch").value;
+    var listResult = document.getElementById("list-result");
     listResult.innerHTML = '';
-   if(keyWord != ''){
-    $.ajax({
-        url: "/search/"+keyWord
-      }).done(function(data) {
-        if(data){
-            data.forEach(element => {
-                listResult.innerHTML+= "<li class='li-result'>"+"<div class='select2-result-repository'>" +
-                "<div class='select2-result-repository__avatar'><img src='/images/game/" + element.avatar + "' /></div>" +
-                "<div class='select2-result-repository__meta'>" +
-                  "<div class='select2-result-repository__title'>" + element.name + "</div>"+"<div class='select2-result-repository__statistics'>" +
-                  "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + element.views + " Forks</div>" +
-                  "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + element.views + " Stars</div>" +
-                  "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + element.views + " Watchers</div>" +
-                "</div>" +
-                "</div></div></li>";
-            });
-        }
-      })
-   }
+    if (keyWord != '') {
+        $.ajax({
+            url: "/search/" + keyWord
+        }).done(function (data) {
+            if (data) {
+                data.forEach(element => {
+                    listResult.innerHTML += "<a href='/detail/" + element._id + "'><li class='li-result'>" + "<div class='search-item'>" +
+                        "<div class='search-item-avatar'><img src='/images/game/" + element.avatar + "' /></div>" +
+                        "<div class='search-item-meta'>" +
+                        "<div class='search-item-title'>" + element.name + "</div>" +
+                        "<div class='search-item-description'>" + element.category + "</div>" +
+                        "<div class='search-item-statistics'>" +
+                        "<div class='search-item-seri'><i class='fa fa-th-list'></i> " + element.seri + "</div>" +
+                        "<div class='search-item-download'><i class='fa fa-cloud-download'></i> " + element.downloads + " Downloads</div>" +
+                        "<div class='search-item-view'><i class='fa fa-eye'></i> " + element.views + " Views</div>" +
+                        "</div>" +
+                        "</div></div></li></a>";
+                });
+            }
+        })
+    }
 }

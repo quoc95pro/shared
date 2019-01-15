@@ -5,7 +5,10 @@ var moment = require('moment');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  Game.find({}, (err, game) => {
+  Game.find({})
+      .limit(8)
+      .sort({views: -1})
+      .exec((err, game) => {
     if (err) {
       console.log(err);
     }

@@ -27,9 +27,9 @@
       <div class="search-area">
         <form class="form-inline my-2 my-lg-0 search-form">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" id="txtSearch" aria-label="Search"
-            onfocusout="outfocusSearch()" onfocus="onfocusSearch()" onkeyup="search()">
+             onfocus="onfocusSearch()" onkeyup="search()">
         </form>
-        <div id="seach-result">
+        <div id="seach-result" onmouseout="resultMouseOut()" onmouseover="resultMouseOver()">
           <ul id="list-result">
 
           </ul>

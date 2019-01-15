@@ -28,17 +28,23 @@
   width: 100% !important;
   height: 4rem;
   border-radius: 20px;
+  font-size: 14px;
 }
 
 #seach-result {
   position: absolute;
   display: none;
   width: 62%;
+  margin-top: 20px;
 }
 
 #list-result {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
+}
+
+#list-result a{
+  text-decoration: none;
 }
 
 .li-result {
@@ -47,33 +53,34 @@
   width: 100%;
 }
 
-.li-result:hover {
-  background-color: #5897fb;
+.li-result:hover div {
+  background-color: blueviolet;
   color: white;
 }
 
-.select2-result-repository {
+.search-item {
   padding-top: 4px;
   padding-bottom: 3px;
 }
 
-.select2-result-repository__avatar {
+.search-item-avatar {
   float: left;
   width: 60px;
+  height: 60px;
   margin-right: 10px;
 }
 
-.select2-result-repository__avatar img {
+.search-item-avatar img {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 2px;
 }
 
-.select2-result-repository__meta {
+.search-item-meta {
   margin-left: 70px;
 }
 
-.select2-result-repository__title {
+.search-item-title {
   color: black;
   font-weight: 700;
   word-wrap: break-word;
@@ -81,19 +88,19 @@
   margin-bottom: 4px;
 }
 
-.select2-result-repository__description {
+.search-item-description {
   font-size: 13px;
   color: #777;
   margin-top: 4px;
 }
 
-.select2-result-repository__forks, .select2-result-repository__stargazers, .select2-result-repository__watchers {
+.search-item-seri, .search-item-download, .search-item-view {
   display: inline-block;
   color: #aaa;
   font-size: 11px;
 }
 
-.select2-result-repository__forks, .select2-result-repository__stargazers {
+.search-item-seri, .search-item-download {
   margin-right: 1em;
 }
 
