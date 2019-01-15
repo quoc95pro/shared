@@ -53,15 +53,14 @@ router.get('/category/:cate', function (req, res) {
 });
 
 router.get('/search/:name', function (req, res) {
-  var id = req.params.id;
-  Game.getGameById(id, function (err, game) {
-    if (err) res.send({ errors: err });
-    game.views = game.views + 1;
-    Game.updateGame(id, game, (err, g) => {
-      if (err) res.send({ errors: err });
-      res.send({ success_msg: 'Edit success' });
+  Game.find({ name: { $regex: '.*' + req.params.name + '.*', $options: "i" } })
+    .limit(10)
+    .exec(function (err, game) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(game);
     });
-  });
 });
 
 module.exports = router;

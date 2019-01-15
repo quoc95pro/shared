@@ -4,8 +4,8 @@
 <head>
   <title>Albumz</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css"/>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/slick.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/slick-theme.css" />
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/fonts/font-awesome.min.css">
   <script src="/javascripts/jquery-3.3.1.min.js"></script>
@@ -26,8 +26,14 @@
       </div>
       <div class="search-area">
         <form class="form-inline my-2 my-lg-0 search-form">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" id="txtSearch" aria-label="Search"
+            onfocusout="outfocusSearch()" onfocus="onfocusSearch()" onkeyup="search()">
         </form>
+        <div id="seach-result">
+          <ul id="list-result">
+
+          </ul>
+        </div>
       </div>
       <div class="right-menu">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
