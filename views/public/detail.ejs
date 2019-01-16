@@ -11,9 +11,14 @@
     </div>
 </div>
 <div class="row">
-  <div class="col-md-3 col-systemRequirements">
+  <div class="col-md-3 detail-left">
     <div>
-      <h3>System Requirements</h3>
+      <div class="col-detail-left-top">
+        <p><%= game.name %></p>
+      </div>
+      
+      <div class="col-systemRequirement">
+        <h3>System Requirements</h3>
       <div class="detail-systemRequirements">
       <p><strong>CPU:</strong> Info</p>
       <p><strong>CPU SPEED:</strong> Dual Core 2.0 GHz or equivalent processor</p>
@@ -26,6 +31,11 @@
       <p><strong>SOUND CARD:</strong> Yes</p>
       <p><strong>FREE DISK SPACE:</strong> 6 GB</p>
       <p><strong>DEDICATED VIDEO RAM:</strong> 512 MB</p>
+      </div>
+      </div>
+
+      <div class="col-detail-left-bottom">
+        <button class="btn-hover color-7">Tải Xuống</button>
       </div>
     </div>
   </div>
@@ -48,54 +58,18 @@
     </section>
   </div>
   <div class="col-md-3">
-    <ul id="accordion" class="accordion">
-      <li>
-        <div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-          <li><a href="#">Photoshop</a></li>
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">Maquetacion web</a></li>
-        </ul>
-      </li>
-      <li class="default open">
-        <div class="link"><i class="fa fa-code"></i>Desarrollo front-end<i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-          <li><a href="#">Javascript</a></li>
-          <li><a href="#">jQuery</a></li>
-          <li><a href="#">Frameworks javascript</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-          <li><a href="#">Tablets</a></li>
-          <li><a href="#">Dispositivos mobiles</a></li>
-          <li><a href="#">Medios de escritorio</a></li>
-          <li><a href="#">Otros dispositivos</a></li>
-        </ul>
-      </li>
-      <li>
-        <div class="link"><i class="fa fa-globe"></i>Posicionamiento web<i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-          <li><a href="#">Google</a></li>
-          <li><a href="#">Bing</a></li>
-          <li><a href="#">Yahoo</a></li>
-          <li><a href="#">Otros buscadores</a></li>
-        </ul>
-      </li>
-    </ul>
+    <% include partials/rightMenu %>
   </div>
 </div>
 
 <div class="row" style="margin-top:30px;">
   <div class="col-md-9 col-detail-content" >
     <div>
-      <div>
-        <h3>
-          <p id="gameId"><%= game._id%></p>
+      <div class="col-detail-content-header">
+        <span id="gameId"><%= game._id %></span>
+        <h1>
           <%= game.name %>
-        </h3>
+        </h1>
         <p class="time-view">
           <span>
             <i class="fa fa-calendar">
@@ -103,29 +77,41 @@
           </span>
           <span class="index-views">
             <i class="fa fa-eye">
-              <%= game.views %></i>
+              <%= game.views %> Lượt Xem</i>
           </span>
         </p>
       </div>
 
+      <div style="clear:both; padding: 0 25px 25px 25px;">
+        <h3><%= game.seri %></h3>
+      </div>  
+
       <div>
         <div class="detail-downloadLink">
-          <a href="<%= game.downloadLink %>">TẢI XUỐNG</a>
-        </div>
-        <div class="detail-downloads">
-          <%= game.downloads %>
+          <a href="<%= game.downloadLink %>">Tải Xuống</a>
         </div>
         <div class="detail-uploadBy">
-          <%= game.uploadBy %> a
+          Người đăng: <%= game.uploadBy %>
+        </div>
+        <div class="detail-downloads">
+          <%= game.downloads %> Lượt Tải
         </div>
       </div>
 
       <div style="clear:both;">
-        <%= game.seri %>
+        <p class="">
+         <span>Thể loại : </span><% game.category.forEach(function(c) { %>
+              <a href="/category/<%= c %>">
+                  <%= c %>.</a>
+          <% }); %>
+      </p>
       </div>
 
-      <div>
+      <div class="detail-description">
         <%- game.description %>
+      </div>
+      <div class="col-detail-content-download">
+        <button class="btn-hover color-7">Tải Xuống</button>
       </div>
     </div>
   </div>

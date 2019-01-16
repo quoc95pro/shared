@@ -16,14 +16,14 @@
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" id="addCategory" name="category">
+                            <select class="form-control" id="addCategory" name="category" multiple="multiple">
                                 <% category.forEach(function(cate) { %>
                                 <option value="<%= cate.name %>">
                                     <%= cate.name %>
                                 </option>
                                 <% }); %>
                             </select>
-                        </div>
+                        </div>   
                         <div class="form-group">
                             <label>Download Link</label>
                             <input class="form-control" id="addDownloadLink" name="downloadLink" type="text"
@@ -64,6 +64,10 @@
 <script src="/javascripts/jquery.form.min.js"></script>
 <script src="/javascripts/jnoty.js"></script>
 <script>
+    $('#addCategory').multiselect({
+        includeSelectAllOption: true
+    });
+
     $('#addForm').submit(function () {
         for (instance in CKEDITOR.instances)
             CKEDITOR.instances[instance].updateElement();

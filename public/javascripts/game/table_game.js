@@ -147,11 +147,31 @@ function operateFormatter(value, row, index) {
 CKEDITOR.replace('addDescription');
 CKEDITOR.replace('editDescription');
 
+
 window.operateEvents = {
     'click .edit': function (e, value, row, index) {
         document.getElementById('editId').value = row._id;
         document.getElementById('editName').value = row.name;
-        document.getElementById('editCategory').value = row.category;
+        var options = [];
+        $.ajax({
+            url: "games/category"
+          }).done(function(cate) {
+              var selectedItemCate = [];
+              row.category.forEach(element => {
+                  console.log(element);
+                  selectedItemCate.push(element);
+              });
+              
+            cate.forEach(element => {
+                if(selectedItemCate.includes(element.name)){
+                    options.push({label: element.name, title: element.name, value: element.name, selected: true});
+                }else{
+                    options.push({label: element.name, title: element.name, value: element.name});
+                }
+                
+            });
+            $('#editCategory').multiselect('dataprovider', options);
+        });
         document.getElementById('editLinkDownload').value = row.downloadLink;
         document.getElementById('editSystemRequirements').value = row.systemRequirements;
         CKEDITOR.instances['editDescription'].setData(row.description)

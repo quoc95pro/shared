@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label>Category</label>
-                            <select class="form-control" id="editCategory" name="category">
+                            <select class="form-control" id="editCategory" name="category" multiple="multiple">
                                 <% category.forEach(function(cate) { %>
                                 <option value="<%= cate.name %>">
                                     <%= cate.name %>
@@ -63,15 +63,13 @@
 
 <script src="/javascripts/jquery.form.min.js"></script>
 <script>
+
 $('#editForm').submit(function () {
     for ( instance in CKEDITOR.instances )
         CKEDITOR.instances[instance].updateElement();
-    alert(document.getElementById('editDescription').value);
-    // var data = CKEDITOR.instances.editDescription.getData();
     $(this).ajaxSubmit({
         type: 'PUT',
         error: function (xhr) {
-            alert("err" + xhr);
         },
         success: function (response) {
             if (response.success_msg != null) {

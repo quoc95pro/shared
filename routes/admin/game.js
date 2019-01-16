@@ -25,6 +25,15 @@ router.get('/', function(req, res, next) {
   }); 
 });
 
+router.get('/category', function(req, res, next) {
+  Category.find({}, function(err, category){
+    if(err){
+      console.log(err);
+    }
+      res.send(category);
+  }); 
+});
+
 // Add game
 
 router.post('/', upload.single('avatar') ,function(req, res, next) {
