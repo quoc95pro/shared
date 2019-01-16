@@ -32,7 +32,7 @@
                         <%= g.name %></a></p>
                 <p class="top-Game-Category">
                     <% g.category.forEach(function(c) { %>
-                        <a href="/category/<%= c %>">
+                        <a href="/category/<%= c %>/1">
                             <%= c %>.</a>
                     <% }); %>
                 </p>
@@ -73,7 +73,7 @@
                 </a>
                 <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="top-Game-Category"><a href="/category/<%= g.category %>">
+                <p class="top-Game-Category"><a href="/category/<%= g.category %>/1">
                         <%= g.category %></a></p>
                 <p class="time-view">
                     <span>
@@ -112,7 +112,7 @@
                 </a>
                 <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="top-Game-Category"><a href="/category/<%= g.category %>">
+                <p class="top-Game-Category"><a href="/category/<%= g.category %>/1">
                         <%= g.category %></a></p>
                 <p class="time-view">
                     <span>

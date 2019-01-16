@@ -6,14 +6,14 @@ var moment = require('moment');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   Game.find({})
-      .limit(8)
-      .sort({views: -1})
-      .exec((err, game) => {
-    if (err) {
-      console.log(err);
-    }
-    res.render('public/index', { title: 'Index', game: game, moment: moment });
-  });
+    .limit(8)
+    .sort({ views: -1 })
+    .exec((err, game) => {
+      if (err) {
+        console.log(err);
+      }
+      res.render('public/index', { title: 'Index', game: game, moment: moment });
+    });
 });
 // Data test
 router.get('/data', function (req, res, next) {
@@ -46,13 +46,26 @@ router.get('/countViews/:id', function (req, res) {
   });
 });
 
-router.get('/category/:cate', function (req, res) {
-  Game.getGameByCategory(req.params.cate, function (err, game) {
-    if (err) {
-      console.log(err);
-    }
-    res.render('public/category', { game: game, cate: req.params.cate });
-  })
+router.get('/category/:cate/:page', function (req, res) {
+  Game.find({ category: req.params.cate })
+    .limit(14)
+    .skip(req.params.page * 14 - 14)
+    .exec((err, game) => {
+      if (err) {
+        console.log(err);
+      }
+      Game.find({ category: req.params.cate })
+        .count((err, countRow) => {
+          if (err) {
+            console.log(err);
+          }
+          var maxPage = Math.floor(countRow / 14);
+          if(countRow%14 >= 1){
+            maxPage += 1;
+          }
+          res.render('public/category', { game: game, cate: req.params.cate, currentPage: req.params.page, maxPage: maxPage });
+        })
+    })
 });
 
 router.get('/search/:name', function (req, res) {
