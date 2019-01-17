@@ -8,11 +8,30 @@ router.get('/', function (req, res, next) {
   Game.find({})
     .limit(8)
     .sort({ views: -1 })
-    .exec((err, game) => {
+    .exec((err, topViewGame) => {
       if (err) {
         console.log(err);
       }
-      res.render('public/index', { title: 'Index', game: game, moment: moment });
+      Game.find({})
+        .limit(8)
+        .sort({ download: -1 })
+        .exec((err, topDownloadGame) => {
+          if (err) {
+            console.log(err);
+          }
+          Game.find({})
+        .limit(8)
+        .sort({ postedDate: -1 })
+        .exec((err, newestGame) => {
+          if (err) {
+            console.log(err);
+          }
+          res.render('public/index', { title: 'Index', topViewGame: topViewGame, topDownloadGame: topDownloadGame, newestGame: newestGame, moment: moment });
+
+        });
+        });
+
+
     });
 });
 // Data test
@@ -60,7 +79,7 @@ router.get('/category/:cate/:page', function (req, res) {
             console.log(err);
           }
           var maxPage = Math.floor(countRow / 14);
-          if(countRow%14 >= 1){
+          if (countRow % 14 >= 1) {
             maxPage += 1;
           }
           res.render('public/category', { game: game, cate: req.params.cate, currentPage: req.params.page, maxPage: maxPage });

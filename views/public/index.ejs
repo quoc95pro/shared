@@ -1,23 +1,23 @@
 <% include partials/header %>
 <div class="right-menu-custom">
     <ul class="list-group" id="myScrollspy">
-        <div class="list-group-it"><span class="list-group-left">Top Game</span><a class="list-group-right list-group-item"
-                href="#top-Game"></a></div>
-        <div class="list-group-it"><span class="list-group-left">Top Seri</span><a class="list-group-right list-group-item"
-                href="#top-Seri"></a></div>
-        <div class="list-group-it"><span class="list-group-left">Action</span><a class="list-group-right list-group-item"
-                href="#action"></a></div>
+        <div class="list-group-it"><span class="list-group-left">Mới Nhất</span><a class="list-group-right list-group-item"
+                href="#newest-Game"></a></div>
+        <div class="list-group-it"><span class="list-group-left">Tải Nhiều Nhất</span><a class="list-group-right list-group-item"
+                href="#top-Download"></a></div>
+        <div class="list-group-it"><span class="list-group-left">Xem Nhiều Nhất</span><a class="list-group-right list-group-item"
+                href="#top-View"></a></div>
     </ul>
 </div>
 <section>
     <div class="row row-index">
         <div class="col-md-12">
-            <h1 id="top-Game">&nbsp;</h1>
+            <h1 id="newest-Game">&nbsp;</h1>
         </div>
         <div class="col-md-12">
-            <h1 class="title">Top Game</h1>
+            <h1 class="title">Mới Nhất</h1>
         </div>
-        <% game.forEach(function(g) { %>
+        <% newestGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
                 <a href="/detail/<%= g._id %>">
@@ -28,9 +28,9 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="top-Game-Category">
+                <p class="Game-Category">
                     <% g.category.forEach(function(c) { %>
                         <a href="/category/<%= c %>/1">
                             <%= c %>.</a>
@@ -55,12 +55,12 @@
 <section>
     <div class="row row-index">
         <div class="col-md-12">
-            <h1 id="top-Seri">&nbsp;</h1>
+            <h1 id="top-Download">&nbsp;</h1>
         </div>
         <div class="col-md-12">
-            <h1 class="title">Top Seri</h1>
+            <h1 class="title">Tải Nhiều Nhất</h1>
         </div>
-        <% game.forEach(function(g) { %>
+        <% topDownloadGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
                 <a href="/detail/<%= g._id %>">
@@ -71,9 +71,9 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="top-Game-Category"><a href="/category/<%= g.category %>/1">
+                <p class="Game-Category"><a href="/category/<%= g.category %>/1">
                         <%= g.category %></a></p>
                 <p class="time-view">
                     <span>
@@ -94,12 +94,12 @@
 <section>
     <div class="row row-index">
         <div class="col-md-12">
-            <h1 id="action">&nbsp;</h1>
+            <h1 id="top-View">&nbsp;</h1>
         </div>
         <div class="col-md-12">
             <h1 class="title">Action</h1>
         </div>
-        <% game.forEach(function(g) { %>
+        <% topViewGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
                 <a href="/detail/<%= g._id %>">
@@ -110,9 +110,9 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="top-Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="top-Game-Category"><a href="/category/<%= g.category %>/1">
+                <p class="Game-Category"><a href="/category/<%= g.category %>/1">
                         <%= g.category %></a></p>
                 <p class="time-view">
                     <span>

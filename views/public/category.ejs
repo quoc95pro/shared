@@ -184,19 +184,23 @@
 
 <div class="row">
     <div class="pagination-custom">
-        <nav class="pagination-nav"><span class="pagination-text">Trang <%=currentPage %>, <%=maxPage %></span>
+        <nav class="pagination-nav"><span class="pagination-text">Trang <%=currentPage %></span>
             <div class="pagination-left">
                 <a href="" class="pagination-prev"></a>
-                <a href="">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
+                <% for(var i = parseInt(currentPage) - 3; i < parseInt(currentPage) ; i++ ) {%>
+                    <% if(i>0) {%>
+                        <a href="/category/<%= cate %>/<%=i %>"><%=i %></a>
+                    <% }%>
+                <%}%>
                 <span class="pagination-line"></span>
             </div>
             <div class="pagination-right">
                 <a href="" class="pagination-next"></a>
-                <a href="">4</a>
-                <a href="">5</a>
-                <a href="">6</a>
+                <% for(var i = parseInt(currentPage) + 1; i <= parseInt(currentPage) + 3 ; i++ ) {%>
+                    <% if(i <= parseInt(maxPage)) {%>
+                        <a href="/category/<%= cate %>/<%=i %>"><%=i %></a>
+                    <%}%>
+                <%}%>
                 <span class="pagination-line"></span>
             </div>
         </nav>
