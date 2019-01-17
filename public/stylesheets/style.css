@@ -11,7 +11,7 @@
 }
 
 .main-logo {
-  margin-left: 8%;
+  margin-left: 10%;
 }
 
 .main-logo a:hover{
@@ -314,114 +314,6 @@ section {
   width: 150px;
   margin-top: 15px;
   border-bottom: 3px solid #c8c8c8;
-}
-
-/* flat header menu */
-
-.left-menu-toggle {
-  margin-left: 1.3%;
-}
-
-
-/* left-menu */
-#toggle-header {
-  display: block;
-  width: 28px;
-  height: 28px;
-  margin: 35px 0 10px 0;
-}
-
-#toggle-header span:after, #toggle-header span:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -9px;
-}
-
-#toggle-header span:after {
-  top: 9px;
-}
-
-#toggle-header span {
-  position: relative;
-  display: block;
-}
-
-#toggle-header span, #toggle-header span:after, #toggle-header span:before {
-  width: 100%;
-  height: 5px;
-  background-color: #c8c8c8;
-  transition: all 0.3s;
-  backface-visibility: hidden;
-  border-radius: 2px;
-}
-
-#toggle-header.on span {
-  background-color: transparent;
-}
-
-#toggle-header.on span:before {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-#toggle-header.on span:after {
-  transform: rotate(-45deg) translate(8px, -8px);
-}
-
-/* menu appearance*/
-
-#menu-header {
-  z-index: +10;
-  position: fixed;
-  top: 100px;
-  left: 1.3%;
-  color: white;
-  padding: 10px;
-  margin: auto;
-  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
-  text-align: center;
-  border-radius: 0px 4px 4px 4px;
-  background: #c8c8c8;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .4s;
-}
-
-.menu-header-toggled {
-  opacity: 0.9 !important;
-  visibility: visible !important;
-}
-
-#menu-header:after {
-  position: absolute;
-  top: -20px;
-  left: 0px;
-  content: "";
-  display: block;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 20px solid #c8c8c8;
-}
-
-#menu-header ul, #menu-header li, #menu-header li a {
-  list-style: none;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-#menu-header li a {
-  padding: 5px;
-  color: white;
-  text-decoration: none;
-  transition: all .2s;
-}
-
-#menu-header li a:hover, #menu-header li a:focus {
-  background: blueviolet;
-  color: #fff;
-  text-decoration: none;
 }
 
 /* category */
@@ -1185,10 +1077,12 @@ ul {
   text-decoration: none;
   font-size: 24px;
   background: #2b3033;
+  color: blueviolet;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .nav__link:hover {
   background: #000;
+  text-decoration: none;
 }
 @media (max-width: 640px) {
   .nav-left {
@@ -1313,18 +1207,7 @@ ul {
     font-size: 16px;
   }
 }
-.c-blue {
-  color: #5fc7ea;
-}
-.c-red {
-  color: #e68568;
-}
-.c-green {
-  color: #68e6ac;
-}
-.c-yellow {
-  color: #e6d068;
-}
+
 .b-blue {
   background: #5fc7ea;
 }
@@ -1337,6 +1220,7 @@ ul {
 .b-yellow {
   background: #e6d068;
 }
+
 .logo {
   position: fixed;
   bottom: 3vh;

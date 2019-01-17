@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Game = require('../models/game');
+var Category = require('../models/category');
 var moment = require('moment');
 
 /* GET home page. */
@@ -20,18 +21,21 @@ router.get('/', function (req, res, next) {
             console.log(err);
           }
           Game.find({})
-        .limit(8)
-        .sort({ postedDate: -1 })
-        .exec((err, newestGame) => {
-          if (err) {
-            console.log(err);
-          }
-          res.render('public/index', { title: 'Index', topViewGame: topViewGame, topDownloadGame: topDownloadGame, newestGame: newestGame, moment: moment });
-
+            .limit(8)
+            .sort({ postedDate: -1 })
+            .exec((err, newestGame) => {
+              if (err) {
+                console.log(err);
+              }
+              res.render('public/index', {
+                title: 'Index',
+                topViewGame: topViewGame,
+                topDownloadGame: topDownloadGame,
+                newestGame: newestGame,
+                moment: moment
+              });
+            });
         });
-        });
-
-
     });
 });
 // Data test
@@ -95,6 +99,16 @@ router.get('/search/:name', function (req, res) {
         console.log(err);
       }
       res.send(game);
+    });
+});
+
+router.get('/cateAll', function (req, res) {
+  Category.find()
+    .exec(function (err, cate) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(cate);
     });
 });
 

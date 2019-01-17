@@ -1,43 +1,3 @@
-var theToggle = document.getElementById('toggle-header');
-var menu = document.getElementById('menu-header');
-
-// hasClass
-function hasClass(elem, className) {
-    return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
-}
-
-// toggleClass
-function toggleClass(elem, className) {
-    var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, " ") + ' ';
-    if (hasClass(elem, className)) {
-        while (newClass.indexOf(" " + className + " ") >= 0) {
-            newClass = newClass.replace(" " + className + " ", " ");
-        }
-        elem.className = newClass.replace(/^\s+|\s+$/g, '');
-    } else {
-        elem.className += ' ' + className;
-    }
-}
-
-// theToggle.onclick = function () {
-//     toggleClass(this, 'on');
-//     toggleClass(menu, 'menu-header-toggled');
-
-//     return false;
-// }
-
-// function toggleMenu(elem) {
-
-//     if (hasClass(elem, 'on')) {
-//         while (newClass.indexOf(" " + className + " ") >= 0) {
-//             newClass = newClass.replace(" " + className + " ", " ");
-//         }
-//         elem.className = newClass.replace(/^\s+|\s+$/g, '');
-//     } else {
-//         elem.className += ' ' + className;
-//     }
-// }
-
 // right menu category
 
 $(function () {
@@ -78,11 +38,11 @@ function outfocusSearch() {
 }
 
 function resultMouseOut() {
-    document.getElementById("txtSearch").setAttribute("onfocusout","outfocusSearch()");
+    document.getElementById("txtSearch").setAttribute("onfocusout", "outfocusSearch()");
 }
 
 function resultMouseOver() {
-    document.getElementById("txtSearch").setAttribute("onfocusout","");
+    document.getElementById("txtSearch").setAttribute("onfocusout", "");
 }
 
 function search() {
@@ -122,51 +82,73 @@ var l = $('.scrolly');
 var panel = $('.panel');
 var vh = $(window).height();
 
-var openMenu = function() {
-  burger.classList.toggle('burger--active');
-  menu.classList.toggle('nav__list--active');
+var openMenu = function () {
+    burger.classList.toggle('burger--active');
+    menu.classList.toggle('nav__list--active');
 };
 
 // reveal content of first panel by default
 panel.eq(0).find('.panel__content').addClass('panel__content--active');
 
-var scrollFx = function() {
-  var ds = doc.scrollTop();
-  var of = vh / 4;
-  
-  // if the panel is in the viewport, reveal the content, if not, hide it.
-  for (var i = 0; i < panel.length; i++) {
-    if (panel.eq(i).offset().top < ds+of) {
-     panel
-       .eq(i)
-       .find('.panel__content')
-       .addClass('panel__content--active');
-    } else {
-      panel
-        .eq(i)
-        .find('.panel__content')
-        .removeClass('panel__content--active')
+var scrollFx = function () {
+    var ds = doc.scrollTop();
+    var of = vh / 4;
+
+    // if the panel is in the viewport, reveal the content, if not, hide it.
+    for (var i = 0; i < panel.length; i++) {
+        if (panel.eq(i).offset().top < ds + of) {
+            panel
+                .eq(i)
+                .find('.panel__content')
+                .addClass('panel__content--active');
+        } else {
+            panel
+                .eq(i)
+                .find('.panel__content')
+                .removeClass('panel__content--active')
+        }
     }
-  }
 };
 
-var scrolly = function(e) {
-  e.preventDefault();
-  var target = this.hash;
-  var $target = $(target);
+var scrolly = function (e) {
+    e.preventDefault();
+    var target = this.hash;
+    var $target = $(target);
 
-  $('html, body').stop().animate({
-      'scrollTop': $target.offset().top
-  }, 300, 'swing', function () {
-      window.location.hash = target;
-  });
+    $('html, body').stop().animate({
+        'scrollTop': $target.offset().top
+    }, 300, 'swing', function () {
+        window.location.hash = target;
+    });
 }
 
-var init = function() {
-  burger.addEventListener('click', openMenu, false);
-  window.addEventListener('scroll', scrollFx, false);
-  window.addEventListener('load', scrollFx, false);
-  $('a[href^="#"]').on('click',scrolly);
+var init = function () {
+    burger.addEventListener('click', openMenu, false);
+    window.addEventListener('scroll', scrollFx, false);
+    window.addEventListener('load', scrollFx, false);
+    $.ajax({
+        url: "/cateAll"
+    }).done(function (cate) {
+        var classColor = ['b-yellow', 'b-green', 'b-blue', 'b-red'];
+        var previousColor = '';
+        var random_class = '';
+        cate.forEach(element => {
+            do {
+                random_class = classColor[Math.floor(Math.random() * classColor.length)];
+            } while (random_class == previousColor);
+            previousColor = random_class;
+            $(".nav__list").append("<li class='nav__item'>" +
+                "<a href='/category/" + element.name + "/1' class='nav__link " + random_class + "'>" +
+                "<div>" +
+                "<i style='width:100%;text-align:center;' class='fa fa-gamepad'>" +
+                "</i>" +
+                "<p style='font-size: 1.5vh;text-align: center;'>" + element.name +
+                "</p></div></a></li");
+        });
+    });
+
+    $('a[href^="#"]').on('click', scrolly);
 };
 
 doc.on('ready', init());
+
