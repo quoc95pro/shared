@@ -8,7 +8,9 @@ var GameSchema = mongoose.Schema({
 		type: String
 	},
 	category: [{
-		type: String
+		name: String,
+		ename: String,
+		group: String
 	}],
 	postedDate: {
 		type: Date

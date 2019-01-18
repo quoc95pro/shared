@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/category', function(req, res, next) {
-  Category.find({}, function(err, category){
+  Category.find({},['-_id','name','group','ename'] ,function(err, category){
     if(err){
       console.log(err);
     }
@@ -100,34 +100,37 @@ router.put('/', upload.single('avatar') ,function(req, res, next) {
   } else{
     var id = req.body.id;
     var name = req.body.name;
-    var category = req.body.category;
+    var category = JSON.parse(JSON.stringify(req.body.category));
     var downloadLink = req.body.downloadLink;
     var systemRequirements = req.body.systemRequirements;
     var description = req.body.description;
-    var seri = req.body.seri;
+    var seri = req.body.seri;    
     
     Game.getGameById(id, function(err, game){
         if(err) res.send({errors: err});
         game.name = name;
-        game.category = category;
+        game.category=category;
         game.downloadLink = downloadLink;
         game.systemRequirements = systemRequirements;
         game.description = description;
         game.seri = seri;
+        console.log(category[0]);
+        game.category.push(category[0]);
+        console.log(game.category);
         if(req.file){
           game.avatar = req.file.filename;
         }
-        Game.updateGame(id, game, (err, g) => {
-          if(err) res.send({errors: err});
+        // Game.updateGame(id, game, (err, g) => {
+        //   if(err) res.send({errors: err});
           res.send({success_msg: 'Edit success'});
-        });
+        // });
     });
   }
 });
 
 // Delete game
 
-router.delete('/', function(req, res,) {
+router.delete('/', function(req, res, next) {
   var id = req.body.id;
   Game.findByIdAndDelete(id, (err, a) =>{
     if(err) res.send({errors: err});

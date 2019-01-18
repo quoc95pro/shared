@@ -158,15 +158,14 @@ window.operateEvents = {
           }).done(function(cate) {
               var selectedItemCate = [];
               row.category.forEach(element => {
-                  console.log(element);
-                  selectedItemCate.push(element);
+                  selectedItemCate.push(element.name);
               });
               
-            cate.forEach(element => {
+            cate.forEach(element => {                                
                 if(selectedItemCate.includes(element.name)){
-                    options.push({label: element.name, title: element.name, value: element.name, selected: true});
+                    options.push({label: element.name, title: element.name, value: JSON.stringify(element), selected: true});
                 }else{
-                    options.push({label: element.name, title: element.name, value: element.name});
+                    options.push({label: element.name, title: element.name, value: JSON.stringify(element) });
                 }
                 
             });

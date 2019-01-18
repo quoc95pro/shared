@@ -32,8 +32,8 @@
                         <%= g.name %></a></p>
                 <p class="Game-Category">
                     <% g.category.forEach(function(c) { %>
-                        <a href="/category/<%= c %>/1">
-                            <%= c %>.</a>
+                    <a href="/category/<%= c.name %>/1">
+                        <%= c.name %>.</a>
                     <% }); %>
                 </p>
                 <p class="time-view">
@@ -73,8 +73,12 @@
                 </a>
                 <p class="Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="Game-Category"><a href="/category/<%= g.category %>/1">
-                        <%= g.category %></a></p>
+                <p class="Game-Category">
+                    <% g.category.forEach(function(c) { %>
+                    <a href="/category/<%= c.name %>/1">
+                        <%= c.name %>.</a>
+                    <% }); %>
+                </p>
                 <p class="time-view">
                     <span>
                         <i class="fa fa-calendar">
@@ -112,8 +116,12 @@
                 </a>
                 <p class="Game-Name"><a href="/detail/<%= g._id %>">
                         <%= g.name %></a></p>
-                <p class="Game-Category"><a href="/category/<%= g.category %>/1">
-                        <%= g.category %></a></p>
+                <p class="Game-Category">
+                    <% g.category.forEach(function(c) { %>
+                    <a href="/category/<%= c.name %>/1">
+                        <%= c.name %>.</a>
+                    <% }); %>
+                </p>
                 <p class="time-view">
                     <span>
                         <i class="fa fa-calendar">

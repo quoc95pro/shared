@@ -70,14 +70,14 @@ router.get('/countViews/:id', function (req, res) {
 });
 
 router.get('/category/:cate/:page', function (req, res) {
-  Game.find({ category: req.params.cate })
+  Game.find({ 'category.name': req.params.cate  })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
       if (err) {
         console.log(err);
       }
-      Game.find({ category: req.params.cate })
+      Game.find({ 'category.name': req.params.cate })
         .count((err, countRow) => {
           if (err) {
             console.log(err);
