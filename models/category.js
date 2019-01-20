@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 // Category Schema
 var CategorySchema = mongoose.Schema({
 	name: { type: String },
-	ename: { type: String },
+	eName: { type: String },
 	group: { type: String }
 });
 

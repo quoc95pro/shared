@@ -138,11 +138,11 @@ var init = function () {
             } while (random_class == previousColor);
             previousColor = random_class;
             $(".nav__list").append("<li class='nav__item'>" +
-                "<a href='/category/" + element.group + "/1' class='nav__link " + random_class + "'>" +
+                "<a href='/group/" + element + "/1' class='nav__link " + random_class + "'>" +
                 "<div>" +
                 "<i style='width:100%;text-align:center;' class='fa fa-gamepad'>" +
                 "</i>" +
-                "<p style='font-size: 1.5vh;text-align: center;'>" + element.group +
+                "<p style='font-size: 1.5vh;text-align: center;'>" + element +
                 "</p></div></a></li");
         });
     });

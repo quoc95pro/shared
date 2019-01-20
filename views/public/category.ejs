@@ -189,7 +189,7 @@
                 <a href="" class="pagination-prev"></a>
                 <% for(var i = parseInt(currentPage) - 3; i < parseInt(currentPage) ; i++ ) {%>
                     <% if(i>0) {%>
-                        <a href="/category/<%= cate %>/<%=i %>"><%=i %></a>
+                        <a href="/<%= type %>/<%= cate %>/<%=i %>"><%=i %></a>
                     <% }%>
                 <%}%>
                 <span class="pagination-line"></span>
@@ -198,7 +198,7 @@
                 <a href="" class="pagination-next"></a>
                 <% for(var i = parseInt(currentPage) + 1; i <= parseInt(currentPage) + 3 ; i++ ) {%>
                     <% if(i <= parseInt(maxPage)) {%>
-                        <a href="/category/<%= cate %>/<%=i %>"><%=i %></a>
+                        <a href="/<%= type %>/<%= cate %>/<%=i %>"><%=i %></a>
                     <%}%>
                 <%}%>
                 <span class="pagination-line"></span>
@@ -206,8 +206,10 @@
         </nav>
     </div>
 </div>
+
+<p id="typeCate" style="display:none;"><%=type %></p>
 <script>
-    localStorage.setItem("breadcumbType", 'category');
+    localStorage.setItem("breadcumbType", document.getElementById('typeCate').innerHTML);
     localStorage.setItem("breadcumbValue", document.getElementById("cate_name").innerHTML.trim());
 
 </script>

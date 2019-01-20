@@ -161,13 +161,36 @@ window.operateEvents = {
                   selectedItemCate.push(element.name);
               });
               
-            cate.forEach(element => {                                
+            cate.forEach(element => { 
+                var check  = 0;                               
                 if(selectedItemCate.includes(element.name)){
-                    options.push({label: element.name, title: element.name, value: JSON.stringify(element), selected: true});
+
+                    options.forEach(opt => {
+                        if(opt.label==element.group){
+                            opt.children.push({label: element.name, title: element.name, value: JSON.stringify(element), selected: true});
+                            check = 1;
+                        }
+                    });
+                    if(check == 0){
+                            options.push({label: element.group, children:[{label: element.name, title: element.name, value: JSON.stringify(element), selected: true}]});
+                    }
+
                 }else{
-                    options.push({label: element.name, title: element.name, value: JSON.stringify(element) });
+                    options.forEach(opt => {
+                        if(opt.label==element.group){
+                            opt.children.push({label: element.name, title: element.name, value: JSON.stringify(element)});
+                            check = 1;
+                        }
+                    });
+                    if(check == 0){
+                            options.push({label: element.group, children:[{label: element.name, title: element.name, value: JSON.stringify(element)}]});
+                    }
                 }
                 
+            });
+            $('#editCategory').multiselect({
+                enableClickableOptGroups: true,
+                enableCollapsibleOptGroups: true
             });
             $('#editCategory').multiselect('dataprovider', options);
         });

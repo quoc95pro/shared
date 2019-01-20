@@ -86,7 +86,29 @@ router.get('/category/:cate/:page', function (req, res) {
           if (countRow % 14 >= 1) {
             maxPage += 1;
           }
-          res.render('public/category', { game: game, cate: req.params.cate, currentPage: req.params.page, maxPage: maxPage });
+          res.render('public/category', { game: game, type: 'group', cate: req.params.cate, currentPage: req.params.page, maxPage: maxPage });
+        })
+    })
+});
+
+router.get('/group/:group/:page', function (req, res) {
+  Game.find({ 'category.group': req.params.group  })
+    .limit(14)
+    .skip(req.params.page * 14 - 14)
+    .exec((err, game) => {
+      if (err) {
+        console.log(err);
+      }
+      Game.find({ 'category.group': req.params.group })
+        .count((err, countRow) => {
+          if (err) {
+            console.log(err);
+          }
+          var maxPage = Math.floor(countRow / 14);
+          if (countRow % 14 >= 1) {
+            maxPage += 1;
+          }
+          res.render('public/category', { game: game, type: 'group', cate: req.params.group, currentPage: req.params.page, maxPage: maxPage });
         })
     })
 });
@@ -103,7 +125,7 @@ router.get('/search/:name', function (req, res) {
 });
 
 router.get('/cateAll', function (req, res) {
-  Category.find()
+  Category.distinct('group')
     .exec(function (err, cate) {
       if (err) {
         console.log(err);

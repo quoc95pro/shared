@@ -19,7 +19,11 @@
     <script src="/javascripts/jnoty.js"></script>
     <script src="/javascripts/ckeditor/ckeditor.js"></script>
     <script src="/javascripts/bootstrap-multiselect.js"></script>
-
+    <style>
+        .multiselect-container{
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,6 +36,9 @@
             <button id="remove" class="btn btn-danger">
                 <i class="glyphicon glyphicon-remove"></i> Delete
             </button>
+            <button id="addCategoryBtn" class="btn btn-primary" data-toggle="modal" data-target="#addCategoryModal">
+                <i class="glyphicon glyphicon-add"></i> Add Category
+            </button>
         </div>
         <table id="table" data-toolbar="#toolbar" data-show-refresh="true" data-show-toggle="true" data-show-columns="true"
             data-detail-formatter="detailFormatter" data-minimum-count-columns="2" data-show-pagination-switch="true"
@@ -43,6 +50,10 @@
 
     <!-- Add Modal -->
     <% include add %>
+    <!-- Add Modal -->
+
+    <!-- Add Modal -->
+    <% include addCategory %>
     <!-- Add Modal -->
 
     <!-- Edit Modal -->

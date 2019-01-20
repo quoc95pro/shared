@@ -1,0 +1,69 @@
+<div class="modal" tabindex="-1" role="dialog" id="addCategoryModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  modal-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form id="addCategoryForm" method="post" action="/games/category">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" id="addCategoryName" name="categoryName" type="text" placeholder="Enter Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Ename</label>
+                            <input class="form-control" id="addCategoryEname" name="categoryEname" type="text" placeholder="Enter Name" />
+                        </div>   
+                        <div class="form-group">
+                            <label>Group</label>
+                            <input class="form-control" id="addCategoryGroup" name="categoryGroup" type="text" placeholder="Enter Name" />
+                        </div>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Add" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/jquery.form.min.js"></script>
+<script src="/javascripts/jnoty.js"></script>
+<script>
+    $('#addCategoryForm').submit(function () {
+        $(this).ajaxSubmit({
+
+            error: function (xhr) {
+                alert(xhr);
+            },
+
+            success: function (response) {
+                if (response.success_msg != null) {
+                    $.jnoty(response.success_msg, {
+                        theme: 'jnoty-success',
+                        life: 3000,
+                        icon: 'fa fa-check-circle',
+                        position: 'top-right'
+                    });
+                }
+                else {
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+
+
+                    });
+                }
+            }
+        });
+        return false;
+    });
+</script>
