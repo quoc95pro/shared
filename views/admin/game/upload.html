@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  <form method="post" action="uploadImages.php" name ='photo' id='imageuploadform' enctype="multipart/form-data">
+    <input hidden="true" id="fileupload" type="file" name="image[]" multiple >
+
+    <div id ="divleft">
+        <button id="btnupload">sdsdsdsd</button>
+    </div>   
+    <div id="count">
+
+    </div> 
+    <div id="result">
+
+    </div>
+</form>
+</body>
+<script>
+  $("#btnupload").click(function(e) {
+
+    $("#fileupload").click();
+    e.preventDefault();
+
+});
+
+$('#fileupload').change(function (e) {
+
+    $("#imageuploadform").submit();
+    e.preventDefault();
+});
+
+$('#imageuploadform').submit(function(e) {
+    var formData, count = [];
+    for(let i = 0; i < $('#fileupload').prop('files').length; i++){
+      formData = new FormData();
+      formData.append('image', $('#fileupload').prop('files')[i]);
+      $.ajax({
+        type:'POST',
+        url: 'https://api.imgur.com/3/image',
+        data: formData,
+        headers: {
+          "Authorization": "Bearer f891bcabdefd8b3be1b6a5de0e72c00b6b1f9572"
+        },
+        xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',(e) => {
+                      if(e.lengthComputable){
+                        var max = e.total;
+                        var current = e.loaded;
+                        
+                        var Percentage = (current * 100)/max;
+                        count[i] = Percentage;
+                        console.log();
+                        $('#count').text(count.reduce(getSum)/(count.length));
+                
+                        if(Percentage >= 100)
+                        {
+                           // process completed  
+                        }
+                    }  
+                    }, false);
+                }
+                return myXhr;
+        },
+        cache:false,
+        contentType: false,
+        processData: false,
+
+        success:function(data){
+          $('#result').append('<img src="'+ data.data.link +'" width="200px" />')
+           
+
+        },
+
+        error: function(data){
+            console.log(data);
+        }
+    });
+    }
+    
+    
+
+    e.preventDefault();
+
+});
+
+function getSum(total, num) {
+  return total + num;
+}
+
+function progress(e){
+    if(e.lengthComputable){
+        var max = e.total;
+        var current = e.loaded;
+
+        var Percentage = (current * 100)/max;
+        console.log(Percentage);
+
+
+        if(Percentage >= 100)
+        {
+           // process completed  
+        }
+    }  
+ }
+</script>
+</html>
