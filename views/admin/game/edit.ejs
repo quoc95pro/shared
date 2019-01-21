@@ -32,8 +32,7 @@
                         </div>
                         <div class="form-group">
                             <label>System Requirements</label>
-                            <input class="form-control" id="editSystemRequirements" name="systemRequirements" type="text"
-                                placeholder="System Requirements" />
+                            <textarea class="form-control" id="editSystemRequirements" name="systemRequirements"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -63,10 +62,10 @@
 
 <script src="/javascripts/jquery.form.min.js"></script>
 <script>
-
 $('#editForm').submit(function () {
     for ( instance in CKEDITOR.instances )
         CKEDITOR.instances[instance].updateElement();
+
     $(this).ajaxSubmit({
         type: 'PUT',
         error: function (xhr) {

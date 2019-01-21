@@ -17,13 +17,28 @@
                         <div class="form-group">
                             <label>Category</label>
                             <select class="form-control" id="addCategory" name="category" multiple="multiple">
-                                <% category.forEach(function(cate) { %>
-                                <option value="<%= cate.name %>">
-                                    <%= cate.name %>
-                                </option>
+                                <% 
+                                    var group = [];
+                                    category.forEach(function(cate) { 
+                                            if(group.includes(cate.group)){
+                                            }else{
+                                                group.push(cate.group);
+                                            }
+                                        }); %>
+
+                                <% group.forEach(function(g) { %>
+                                <optgroup label="<%=g %>">
+                                    <% category.forEach(function(cate) { %>
+                                    <% if(cate.group == g) { %>
+                                    <option value="<%= JSON.stringify(cate) %>">
+                                        <%= cate.name %>
+                                    </option>
+                                    <% } %>
+                                    <% }); %>
+                                </optgroup>
                                 <% }); %>
                             </select>
-                        </div>   
+                        </div>
                         <div class="form-group">
                             <label>Download Link</label>
                             <input class="form-control" id="addDownloadLink" name="downloadLink" type="text"
@@ -64,17 +79,21 @@
 <script src="/javascripts/jquery.form.min.js"></script>
 <script src="/javascripts/jnoty.js"></script>
 <script>
-    $('#addCategory').multiselect({
-        includeSelectAllOption: true
-    });
-
+    $('#add').on('click', function () {
+        $('#addCategory').multiselect({
+            enableClickableOptGroups: true
+        });
+        CKEDITOR.instances['addSystemRequirements'].setData("<p><strong>CPU:</strong> Core i7 6700</p><p><strong>CPU SPEED:</strong> 2.0 GHz</p><p><strong>RAM:</strong> 16 GB</p><p><strong>OS:</strong> Windows 7/Vista/XP PC (32 or 64 bit)</p><p><strong>VIDEO CARD:</strong> DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon X1800.</p><p><strong>PIXEL SHADER:</strong> 3.0</p><p><strong>VERTEX SHADER:</strong> 3.0</p><p><strong>SOUND CARD:</strong> Có</p><p><strong>FREE DISK SPACE:</strong> 16 GB</p><p><strong>DEDICATED VIDEO RAM:</strong> 512 MB</p>");
+        $('#addModal').modal('show');
+    })
     $('#addForm').submit(function () {
         for (instance in CKEDITOR.instances)
             CKEDITOR.instances[instance].updateElement();
+
         $(this).ajaxSubmit({
 
             error: function (xhr) {
-                alert(xhr);
+                alert(JSON.stringify(xhr));
             },
 
             success: function (response) {
@@ -87,16 +106,16 @@
                     });
                 }
                 else {
-                    response.errors.forEach(err => {
-                        $.jnoty(err.msg, {
-                            theme: 'jnoty-danger',
-                            life: 3000,
-                            icon: 'fa fa-check-circle',
-                            position: 'top-right'
-                        });
-
-
-                    });
+                    // response.errors.forEach(err => {
+                    //     $.jnoty(err.msg, {
+                    //         theme: 'jnoty-danger',
+                    //         life: 3000,
+                    //         icon: 'fa fa-check-circle',
+                    //         position: 'top-right'
+                    //     });  
+                    // });
+                    console.log(response);
+                    
                 }
                 $table.bootstrapTable('refresh');
             }

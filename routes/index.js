@@ -53,8 +53,11 @@ router.get('/detail/:id', function (req, res) {
     if (err) {
       console.log(err);
     }
-    res.render('public/detail', { game: game, moment: moment });
-  })
+    Category.find({})
+      .exec((err, cateAll) => {
+        res.render('public/detail', { game: game, moment: moment, cateAll: cateAll });
+      });
+  });
 });
 
 router.get('/countViews/:id', function (req, res) {
@@ -70,7 +73,7 @@ router.get('/countViews/:id', function (req, res) {
 });
 
 router.get('/category/:cate/:page', function (req, res) {
-  Game.find({ 'category.name': req.params.cate  })
+  Game.find({ 'category.name': req.params.cate })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
@@ -86,13 +89,25 @@ router.get('/category/:cate/:page', function (req, res) {
           if (countRow % 14 >= 1) {
             maxPage += 1;
           }
-          res.render('public/category', { game: game, type: 'group', cate: req.params.cate, currentPage: req.params.page, maxPage: maxPage });
+
+          Category.find({})
+            .exec((err, cateAll) => {
+              res.render('public/category', {
+                game: game,
+                type: 'category',
+                cate: req.params.cate,
+                currentPage: req.params.page,
+                cateAll: cateAll,
+                maxPage: maxPage
+              });
+            });
+
         })
     })
 });
 
 router.get('/group/:group/:page', function (req, res) {
-  Game.find({ 'category.group': req.params.group  })
+  Game.find({ 'category.group': req.params.group })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
@@ -108,7 +123,18 @@ router.get('/group/:group/:page', function (req, res) {
           if (countRow % 14 >= 1) {
             maxPage += 1;
           }
-          res.render('public/category', { game: game, type: 'group', cate: req.params.group, currentPage: req.params.page, maxPage: maxPage });
+
+          Category.find({})
+            .exec((err, cateAll) => {
+              res.render('public/category', {
+                game: game,
+                type: 'group',
+                cate: req.params.group,
+                currentPage: req.params.page,
+                cateAll: cateAll,
+                maxPage: maxPage
+              });
+            });
         })
     })
 });
@@ -124,7 +150,7 @@ router.get('/search/:name', function (req, res) {
     });
 });
 
-router.get('/cateAll', function (req, res) {
+router.get('/cateGroup', function (req, res) {
   Category.distinct('group')
     .exec(function (err, cate) {
       if (err) {

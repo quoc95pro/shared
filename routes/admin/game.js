@@ -9,7 +9,7 @@ var Seri = require('../../models/seri');
 
 /* GET Game Page. */
 router.get('/', function (req, res, next) {
-  Category.find({}, function (err, category) {
+  Category.find({},['-_id', 'name', 'group', 'ename'], function (err, category) {
 
     if (err) {
       console.log(err);
@@ -55,9 +55,19 @@ router.post('/', upload.single('avatar'), function (req, res, next) {
   if (errors) {
     res.send({ errors: errors });
   } else {
+    var objCategory = [];
+    if (typeof (category) != 'object') {
+      objCategory.push(JSON.parse(category));
+    } else {
+      category.forEach(element => {
+        objCategory.push(JSON.parse(element));
+      });
+    }
+    // console.log(category);
+    
     var newGame = new Game({
       name: name,
-      category: category,
+      category: objCategory,
       postedDate: postedDate,
       views: views,
       downloads: downloads,

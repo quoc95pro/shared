@@ -145,8 +145,9 @@ function operateFormatter(value, row, index) {
     ].join('');
 }
 CKEDITOR.replace('addDescription');
+CKEDITOR.replace('addSystemRequirements');
 CKEDITOR.replace('editDescription');
-
+CKEDITOR.replace('editSystemRequirements');
 
 window.operateEvents = {
     'click .edit': function (e, value, row, index) {
@@ -195,7 +196,7 @@ window.operateEvents = {
             $('#editCategory').multiselect('dataprovider', options);
         });
         document.getElementById('editLinkDownload').value = row.downloadLink;
-        document.getElementById('editSystemRequirements').value = row.systemRequirements;
+        CKEDITOR.instances['editSystemRequirements'].setData(row.systemRequirements);
         CKEDITOR.instances['editDescription'].setData(row.description)
         document.getElementById('editSeri').value = row.seri;
         $('#editModal').modal('show')

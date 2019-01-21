@@ -1,37 +1,24 @@
 <ul id="accordion" class="accordion">
-    <li>
-      <div class="link"><i class="fa fa-paint-brush"></i>Diseño web<i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Photoshop</a></li>
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">Maquetacion web</a></li>
-      </ul>
-    </li>
-    <li class="default open">
-      <div class="link"><i class="fa fa-code"></i>Desarrollo front-end<i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Javascript</a></li>
-        <li><a href="#">jQuery</a></li>
-        <li><a href="#">Frameworks javascript</a></li>
-      </ul>
-    </li>
-    <li>
-      <div class="link"><i class="fa fa-mobile"></i>Diseño responsive<i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Tablets</a></li>
-        <li><a href="#">Dispositivos mobiles</a></li>
-        <li><a href="#">Medios de escritorio</a></li>
-        <li><a href="#">Otros dispositivos</a></li>
-      </ul>
-    </li>
-    <li>
-      <div class="link"><i class="fa fa-globe"></i>Posicionamiento web<i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Google</a></li>
-        <li><a href="#">Bing</a></li>
-        <li><a href="#">Yahoo</a></li>
-        <li><a href="#">Otros buscadores</a></li>
-      </ul>
-    </li>
-  </ul>
+  <% var group = []; %>
+  <% cateAll.forEach(function(cate) { 
+     if(group.includes(cate.group)){
+     }else{
+      group.push(cate.group);
+     }
+    }); %>
+
+  <% group.forEach(function(g) { %>
+  <li>
+    <div class="link"><i class="fa fa-gamepad"></i>
+      <%=g %><i class="fa fa-chevron-down"></i></div>
+    <ul class="submenu">
+      <% cateAll.forEach(function(cate) { %>
+      <% if(cate.group == g) { %>
+      <li><a href="/category/<%= cate.name %>/1">
+          <%=cate.name %></a></li>
+      <% } %>
+      <% }); %>
+    </ul>
+  </li>
+  <% }); %>
+</ul>

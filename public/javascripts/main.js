@@ -127,7 +127,7 @@ var init = function () {
     window.addEventListener('scroll', scrollFx, false);
     window.addEventListener('load', scrollFx, false);
     $.ajax({
-        url: "/cateAll"
+        url: "/cateGroup"
     }).done(function (cate) {
         var classColor = ['b-yellow', 'b-green', 'b-blue', 'b-red'];
         var previousColor = '';
