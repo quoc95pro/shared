@@ -50,8 +50,9 @@ $('#imageuploadform').submit(function(e) {
         url: 'https://api.imgur.com/3/image',
         data: formData,
         headers: {
-          "Authorization": "Bearer f891bcabdefd8b3be1b6a5de0e72c00b6b1f9572"
+          "Authorization": "Bearer 59a5e7b42b1dbd98a0d143440fd943a48cd5d12b"
         },
+        // 59a5e7b42b1dbd98a0d143440fd943a48cd5d12b f891bcabdefd8b3be1b6a5de0e72c00b6b1f9572
         xhr: function() {
                 var myXhr = $.ajaxSettings.xhr();
                 if(myXhr.upload){

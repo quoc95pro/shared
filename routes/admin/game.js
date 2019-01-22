@@ -27,23 +27,19 @@ router.get('/', function (req, res, next) {
 
 // Add game
 
-router.post('/', upload.single('avatar'), function (req, res, next) {
+router.post('/', function (req, res, next) {
   var name = req.body.name;
   var category = req.body.category;
   var postedDate = new Date();
   var views = 0;
   var downloads = 0;
   var downloadLink = req.body.downloadLink;
+  var avatar = JSON.parse(req.body.avatar);
   var uploadBy = '';
   var systemRequirements = req.body.systemRequirements;
   var description = req.body.description;
   var seri = req.body.seri;
-
-  if (req.file) {
-    var avatar = req.file.filename;
-  } else {
-    var avatar = 'noimage.jpg';
-  }
+  
 
   // Form Validator
   req.checkBody('name', 'Name field is required').notEmpty();
@@ -62,8 +58,7 @@ router.post('/', upload.single('avatar'), function (req, res, next) {
       category.forEach(element => {
         objCategory.push(JSON.parse(element));
       });
-    }
-    // console.log(category);
+    }    
     
     var newGame = new Game({
       name: name,
@@ -78,7 +73,7 @@ router.post('/', upload.single('avatar'), function (req, res, next) {
       seri: seri,
       avatar: avatar
     });
-
+    
     Game.createGame(newGame, function (err, game) {
       if (err) res.send({ errors: err });
       res.send({ success_msg: 'Create Game success' });

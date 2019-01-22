@@ -36,9 +36,9 @@ var GameSchema = mongoose.Schema({
 	seri: {
 		type: String
 	},
-	avatar: {
-		type: String
-	}
+	avatar: [{
+		link: String
+	}]
 });
 
 var Game = module.exports = mongoose.model('Game', GameSchema);

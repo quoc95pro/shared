@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="addForm" method="post" action="/games" enctype="multipart/form-data">
+                    <form id="addForm" method="post" action="/games">
                         <div class="form-group">
                             <label>Name</label>
                             <input class="form-control" id="addName" name="name" type="text" placeholder="Enter Name" />
@@ -46,8 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label>System Requirements</label>
-                            <input class="form-control" id="addSystemRequirements" name="systemRequirements" type="text"
-                                placeholder="System Requirements" />
+                            <textarea class="form-control" id="addSystemRequirements" name="systemRequirements"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Description</label>
@@ -64,12 +63,27 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Avatar</label>
-                            <input class="form-control" id="addAvatar" name="avatar" type="file" />
+                            <input hidden="true" class="form-control" id="addAvatar" name="avatar" type="text" />
                         </div>
-                        <input class="btn btn-primary" type="submit" name="submit" value="Add" />
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </form>
+                    <!-- Image Upload -->
+                    <form method="post" action="#" name='photo' id='imageuploadform' enctype="multipart/form-data">
+                        <input hidden="true" id="fileupload" type="file" name="image[]" multiple>
+
+                        <div id="divleft">
+                            <button id="btnupload" class="btn btn-primary">Upload Image</button>
+                        </div>
+                        <div class="progress">
+                            <div id="uploadPogress" class="progress-bar" role="progressbar" style="width: 0%;"
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div id="result">
+
+                        </div>
+                    </form>
+                    <!-- End Image Upload -->
+                    <button type="button" class="btn btn-primary" id="testSubmit">Add</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -79,6 +93,11 @@
 <script src="/javascripts/jquery.form.min.js"></script>
 <script src="/javascripts/jnoty.js"></script>
 <script>
+
+    $('#testSubmit').on('click', () => {
+        $('#addForm').submit();
+    });
+
     $('#add').on('click', function () {
         $('#addCategory').multiselect({
             enableClickableOptGroups: true
@@ -115,11 +134,107 @@
                     //     });  
                     // });
                     console.log(response);
-                    
+
                 }
                 $table.bootstrapTable('refresh');
             }
         });
         return false;
     });
+
+
+    // Image Upload
+    var count = [];
+    var imgData = [];
+    $("#btnupload").click(function (e) {
+
+        $("#fileupload").click();
+        e.preventDefault();
+
+    });
+
+    $('#fileupload').change(function (e) {
+
+        $("#imageuploadform").submit();
+        e.preventDefault();
+    });
+
+    $('#imageuploadform').submit(function (e) {
+        var formData;
+        for (let i = 0; i < $('#fileupload').prop('files').length; i++) {
+            formData = new FormData();
+            formData.append('image', $('#fileupload').prop('files')[i]);
+            $.ajax({
+                type: 'POST',
+                url: 'https://api.imgur.com/3/image',
+                data: formData,
+                headers: {
+                    "Authorization": "Bearer 59a5e7b42b1dbd98a0d143440fd943a48cd5d12b"
+                },
+                xhr: function () {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', (e) => {
+                            if (e.lengthComputable) {
+                                var max = e.total;
+                                var current = e.loaded;
+                                var Percentage = (current * 100) / max;
+                                count[i] = Percentage;
+                                $('#uploadPogress').attr('aria-valuenow', count.reduce(getSum) / (count.length).toFixed(0));
+                                $('#uploadPogress').css('width', (count.reduce(getSum) / (count.length)) + '%');
+                                $('#uploadPogress').text((count.reduce(getSum) / (count.length)).toFixed(0) + '%');
+
+                                if (count.reduce(getSum) / (count.length).toFixed(0) == 100) {
+                                    $.jnoty('Upload Images Success !!', {
+                                        theme: 'jnoty-success',
+                                        life: 3000,
+                                        icon: 'fa fa-check-circle',
+                                        position: 'top-right'
+                                    });
+                                }
+                            }
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+
+                success: function (data) {
+                    $('#result').append('<div class="img-item" id="uploadedImage'+i+'"><img src="' + data.data.link + '" width="200px" /></div>')
+                    imgData.push({ link: data.data.link });
+                    $('#addAvatar').val(JSON.stringify(imgData));
+                },
+
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+
+
+
+        e.preventDefault();
+
+    });
+
+    function getSum(total, num) {
+        return total + num;
+    }
+
+    function progress(e) {
+        if (e.lengthComputable) {
+            var max = e.total;
+            var current = e.loaded;
+
+            var Percentage = (current * 100) / max;
+            console.log(Percentage);
+
+
+            if (Percentage >= 100) {
+                // process completed  
+            }
+        }
+    }
 </script>
