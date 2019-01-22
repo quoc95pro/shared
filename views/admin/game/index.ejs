@@ -27,14 +27,34 @@
         #result {
             overflow-x: scroll;
             overflow-y: hidden;
-            height: 250px;
-            white-space: nowrap;
+            white-space: nowrap;            
         }
         .img-item{
             display: inline-block;
+            position: relative;
+            margin: 2px;
         }
         .progress{
             margin-top: 10px;
+        }
+        .img-item .close {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            z-index: 100;
+            background-color: #FFF;
+            padding: 5px 2px 2px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: .2;
+            text-align: center;
+            font-size: 22px;
+            line-height: 10px;
+            border-radius: 50%;
+        }
+        .img-wrap:hover .close {
+            opacity: 1;
         }
     </style>
 </head>

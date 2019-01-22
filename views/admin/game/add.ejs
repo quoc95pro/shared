@@ -63,7 +63,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input hidden="true" class="form-control" id="addAvatar" name="avatar" type="text" />
+                            <input class="form-control" id="addAvatar" name="avatar" type="text" />
                         </div>
                     </form>
                     <!-- Image Upload -->
@@ -125,15 +125,14 @@
                     });
                 }
                 else {
-                    // response.errors.forEach(err => {
-                    //     $.jnoty(err.msg, {
-                    //         theme: 'jnoty-danger',
-                    //         life: 3000,
-                    //         icon: 'fa fa-check-circle',
-                    //         position: 'top-right'
-                    //     });  
-                    // });
-                    console.log(response);
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    });
 
                 }
                 $table.bootstrapTable('refresh');
@@ -184,14 +183,6 @@
                                 $('#uploadPogress').css('width', (count.reduce(getSum) / (count.length)) + '%');
                                 $('#uploadPogress').text((count.reduce(getSum) / (count.length)).toFixed(0) + '%');
 
-                                if (count.reduce(getSum) / (count.length).toFixed(0) == 100) {
-                                    $.jnoty('Upload Images Success !!', {
-                                        theme: 'jnoty-success',
-                                        life: 3000,
-                                        icon: 'fa fa-check-circle',
-                                        position: 'top-right'
-                                    });
-                                }
                             }
                         }, false);
                     }
@@ -202,13 +193,26 @@
                 processData: false,
 
                 success: function (data) {
-                    $('#result').append('<div class="img-item" id="uploadedImage'+i+'"><img src="' + data.data.link + '" width="200px" /></div>')
                     imgData.push({ link: data.data.link });
                     $('#addAvatar').val(JSON.stringify(imgData));
+                    $('#result').append('<div class="img-item" id="uploadedImage' + i + '"><i class="close fa fa-remove" onclick="removeImage('+i+')"></i><img src="' + data.data.link + '" width="200px"/></div>');
+                    if (count.reduce(getSum) / (count.length).toFixed(0) == 100) {
+                        $.jnoty('Upload Images Success !!', {
+                            theme: 'jnoty-success',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    }
                 },
 
                 error: function (data) {
-                    console.log(data);
+                    $.jnoty(data.responseJSON.data.error.message, {
+                        theme: 'jnoty-danger',
+                        life: 3000,
+                        icon: 'fa fa-check-circle',
+                        position: 'top-right'
+                    });
                 }
             });
         }
@@ -223,18 +227,19 @@
         return total + num;
     }
 
-    function progress(e) {
-        if (e.lengthComputable) {
-            var max = e.total;
-            var current = e.loaded;
-
-            var Percentage = (current * 100) / max;
-            console.log(Percentage);
-
-
-            if (Percentage >= 100) {
-                // process completed  
+    function removeImage(i){
+        $('#uploadedImage' + i).remove();
+        var currentUrl = $('#uploadedImage' + i+' img').attr("src");
+        for(let i = 0; i < imgData.length; i++){
+            alert(imgData[i].link);
+            alert(currentUrl);
+            if(imgData[i].link == currentUrl){
+                imgData.splice(imgData[i], 1);
+                
+                $('#addAvatar').val(JSON.stringify(imgData));
             }
         }
+        
+     
     }
 </script>
