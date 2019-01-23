@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="editForm" action="/games" enctype="multipart/form-data">
+                    <form id="editForm" action="/games">
                         <input type="hidden" id="editId" name="id" />
                         <div class="form-group">
                             <label>Name</label>
@@ -49,11 +49,28 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Avatar</label>
-                            <input class="form-control" id="editAvatar" name="avatar" type="file" />
+                            <input class="form-control" id="editAvatar" name="avatar" type="text" />
                         </div>
-                        <input class="btn btn-primary" type="submit" name="submit" value="Edit" />
+
                     </form>
+                    <!-- Image Upload -->
+                    <form method="post" action="#" name='photo' id='imageuploadeditform' enctype="multipart/form-data">
+                        <input hidden="true" id="fileuploadedit" type="file" name="image[]" multiple>
+
+                        <div id="divleft">
+                            <button id="btnuploadedit" class="btn btn-primary">Upload Image</button>
+                        </div>
+                        <div class="progress">
+                            <div id="uploadPogressEdit" class="progress-bar" role="progressbar" style="width: 0%;"
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div id="resultEdit">
+
+                        </div>
+                    </form>
+                    <!-- End Image Upload -->
+                    <button type="button" class="btn btn-primary" id="editSubmit">Edit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -62,36 +79,131 @@
 
 <script src="/javascripts/jquery.form.min.js"></script>
 <script>
-$('#editForm').submit(function () {
-    for ( instance in CKEDITOR.instances )
-        CKEDITOR.instances[instance].updateElement();
+    $('#editSubmit').on('click', () => {
+        $('#editForm').submit();
+    });
 
-    $(this).ajaxSubmit({
-        type: 'PUT',
-        error: function (xhr) {
-        },
-        success: function (response) {
-            if (response.success_msg != null) {
-                $.jnoty(response.success_msg, {
-                    theme: 'jnoty-success',
-                    life: 3000,
-                    icon: 'fa fa-check-circle',
-                    position: 'top-right'
-                });
+    $('#editForm').submit(function () {
+        for (instance in CKEDITOR.instances)
+            CKEDITOR.instances[instance].updateElement();
+
+        $(this).ajaxSubmit({
+            type: 'PUT',
+            error: function (xhr) {
+            },
+            success: function (response) {
+                if (response.success_msg != null) {
+                    $.jnoty(response.success_msg, {
+                        theme: 'jnoty-success',
+                        life: 3000,
+                        icon: 'fa fa-check-circle',
+                        position: 'top-right'
+                    });
+                }
+                else {
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    });
+                }
+                $table.bootstrapTable('refresh');
             }
-            else {
-                response.errors.forEach(err => {
-                    $.jnoty(err.msg, {
+        });
+        return false;
+    });
+
+    // Image Upload
+    var countEdit = [];
+    var imgDataEdit = [];
+    $("#btnuploadedit").click(function (e) {
+
+        $("#fileuploadedit").click();
+        e.preventDefault();
+
+    });
+
+    $('#fileuploadedit').change(function (e) {
+
+        $("#imageuploadeditform").submit();
+        e.preventDefault();
+    });
+
+    $('#imageuploadeditform').submit(function (e) {
+        var formData;
+        for (let i = 0; i < $('#fileuploadedit').prop('files').length; i++) {
+            formData = new FormData();
+            formData.append('image', $('#fileuploadedit').prop('files')[i]);
+            $.ajax({
+                type: 'POST',
+                url: 'https://api.imgur.com/3/image',
+                data: formData,
+                headers: {
+                    "Authorization": "Bearer 59a5e7b42b1dbd98a0d143440fd943a48cd5d12b"
+                },
+                xhr: function () {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', (e) => {
+                            if (e.lengthComputable) {
+                                var max = e.total;
+                                var current = e.loaded;
+                                var Percentage = (current * 100) / max;
+                                countEdit[i] = Percentage;
+                                $('#uploadPogressEdit').attr('aria-valuenow', countEdit.reduce(getSum) / (countEdit.length).toFixed(0));
+                                $('#uploadPogressEdit').css('width', (countEdit.reduce(getSum) / (countEdit.length)) + '%');
+                                $('#uploadPogressEdit').text((countEdit.reduce(getSum) / (countEdit.length)).toFixed(0) + '%');
+
+                            }
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+
+                success: function (data) {
+                    imgDataEdit.push({ link: data.data.link });
+                    $('#editAvatar').val(JSON.stringify(imgDataEdit));
+                    $('#resultEdit').append('<div class="img-item" id="uploadedEditImage' + i + '"><i class="close fa fa-remove" onclick="removeImageEdit('+i+')"></i><img src="' + data.data.link + '" width="200px"/></div>');
+                    if (countEdit.reduce(getSum) / (countEdit.length).toFixed(0) == 100) {
+                        $.jnoty('Upload Images Success !!', {
+                            theme: 'jnoty-success',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    }
+                },
+
+                error: function (data) {
+                    $.jnoty(data.responseJSON.data.error.message, {
                         theme: 'jnoty-danger',
                         life: 3000,
                         icon: 'fa fa-check-circle',
                         position: 'top-right'
                     });
-                });
-            }
-            $table.bootstrapTable('refresh');
+                }
+            });
         }
+
+        e.preventDefault();
+
     });
-    return false;
-});
+
+    function removeImageEdit(i){
+        var currentUrl = $('#uploadedEditImage' + i+' img').attr("src");
+        for(let a = 0; a < imgDataEdit.length; a++){
+            if(imgDataEdit[a].link == currentUrl){
+               imgDataEdit.splice(a, 1);
+               $('#editAvatar').val(JSON.stringify(imgDataEdit));
+               $('#uploadedEditImage' + i).remove();
+            }
+        }
+             
+    }
 </script>

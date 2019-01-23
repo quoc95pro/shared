@@ -82,7 +82,7 @@
                         </div>
                     </form>
                     <!-- End Image Upload -->
-                    <button type="button" class="btn btn-primary" id="testSubmit">Add</button>
+                    <button type="button" class="btn btn-primary" id="addSubmit">Add</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -94,7 +94,7 @@
 <script src="/javascripts/jnoty.js"></script>
 <script>
 
-    $('#testSubmit').on('click', () => {
+    $('#addSubmit').on('click', () => {
         $('#addForm').submit();
     });
 
@@ -195,7 +195,7 @@
                 success: function (data) {
                     imgData.push({ link: data.data.link });
                     $('#addAvatar').val(JSON.stringify(imgData));
-                    $('#result').append('<div class="img-item" id="uploadedImage' + i + '"><i class="close fa fa-remove" onclick="removeImage('+i+')"></i><img src="' + data.data.link + '" width="200px"/></div>');
+                    $('#result').append('<div class="img-item" id="uploadedImage' + i + '"><i class="close fa fa-remove" onclick="removeImage(' + i + ')"></i><img src="' + data.data.link + '" width="200px"/></div>');
                     if (count.reduce(getSum) / (count.length).toFixed(0) == 100) {
                         $.jnoty('Upload Images Success !!', {
                             theme: 'jnoty-success',
@@ -227,19 +227,16 @@
         return total + num;
     }
 
-    function removeImage(i){
-        $('#uploadedImage' + i).remove();
-        var currentUrl = $('#uploadedImage' + i+' img').attr("src");
-        for(let i = 0; i < imgData.length; i++){
-            alert(imgData[i].link);
-            alert(currentUrl);
-            if(imgData[i].link == currentUrl){
-                imgData.splice(imgData[i], 1);
-                
+    function removeImage(i) {
+
+        var currentUrl = $('#uploadedImage' + i + ' img').attr("src");
+        for (let a = 0; a < imgData.length; a++) {
+            if (imgData[a].link == currentUrl) {
+                imgData.splice(a, 1);
                 $('#addAvatar').val(JSON.stringify(imgData));
+                $('#uploadedImage' + i).remove();
             }
         }
-        
-     
+
     }
 </script>

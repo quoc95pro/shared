@@ -14,7 +14,7 @@
     <div class="col-md-9" style="box-shadow: 0 0px 5px #4D4D4D; border-radius: 4px;">
         <div class="row row-category">
             <% if(game[0]) { %>
-            <div class="col-md-9 col-31-col-left" style="background-image: url('/images/game/<%= game[0].avatar %>')">
+            <div class="col-md-9 col-31-col-left" style="background-image: url('<%= game[0].avatar[0].link %>')">
                 <a href="/detail/<%= game[0]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -25,7 +25,7 @@
             </div>
             <%}%>
             <% if(game[1]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[1].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[1].avatar[0].link %>')">
                 <a href="/detail/<%= game[1]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -37,7 +37,7 @@
             <%}%>
 
             <% if(game[2]) { %>
-            <div class="col-md-3 col-1111-col-left" style="background-image: url('/images/game/<%= game[2].avatar %>')">
+            <div class="col-md-3 col-1111-col-left" style="background-image: url('<%= game[2].avatar[0].link %>')">
                 <a href="/detail/<%= game[2]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -48,7 +48,7 @@
             </div>
             <%}%>
             <% if(game[3]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[3].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[3].avatar[0].link %>')">
                 <a href="/detail/<%= game[3]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -59,7 +59,7 @@
             </div>
             <%}%>
             <% if(game[4]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[4].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[4].avatar[0].link %>')">
                 <a href="/detail/<%= game[4]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -70,7 +70,7 @@
             </div>
             <%}%>
             <% if(game[5]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[5].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[5].avatar[0].link %>')">
                 <a href="/detail/<%= game[5]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -82,7 +82,7 @@
             <%}%>
 
             <% if(game[6]) { %>
-            <div class="col-md-6 col-22-col-left" style="background-image: url('/images/game/<%= game[6].avatar %>')">
+            <div class="col-md-6 col-22-col-left" style="background-image: url('<%= game[6].avatar[0].link %>')">
                 <a href="/detail/<%= game[6]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -93,7 +93,7 @@
             </div>
             <%}%>
             <% if(game[7]) { %>
-            <div class="col-md-6 col-other22" style="background-image: url('/images/game/<%= game[7].avatar %>')">
+            <div class="col-md-6 col-other22" style="background-image: url('<%= game[7].avatar[0].link %>')">
                 <a href="/detail/<%= game[7]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -105,7 +105,7 @@
             <%}%>
 
             <% if(game[8]) { %>
-            <div class="col-md-3 col-1111-col-left" style="background-image: url('/images/game/<%= game[8].avatar %>')">
+            <div class="col-md-3 col-1111-col-left" style="background-image: url('<%= game[8].avatar[0].link %>')">
                 <a href="/detail/<%= game[8]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -116,7 +116,7 @@
             </div>
             <%}%>
             <% if(game[9]) { %>
-            <div class="col-md-6 col-other22" style="background-image: url('/images/game/<%= game[9].avatar %>')">
+            <div class="col-md-6 col-other22" style="background-image: url('<%= game[9].avatar[0].link %>')">
                 <a href="/detail/<%= game[9]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -127,7 +127,7 @@
             </div>
             <%}%>
             <% if(game[10]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[10].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[10].avatar[0].link %>')">
                 <a href="/detail/<%= game[10]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -139,7 +139,7 @@
             <%}%>
 
             <% if(game[11]) { %>
-            <div class="col-md-6 col-211-col-left" style="background-image: url('/images/game/<%= game[11].avatar %>')">
+            <div class="col-md-6 col-211-col-left" style="background-image: url('<%= game[11].avatar[0].link %>')">
                 <a href="/detail/<%= game[11]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -150,7 +150,7 @@
             </div>
             <%}%>
             <% if(game[12]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[12].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[12].avatar[0].link %>')">
                 <a href="/detail/<%= game[12]._id %>">
                     <div class="cate-item-name">
                         <p>
@@ -161,7 +161,7 @@
             </div>
             <%}%>
             <% if(game[13]) { %>
-            <div class="col-md-3 col-other" style="background-image: url('/images/game/<%= game[13].avatar %>')">
+            <div class="col-md-3 col-other" style="background-image: url('<%= game[13].avatar[0].link %>')">
                 <a href="/detail/<%= game[13]._id %>">
                     <div class="cate-item-name">
                         <p>

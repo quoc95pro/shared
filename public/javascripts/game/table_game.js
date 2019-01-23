@@ -199,7 +199,14 @@ window.operateEvents = {
         CKEDITOR.instances['editSystemRequirements'].setData(row.systemRequirements);
         CKEDITOR.instances['editDescription'].setData(row.description)
         document.getElementById('editSeri').value = row.seri;
-        $('#editModal').modal('show')
+        document.getElementById('editAvatar').value = JSON.stringify(row.avatar);
+        imgDataEdit = row.avatar;
+        $('#resultEdit').empty();
+        for (let index = 0; index < imgDataEdit.length; index++) {
+            $('#resultEdit').append('<div class="img-item" id="uploadedEditImage' + index + '"><i class="close fa fa-remove" onclick="removeImageEdit('+index+')"></i><img src="' + imgDataEdit[index].link + '" width="200px"/></div>');
+            
+        }
+        $('#editModal').modal('show');
     },
     'click .remove': function (e, value, row, index) {
         $table.bootstrapTable('remove', {

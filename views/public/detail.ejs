@@ -25,26 +25,20 @@
       </div>
 
       <div class="col-detail-left-bottom">
-        <button class="btn-hover color-7">Tải Xuống</button>
+        <a href="<%- game.downloadLink %>"> <button class="btn-hover color-7">Tải Xuống</button></a>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-image-slider">
     <section class="vertical-center-4 slider">
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
-      <div><img src="/images/game/<%= game.avatar %>" height="20%"></div>
+      <% game.avatar.forEach((g)=>{ %>
+        <div><img src="<%= g.link %>" style="min-width: 100%;height: 450px;"></div>
+        <% }); %>
     </section>
     <section class="slider-nav">
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
-      <div><img src="/images/game/<%= game.avatar %>"></div>
+      <% game.avatar.forEach((g)=>{ %>
+        <div><img src="<%= g.link %>" style="min-width: 100%;height: 100px;"></div>
+        <% }); %>
     </section>
   </div>
   <div class="col-md-3">
@@ -101,7 +95,7 @@
         <%- game.description %>
       </div>
       <div class="col-detail-content-download">
-        <button class="btn-hover color-7">Tải Xuống</button>
+        <a href="<%= game.downloadLink %>"> <button class="btn-hover color-7">Tải Xuống</button></a>
       </div>
     </div>
   </div>

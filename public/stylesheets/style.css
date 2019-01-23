@@ -152,6 +152,9 @@
 
 .Game-Category {
   text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .Game-Category a {
@@ -804,7 +807,7 @@ ul {
 }
 
 .detail-systemRequirements {
-  font-size: 13px;
+  font-size: 0.75vw;
 }
 
 .detail-left>div>div>p {
@@ -838,6 +841,16 @@ ul {
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
+}
+
+.btn-hover > a{
+  text-decoration: none;
+  color: white;
+}
+
+.btn-hover > a:hover{
+  text-decoration: none;
+  color: white;
 }
 
 .btn-hover:focus {

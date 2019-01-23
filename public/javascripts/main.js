@@ -56,7 +56,7 @@ function search() {
             if (data) {
                 data.forEach(element => {
                     listResult.innerHTML += "<a href='/detail/" + element._id + "'><li class='li-result'>" + "<div class='search-item'>" +
-                        "<div class='search-item-avatar'><img src='/images/game/" + element.avatar + "' /></div>" +
+                        "<div class='search-item-avatar'><img src='" + element.avatar[0].link + "' /></div>" +
                         "<div class='search-item-meta'>" +
                         "<div class='search-item-title'>" + element.name + "</div>" +
                         "<div class='search-item-description'>" + element.category + "</div>" +

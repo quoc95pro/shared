@@ -3,6 +3,7 @@ var router = express.Router();
 var Game = require('../models/game');
 var Category = require('../models/category');
 var moment = require('moment');
+var request = require('request');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -40,7 +41,7 @@ router.get('/', function (req, res, next) {
 });
 // Data test
 router.get('/data', function (req, res, next) {
-  Game.find({}, (error, data) => {
+  Game.find({}, ['-avatar._id'], (error, data) => {
     if (error) {
       console.log(error);
     }
@@ -53,10 +54,21 @@ router.get('/detail/:id', function (req, res) {
     if (err) {
       console.log(err);
     }
-    Category.find({})
-      .exec((err, cateAll) => {
-        res.render('public/detail', { game: game, moment: moment, cateAll: cateAll });
-      });
+
+    request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + game.downloadLink, function (error, response, body) {
+      if (error) {
+        console.log(error);
+      } else {
+        game.downloadLink = JSON.parse(body).shortenedUrl;
+        
+      }
+      Category.find({})
+        .exec((err, cateAll) => {
+          res.render('public/detail', { game: game, moment: moment, cateAll: cateAll });
+        });
+    });
+
+
   });
 });
 

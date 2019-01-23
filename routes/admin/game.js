@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
-var upload = multer({ dest: './public/images/game' });
 
 var Game = require('../../models/game');
 var Category = require('../../models/category');
@@ -9,7 +7,7 @@ var Seri = require('../../models/seri');
 
 /* GET Game Page. */
 router.get('/', function (req, res, next) {
-  Category.find({},['-_id', 'name', 'group', 'ename'], function (err, category) {
+  Category.find({}, ['-_id', 'name', 'group', 'ename'], function (err, category) {
 
     if (err) {
       console.log(err);
@@ -39,7 +37,6 @@ router.post('/', function (req, res, next) {
   var systemRequirements = req.body.systemRequirements;
   var description = req.body.description;
   var seri = req.body.seri;
-  
 
   // Form Validator
   req.checkBody('name', 'Name field is required').notEmpty();
@@ -58,8 +55,8 @@ router.post('/', function (req, res, next) {
       category.forEach(element => {
         objCategory.push(JSON.parse(element));
       });
-    }    
-    
+    }
+
     var newGame = new Game({
       name: name,
       category: objCategory,
@@ -73,7 +70,7 @@ router.post('/', function (req, res, next) {
       seri: seri,
       avatar: avatar
     });
-    
+
     Game.createGame(newGame, function (err, game) {
       if (err) res.send({ errors: err });
       res.send({ success_msg: 'Create Game success' });
@@ -82,7 +79,7 @@ router.post('/', function (req, res, next) {
 });
 
 // Edit game
-router.put('/', upload.single('avatar'), function (req, res, next) {
+router.put('/', function (req, res, next) {
   // Form Validator
   req.checkBody('id', 'id field is required').notEmpty();
   req.checkBody('name', 'Name field is required').notEmpty();
@@ -100,6 +97,7 @@ router.put('/', upload.single('avatar'), function (req, res, next) {
     var downloadLink = req.body.downloadLink;
     var systemRequirements = req.body.systemRequirements;
     var description = req.body.description;
+    var avatar = JSON.parse(req.body.avatar);
     var seri = req.body.seri;
 
     Game.getGameById(id, function (err, game) {
@@ -109,6 +107,7 @@ router.put('/', upload.single('avatar'), function (req, res, next) {
       game.downloadLink = downloadLink;
       game.systemRequirements = systemRequirements;
       game.description = description;
+      game.avatar = avatar;
       game.seri = seri;
       if (typeof (category) != 'object') {
         game.category.push(JSON.parse(category));
@@ -116,9 +115,6 @@ router.put('/', upload.single('avatar'), function (req, res, next) {
         category.forEach(element => {
           game.category.push(JSON.parse(element));
         });
-      }
-      if (req.file) {
-        game.avatar = req.file.filename;
       }
       Game.updateGame(id, game, (err, g) => {
         if (err) res.send({ errors: err });
