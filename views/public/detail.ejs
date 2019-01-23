@@ -25,7 +25,7 @@
       </div>
 
       <div class="col-detail-left-bottom">
-        <a href="<%- game.downloadLink %>"> <button class="btn-hover color-7">Tải Xuống</button></a>
+        <a href="<%- game.downloadLink %>" onclick="countDowload()" target="_blank"> <button class="btn-hover color-7"> Tải Xuống</button></a>
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
 
       <div>
         <div class="detail-downloadLink">
-          <a href="<%= game.downloadLink %>">Tải Xuống</a>
+          <a href="<%= game.downloadLink %>" target="_blank" onclick="countDowload()" >Tải Xuống</a>
         </div>
         <div class="detail-uploadBy">
           Người đăng: <%= game.uploadBy %>
@@ -95,7 +95,7 @@
         <%- game.description %>
       </div>
       <div class="col-detail-content-download">
-        <a href="<%= game.downloadLink %>"> <button class="btn-hover color-7">Tải Xuống</button></a>
+        <a href="<%= game.downloadLink %>" target="_blank" onclick="countDowload()" > <button class="btn-hover color-7">Tải Xuống</button></a>
       </div>
     </div>
   </div>
@@ -115,6 +115,14 @@ var id = document.getElementById('gameId').innerHTML;
     url: "/countViews/"+id
   }).done(function() {
   })
+
+
+  function countDowload(){
+    $.ajax({
+      url: "/countDownloads/"+id
+    }).done(function() {
+    });
+  }
 
 </script>
 <% include partials/footer %>

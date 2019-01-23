@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
       }
       Game.find({})
         .limit(8)
-        .sort({ download: -1 })
+        .sort({ downloads: -1 })
         .exec((err, topDownloadGame) => {
           if (err) {
             console.log(err);
@@ -77,6 +77,18 @@ router.get('/countViews/:id', function (req, res) {
   Game.getGameById(id, function (err, game) {
     if (err) res.send({ errors: err });
     game.views = game.views + 1;
+    Game.updateGame(id, game, (err, g) => {
+      if (err) res.send({ errors: err });
+      res.send({ success_msg: 'Edit success' });
+    });
+  });
+});
+
+router.get('/countDownloads/:id', function (req, res) {
+  var id = req.params.id;
+  Game.getGameById(id, function (err, game) {
+    if (err) res.send({ errors: err });
+    game.downloads = game.downloads + 1;
     Game.updateGame(id, game, (err, g) => {
       if (err) res.send({ errors: err });
       res.send({ success_msg: 'Edit success' });
