@@ -6,37 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="/stylesheets/bootstrap-table.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.css">
     <link rel="stylesheet" href="/stylesheets/jnoty.css">
-    <link rel="stylesheet" href="/stylesheets/bootstrap-multiselect.css">
-    <script src="/javascripts/jquery-3.3.1.min.js"></script>
-    <script src="/javascripts/popper.min.js"></script>
-    <script src="/javascripts/bootstrap.min.js"></script>
-    <script src="/javascripts/bootstrap-table.js"></script>
-    <script src="/javascripts/ga.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.js"></script>
     <script src="/javascripts/jnoty.js"></script>
-    <script src="/javascripts/ckeditor/ckeditor.js"></script>
-    <script src="/javascripts/bootstrap-multiselect.js"></script>
+    <script src="https://cdn.ckeditor.com/4.11.2/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
     <style>
         .multiselect-container {
             white-space: nowrap;
         }
 
-        #result, #resultEdit {
+        #result,
+        #resultEdit {
             overflow-x: scroll;
             overflow-y: hidden;
-            white-space: nowrap;            
+            white-space: nowrap;
         }
-        .img-item{
+
+        .img-item {
             display: inline-block;
             position: relative;
             margin: 2px;
         }
-        .progress{
+
+        .progress {
             margin-top: 10px;
         }
+
         .img-item .close {
             position: absolute;
             top: 2px;
@@ -53,6 +60,7 @@
             line-height: 10px;
             border-radius: 50%;
         }
+
         .img-wrap:hover .close {
             opacity: 1;
         }
@@ -85,9 +93,9 @@
     <% include add %>
     <!-- Add Modal -->
 
-    <!-- Add Modal -->
+    <!-- Add Category Modal -->
     <% include addCategory %>
-    <!-- Add Modal -->
+    <!-- Add Category Modal -->
 
     <!-- Edit Modal -->
     <% include edit %>
