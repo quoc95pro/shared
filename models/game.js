@@ -21,9 +21,10 @@ var GameSchema = mongoose.Schema({
 	downloads: {
 		type: Number
 	},
-	downloadLink: {
+	downloadLink: [{
+		link: String,
 		type: String
-	},
+	}],
 	uploadBy: {
 		type: String
 	},

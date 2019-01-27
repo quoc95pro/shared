@@ -42,8 +42,24 @@
                         <div class="form-group">
                             <label>Download Link</label>
                             <input class="form-control" id="addDownloadLink" name="downloadLink" type="text"
-                                placeholder="Download Link" />
+                                />
+                            
                         </div>
+
+                        <div id="list-add-downloadLink" class="row" style="margin:10px 0;">
+                        </div> 
+
+                        <div class="row" style="margin:10px 0;">
+                            <div class="col-md-6">
+                                <input class="form-control" id="linkDownload" type="text"
+                                placeholder="Download Link" /></div>
+                            <div class="col-md-3"><input class="form-control" id="typeLinkDownload" type="text"
+                                placeholder="Type Link Download Link" />
+                            </div> 
+                            <div class="col-md-3"><button type="button" class="btn btn-primary" id="btnDownloadLink">Add Link</button>
+                            </div> 
+                        </div>  
+
                         <div class="form-group">
                             <label>System Requirements</label>
                             <textarea class="form-control" id="addSystemRequirements" name="systemRequirements"></textarea>
@@ -91,6 +107,40 @@
 </div>
 
 <script>
+    var arrLinkDownload = [];
+    var countLinkDownLoad = 0;
+    var linkDownload, typeLinkDownload, checked;
+    $('#btnDownloadLink').on('click', ()=> {
+        linkDownload = $('#linkDownload').val();
+        typeLinkDownload = $('#typeLinkDownload').val();
+        checked = false;
+
+        for (let a = 0; a < arrLinkDownload.length; a++) {
+            if (arrLinkDownload[a].link == linkDownload && arrLinkDownload[a].type == typeLinkDownload) {
+                checked = true;
+            }
+        }
+        if(checked == false){
+        $('#list-add-downloadLink').append('<div class="col-md-9" id="link-item-'+countLinkDownLoad+'">link : <a href="'+ linkDownload + '">'+ linkDownload +'</a> Type : '+ typeLinkDownload +'</div><div class="col-md-3"><a class="remove" onclick="removeLink('+ countLinkDownLoad +')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
+        arrLinkDownload.push({link: linkDownload, type: typeLinkDownload});
+        $('#addDownloadLink').val(JSON.stringify(arrLinkDownload));
+        countLinkDownLoad++;
+        } else {
+            alert('Link da ton tai');
+        }
+    });
+
+    function removeLink(i){
+        var currentUrl = $('#link-item-'+i).children().attr('href');
+        for (let a = 0; a < arrLinkDownload.length; a++) {
+            if (arrLinkDownload[a].link == currentUrl) {
+                arrLinkDownload.splice(a, 1);
+                $('#addDownloadLink').val(JSON.stringify(arrLinkDownload));
+                $('#link-item-' + i).next().remove();
+                $('#link-item-' + i).remove();
+            }
+        }
+    }
 
     $('#addSubmit').on('click', () => {
         $('#addForm').submit();
@@ -102,7 +152,8 @@
         });
         CKEDITOR.instances['addSystemRequirements'].setData("<p><strong>CPU:</strong> Core i7 6700</p><p><strong>CPU SPEED:</strong> 2.0 GHz</p><p><strong>RAM:</strong> 16 GB</p><p><strong>OS:</strong> Windows 7/Vista/XP PC (32 or 64 bit)</p><p><strong>VIDEO CARD:</strong> DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon X1800.</p><p><strong>PIXEL SHADER:</strong> 3.0</p><p><strong>VERTEX SHADER:</strong> 3.0</p><p><strong>SOUND CARD:</strong> Có</p><p><strong>FREE DISK SPACE:</strong> 16 GB</p><p><strong>DEDICATED VIDEO RAM:</strong> 512 MB</p>");
         $('#addModal').modal('show');
-    })
+    });
+
     $('#addForm').submit(function () {
         for (instance in CKEDITOR.instances)
             CKEDITOR.instances[instance].updateElement();
@@ -205,12 +256,13 @@
                 },
 
                 error: function (data) {
-                    $.jnoty(data.responseJSON.data.error.message, {
-                        theme: 'jnoty-danger',
-                        life: 3000,
-                        icon: 'fa fa-check-circle',
-                        position: 'top-right'
-                    });
+                    //$.jnoty(data.responseJSON.data.error.message, {
+                    //    theme: 'jnoty-danger',
+                    //    life: 3000,
+                    //    icon: 'fa fa-check-circle',
+                    //    position: 'top-right'
+                    //});
+                    console.log(data);
                 }
             });
         }
