@@ -4,6 +4,7 @@ var Game = require('../models/game');
 var Category = require('../models/category');
 var moment = require('moment');
 var request = require('request');
+var async = require("async");
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -33,7 +34,8 @@ router.get('/', function (req, res, next) {
                 topViewGame: topViewGame,
                 topDownloadGame: topDownloadGame,
                 newestGame: newestGame,
-                moment: moment
+                moment: moment,
+                title:'Shared.Com | Free Games '
               });
             });
         });
@@ -41,7 +43,7 @@ router.get('/', function (req, res, next) {
 });
 // Data test
 router.get('/data', function (req, res, next) {
-  Game.find({}, ['-avatar._id'], (error, data) => {
+  Game.find({}, ['-avatar._id', '-downloadLink._id'], (error, data) => {
     if (error) {
       console.log(error);
     }
@@ -55,20 +57,21 @@ router.get('/detail/:id', function (req, res) {
       console.log(err);
     }
 
-    request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + game.downloadLink, function (error, response, body) {
-      if (error) {
-        console.log(error);
-      } else {
-        game.downloadLink = JSON.parse(body).shortenedUrl;
-        
-      }
+    async.forEachOf(game.downloadLink, (value, key, callback) => {
+
+      request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link, function (error, response, body) {
+
+        if (error) console.log(error);
+        game.downloadLink[key].link = JSON.parse(body).shortenedUrl;
+        callback();
+      });
+    }, err => {
+      if (err) console.error(err.message);
       Category.find({})
         .exec((err, cateAll) => {
-          res.render('public/detail', { game: game, moment: moment, cateAll: cateAll });
+          res.render('public/detail', { game: game, moment: moment, cateAll: cateAll, title: game.name + " | Shared.com" });
         });
     });
-
-
   });
 });
 
@@ -122,7 +125,8 @@ router.get('/category/:cate/:page', function (req, res) {
                 cate: req.params.cate,
                 currentPage: req.params.page,
                 cateAll: cateAll,
-                maxPage: maxPage
+                maxPage: maxPage,
+                title: req.params.cate + " | Shared.com"
               });
             });
 

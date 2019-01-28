@@ -36,8 +36,8 @@ function initTable() {
                     footerFormatter: totalNameFormatter,
                     align: 'center'
                 }, {
-                    field: 'downloadLink',
-                    title: 'Download Link',
+                    field: 'downloads',
+                    title: 'Downloads',
                     sortable: true,
                     align: 'center',
                     footerFormatter: totalPriceFormatter
@@ -195,7 +195,7 @@ window.operateEvents = {
             });
             $('#editCategory').multiselect('dataprovider', options);
         });
-        document.getElementById('editLinkDownload').value = row.downloadLink;
+        document.getElementById('editLinkDownloads').value = JSON.stringify(row.downloadLink);
         CKEDITOR.instances['editSystemRequirements'].setData(row.systemRequirements);
         CKEDITOR.instances['editDescription'].setData(row.description)
         document.getElementById('editSeri').value = row.seri;
@@ -206,6 +206,15 @@ window.operateEvents = {
             $('#resultEdit').append('<div class="img-item" id="uploadedEditImage' + index + '"><i class="close fa fa-remove" onclick="removeImageEdit('+index+')"></i><img src="' + imgDataEdit[index].link + '" width="200px"/></div>');
             
         }
+        
+        arrEditLinkDownload = row.downloadLink;
+        $('#list-edit-downloadLink').empty();
+        for (let index = 0; index < arrEditLinkDownload.length; index++) {
+            $('#list-edit-downloadLink').append('<div class="col-md-9" id="link-edit-item-' + index + '">link : <a href="' + row.downloadLink[index].link + '">' + arrEditLinkDownload[index].link + '</a> Type : ' + arrEditLinkDownload[index].typeLink + '</div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + index + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
+            countEditLinkDownLoad ++;
+        }
+        
+
         $('#editModal').modal('show');
     },
     'click .remove': function (e, value, row, index) {

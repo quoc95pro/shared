@@ -12,11 +12,11 @@
                     <form id="editForm" action="/games">
                         <input type="hidden" id="editId" name="id" />
                         <div class="form-group">
-                            <label>Name</label>
+                            <label class="font-weight-bold">Name</label>
                             <input class="form-control" id="editName" name="name" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
-                            <label>Category</label>
+                            <label class="font-weight-bold">Category</label>
                             <select class="form-control" id="editCategory" name="category" multiple="multiple">
                                 <% category.forEach(function(cate) { %>
                                 <option value="<%= cate.name %>">
@@ -26,20 +26,35 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Download Link</label>
-                            <input class="form-control" id="editLinkDownload" name="downloadLink" type="text"
+                            <label class="font-weight-bold">Download Link</label>
+                            <input class="form-control" id="editLinkDownloads" name="downloadLink" type="text"
                                 placeholder="Download Link" />
                         </div>
+
+                        <div id="list-edit-downloadLink" class="row" style="margin:10px 0;">
+                        </div>
+
+                        <div class="row" style="margin:10px 0;">
+                            <div class="col-md-6">
+                                <input class="form-control" id="editLinkDownload" type="text" placeholder="Download Link" /></div>
+                            <div class="col-md-3"><input class="form-control" id="editTypeLinkDownload" type="text"
+                                    placeholder="Type Link Download Link" />
+                            </div>
+                            <div class="col-md-3"><button type="button" class="btn btn-primary" id="btnEditDownloadLink">Add
+                                    Link</button>
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label>System Requirements</label>
+                            <label class="font-weight-bold">System Requirements</label>
                             <textarea class="form-control" id="editSystemRequirements" name="systemRequirements"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Description</label>
+                            <label class="font-weight-bold">Description</label>
                             <textarea class="form-control" id="editDescription" name="description"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Seri</label>
+                            <label class="font-weight-bold">Seri</label>
                             <select class="form-control" id="editSeri" name="seri">
                                 <% seri.forEach(function(sr) { %>
                                 <option value="<%= sr.name %>">
@@ -49,7 +64,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input class="form-control" id="editAvatar" name="avatar" type="text" />
+                            <input hidden="true" class="form-control" id="editAvatar" name="avatar" type="text" />
                         </div>
 
                     </form>
@@ -78,6 +93,41 @@
 </div>
 
 <script>
+    var arrEditLinkDownload = [];
+    var countEditLinkDownLoad = 0;
+    var editLinkDownload, editTypeLinkDownload, checkedEdit;
+    $('#btnEditDownloadLink').on('click', () => {
+        editLinkDownload = $('#editLinkDownload').val();
+        editTypeLinkDownload = $('#editTypeLinkDownload').val();
+        checkedEdit = false;
+
+        for (let a = 0; a < arrEditLinkDownload.length; a++) {
+            if (arrEditLinkDownload[a].link == editLinkDownload && arrEditLinkDownload[a].typeLink == editTypeLinkDownload) {
+                checkedEdit = true;
+            }
+        }
+        if (checkedEdit == false) {
+            $('#list-edit-downloadLink').append('<div class="col-md-9" id="link-edit-item-' + countEditLinkDownLoad + '">link : <a href="' + editLinkDownload + '">' + editLinkDownload + '</a> Type : ' + editTypeLinkDownload + '</div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + countEditLinkDownLoad + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
+            arrEditLinkDownload.push({ link: editLinkDownload, typeLink: editTypeLinkDownload });
+            $('#editLinkDownloads').val(JSON.stringify(arrEditLinkDownload));
+            countEditLinkDownLoad++;
+        } else {
+            alert('Link da ton tai');
+        }
+    });
+
+    function removeEditLink(i) {
+        var currentUrl = $('#link-edit-item-' + i).children().attr('href');
+        for (let a = 0; a < arrEditLinkDownload.length; a++) {
+            if (arrEditLinkDownload[a].link == currentUrl) {
+                arrEditLinkDownload.splice(a, 1);
+                $('#editLinkDownloads').val(JSON.stringify(arrEditLinkDownload));
+                $('#link-edit-item-' + i).next().remove();
+                $('#link-edit-item-' + i).remove();
+            }
+        }
+    }
+
     $('#editSubmit').on('click', () => {
         $('#editForm').submit();
     });
@@ -168,7 +218,7 @@
                 success: function (data) {
                     imgDataEdit.push({ link: data.data.link });
                     $('#editAvatar').val(JSON.stringify(imgDataEdit));
-                    $('#resultEdit').append('<div class="img-item" id="uploadedEditImage' + i + '"><i class="close fa fa-remove" onclick="removeImageEdit('+i+')"></i><img src="' + data.data.link + '" width="200px"/></div>');
+                    $('#resultEdit').append('<div class="img-item" id="uploadedEditImage' + i + '"><i class="close fa fa-remove" onclick="removeImageEdit(' + i + ')"></i><img src="' + data.data.link + '" width="200px"/></div>');
                     if (countEdit.reduce(getSum) / (countEdit.length).toFixed(0) == 100) {
                         $.jnoty('Upload Images Success !!', {
                             theme: 'jnoty-success',
@@ -194,15 +244,15 @@
 
     });
 
-    function removeImageEdit(i){
-        var currentUrl = $('#uploadedEditImage' + i+' img').attr("src");
-        for(let a = 0; a < imgDataEdit.length; a++){
-            if(imgDataEdit[a].link == currentUrl){
-               imgDataEdit.splice(a, 1);
-               $('#editAvatar').val(JSON.stringify(imgDataEdit));
-               $('#uploadedEditImage' + i).remove();
+    function removeImageEdit(i) {
+        var currentUrl = $('#uploadedEditImage' + i + ' img').attr("src");
+        for (let a = 0; a < imgDataEdit.length; a++) {
+            if (imgDataEdit[a].link == currentUrl) {
+                imgDataEdit.splice(a, 1);
+                $('#editAvatar').val(JSON.stringify(imgDataEdit));
+                $('#uploadedEditImage' + i).remove();
             }
         }
-             
+
     }
 </script>

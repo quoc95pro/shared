@@ -55,11 +55,15 @@ function search() {
         }).done(function (data) {
             if (data) {
                 data.forEach(element => {
+                    var listCate = '';
+                    element.category.forEach(cate => {
+                        listCate += cate.name + '. ';
+                    });
                     listResult.innerHTML += "<a href='/detail/" + element._id + "'><li class='li-result'>" + "<div class='search-item'>" +
                         "<div class='search-item-avatar'><img src='" + element.avatar[0].link + "' /></div>" +
                         "<div class='search-item-meta'>" +
                         "<div class='search-item-title'>" + element.name + "</div>" +
-                        "<div class='search-item-description'>" + element.category + "</div>" +
+                        "<div class='search-item-description'>" + listCate + "</div>" +
                         "<div class='search-item-statistics'>" +
                         "<div class='search-item-seri'><i class='fa fa-th-list'></i> " + element.seri + "</div>" +
                         "<div class='search-item-download'><i class='fa fa-cloud-download'></i> " + element.downloads + " Downloads</div>" +

@@ -877,7 +877,22 @@ ul {
 .col-detail-content-download{
   width: 50%;
   margin: auto;
-  height: 150px;
+  padding: 15px 0;
+}
+
+th > h1 {
+  font: 30px Cookie;
+  padding: 10px;
+}
+
+.col-detail-content-download > table{
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+
+.col-detail-content-download > table > tbody > tr > td > a:hover{
+  text-decoration: none;
 }
 
 #gameId{

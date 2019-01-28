@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
   var postedDate = new Date();
   var views = 0;
   var downloads = 0;
-  var downloadLink = req.body.downloadLink;
+  var downloadLink = JSON.parse(req.body.downloadLink);
   var avatar = JSON.parse(req.body.avatar);
   var uploadBy = '';
   var systemRequirements = req.body.systemRequirements;
@@ -54,6 +54,8 @@ router.post('/', function (req, res, next) {
     } else {
       category.forEach(element => {
         objCategory.push(JSON.parse(element));
+        console.log(element);
+        
       });
     }
 
@@ -63,7 +65,7 @@ router.post('/', function (req, res, next) {
       postedDate: postedDate,
       views: views,
       downloads: downloads,
-      downloadLink: downloadLink,
+      downloadLink: downloadLink ,
       uploadBy: uploadBy,
       systemRequirements: systemRequirements,
       description: description,
@@ -72,8 +74,12 @@ router.post('/', function (req, res, next) {
     });
 
     Game.createGame(newGame, function (err, game) {
-      if (err) res.send({ errors: err });
-      res.send({ success_msg: 'Create Game success' });
+      if (err) {
+        res.send({ errors: err });
+      }else {
+        res.send({ success_msg: 'Create Game success' });
+      }
+      
     });
   }
 });
@@ -94,7 +100,7 @@ router.put('/', function (req, res, next) {
     var id = req.body.id;
     var name = req.body.name;
     var category = req.body.category;
-    var downloadLink = req.body.downloadLink;
+    var downloadLink = JSON.parse(req.body.downloadLink);
     var systemRequirements = req.body.systemRequirements;
     var description = req.body.description;
     var avatar = JSON.parse(req.body.avatar);

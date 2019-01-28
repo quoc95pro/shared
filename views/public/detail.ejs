@@ -1,44 +1,47 @@
 <% include partials/header %>
 <div class="row">
-    <div class="main-container page__container">
-        <div class="page__section">
-            <ul class="breadcrumbs breadcrumbs_type5">
-                <li class="breadcrumbs__item"><a href="/" class="breadcrumbs__element">Trang chủ</a></li>
-                <li class="breadcrumbs__item"><a  class="breadcrumbs__element" id="brc"></a></li>
-                <li class="breadcrumbs__item breadcrumbs__item_active"><span class="breadcrumbs__element"><%= game.name %></span></li>
-            </ul>
-        </div>
+  <div class="main-container page__container">
+    <div class="page__section">
+      <ul class="breadcrumbs breadcrumbs_type5">
+        <li class="breadcrumbs__item"><a href="/" class="breadcrumbs__element">Trang chủ</a></li>
+        <li class="breadcrumbs__item"><a class="breadcrumbs__element" id="brc"></a></li>
+        <li class="breadcrumbs__item breadcrumbs__item_active"><span class="breadcrumbs__element">
+            <%= game.name %></span></li>
+      </ul>
     </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-3 detail-left">
     <div>
       <div class="col-detail-left-top">
-        <p><%= game.name %></p>
+        <p>
+          <%= game.name %>
+        </p>
       </div>
-      
+
       <div class="col-systemRequirement">
         <h3>System Requirements</h3>
-      <div class="detail-systemRequirements">
+        <div class="detail-systemRequirements">
           <%- game.systemRequirements %>
-      </div>
+        </div>
       </div>
 
       <div class="col-detail-left-bottom">
-        <a href="<%- game.downloadLink %>" onclick="countDowload()" target="_blank"> <button class="btn-hover color-7"> Tải Xuống</button></a>
+          <a href="#table-download" style="display:flex;"> <button class="btn-hover color-7">Tải Xuống</button></a>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-image-slider">
     <section class="vertical-center-4 slider">
       <% game.avatar.forEach((g)=>{ %>
-        <div><img src="<%= g.link %>" style="min-width: 100%;height: 450px;"></div>
-        <% }); %>
+      <div><img src="<%= g.link %>" style="min-width: 100%;height: 450px;"></div>
+      <% }); %>
     </section>
     <section class="slider-nav">
       <% game.avatar.forEach((g)=>{ %>
-        <div><img src="<%= g.link %>" style="min-width: 100%;height: 100px;"></div>
-        <% }); %>
+      <div><img src="<%= g.link %>" style="min-width: 100%;height: 100px;"></div>
+      <% }); %>
     </section>
   </div>
   <div class="col-md-3">
@@ -47,10 +50,11 @@
 </div>
 
 <div class="row" style="margin-top:30px;">
-  <div class="col-md-9 col-detail-content" >
+  <div class="col-md-9 col-detail-content">
     <div>
       <div class="col-detail-content-header">
-        <span id="gameId"><%= game._id %></span>
+        <span id="gameId">
+          <%= game._id %></span>
         <h1>
           <%= game.name %>
         </h1>
@@ -67,15 +71,18 @@
       </div>
 
       <div style="clear:both; padding: 0 25px 25px 25px;">
-        <h3><%= game.seri %></h3>
-      </div>  
+        <h3>
+          <%= game.seri %>
+        </h3>
+      </div>
 
       <div>
         <div class="detail-downloadLink">
-          <a href="<%= game.downloadLink %>" target="_blank" onclick="countDowload()" >Tải Xuống</a>
+          <a href="#table-download">Tải Xuống</a>
         </div>
         <div class="detail-uploadBy">
-          Người đăng: <%= game.uploadBy %>
+          Người đăng:
+          <%= game.uploadBy %>
         </div>
         <div class="detail-downloads">
           <%= game.downloads %> Lượt Tải
@@ -84,18 +91,35 @@
 
       <div style="clear:both;">
         <p class="">
-         <span>Thể loại : </span><% game.category.forEach(function(c) { %>
-              <a href="/category/<%= c.name %>/1">
-                  <%= c.name %>.</a>
+          <span>Thể loại : </span>
+          <% game.category.forEach(function(c) { %>
+          <a href="/category/<%= c.name %>/1">
+            <%= c.name %>.</a>
           <% }); %>
-      </p>
+        </p>
       </div>
 
       <div class="detail-description">
         <%- game.description %>
       </div>
       <div class="col-detail-content-download">
-        <a href="<%= game.downloadLink %>" target="_blank" onclick="countDowload()" > <button class="btn-hover color-7">Tải Xuống</button></a>
+            <table id="table-download">
+                <tr>
+                <th colspan="2"><h1>Tải Xuống</h1></th>
+                </tr>
+                <% game.downloadLink.forEach(function(g){ %>
+                <% if(game.downloadLink.indexOf(g) % 2 == 0) { %>
+                <tr>
+                  <%}%>
+                  <td>
+                      <a href="<%= g.link %>" target="_blank" onclick="countDowload()" style="display:flex;"> <button class="btn-hover color-7">Part <%= game.downloadLink.indexOf(g) + 1 %></button></a>
+                  </td>
+                  <% if(game.downloadLink.indexOf(g) % 2 != 0) { %>
+                </tr>
+                <%}%>
+                <% }); %>
+      
+              </table>    
       </div>
     </div>
   </div>
@@ -103,24 +127,24 @@
 
 <script>
   var breadcumb = localStorage.getItem("breadcumbValue");
-  if(breadcumb == ''){
+  if (breadcumb == '') {
     document.getElementById("brc").parentElement.style.display = "none";
   }
   else {
     document.getElementById("brc").innerHTML = localStorage.getItem("breadcumbValue");
-    document.getElementById("brc").setAttribute("href",'/'+localStorage.getItem("breadcumbType")+'/'+localStorage.getItem("breadcumbValue")+'/1');
+    document.getElementById("brc").setAttribute("href", '/' + localStorage.getItem("breadcumbType") + '/' + localStorage.getItem("breadcumbValue") + '/1');
   }
-var id = document.getElementById('gameId').innerHTML;
+  var id = document.getElementById('gameId').innerHTML.trim();
   $.ajax({
-    url: "/countViews/"+id
-  }).done(function() {
+    url: "/countViews/" + id
+  }).done(function () {
   })
 
 
-  function countDowload(){
+  function countDowload() {
     $.ajax({
-      url: "/countDownloads/"+id
-    }).done(function() {
+      url: "/countDownloads/" + id
+    }).done(function () {
     });
   }
 

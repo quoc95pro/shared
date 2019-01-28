@@ -23,7 +23,7 @@ var GameSchema = mongoose.Schema({
 	},
 	downloadLink: [{
 		link: String,
-		type: String
+		typeLink: String
 	}],
 	uploadBy: {
 		type: String
