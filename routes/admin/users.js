@@ -3,26 +3,23 @@ var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/user');
+var User = require('../../models/user');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+  res.render('admin/users/index', { title: 'Login' });
 });
 
-router.get('/register', function (req, res, next) {
-  res.render('public/register', { title: 'Register' });
-});
 
 router.get('/login', function (req, res, next) {
-  res.render('public/login', { title: 'Login' });
+  res.render('admin/login', { title: 'Login' });
 });
 
 router.post('/login',
-  passport.authenticate('local', { failureRedirect: '/users/login', failureFlash: 'Invalid username or password' }),
+  passport.authenticate('local', { failureRedirect: '/admin/login', failureFlash: 'Invalid username or password' }),
   function (req, res) {
     req.flash('success_msg', 'You are now logged in');
-    res.redirect('/');
+    res.redirect('/admin');
   });
 
 passport.serializeUser(function (user, done) {
