@@ -59,7 +59,7 @@ router.get('/detail/:id', function (req, res) {
 
     async.forEachOf(game.downloadLink, (value, key, callback) => {
 
-      request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link, function (error, response, body) {
+      request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link.replace('&','%26'), function (error, response, body) {
 
         if (error) console.log(error);
         game.downloadLink[key].link = JSON.parse(body).shortenedUrl;
