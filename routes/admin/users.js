@@ -23,7 +23,7 @@ router.post('/login',
   });
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(function (id, done) {
@@ -96,11 +96,22 @@ router.post('/register', function (req, res, next) {
   }
 });
 
+router.get('/data', function (req, res, next) {
+  User.find({}, ['-password'], (error, data) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(data);
+  });
+});
+
 // Logout User
 router.get('/logout', function (req, res) {
   req.logout();
   req.flash('success_msg', 'You are now logged out');
   res.redirect('/users/login');
 });
+
+
 
 module.exports = router;

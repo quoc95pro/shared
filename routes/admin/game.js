@@ -9,7 +9,7 @@ var Seri = require('../../models/seri');
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
     Category.find({}, ['-_id', 'name', 'group', 'ename'], function (err, category) {
-
+      
       if (err) {
         console.log(err);
       }
