@@ -16,40 +16,28 @@
                             <input class="form-control" id="editName" name="name" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-bold">Category</label>
-                      
+                            <label class="font-weight-bold">Email</label>
+                            <input class="form-control" id="editEmail" name="email" type="text" placeholder="Enter Email" />
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-bold">Download Link</label>
-                            <input class="form-control" id="editLinkDownloads" name="downloadLink" type="text"
-                                placeholder="Download Link" />
-                        </div>
-
-                        <div id="list-edit-downloadLink" class="row" style="margin:10px 0;">
-                        </div>
-
-                        <div class="row" style="margin:10px 0;">
-                            <div class="col-md-6">
-                                <input class="form-control" id="editLinkDownload" type="text" placeholder="Download Link" /></div>
-                            <div class="col-md-3"><input class="form-control" id="editTypeLinkDownload" type="text"
-                                    placeholder="Type Link Download Link" />
-                            </div>
-                            <div class="col-md-3"><button type="button" class="btn btn-primary" id="btnEditDownloadLink">Add
-                                    Link</button>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="font-weight-bold">System Requirements</label>
-                            <textarea class="form-control" id="editSystemRequirements" name="systemRequirements"></textarea>
+                            <label class="font-weight-bold">UserName</label>
+                            <input class="form-control" id="editUserName" name="username" type="text" placeholder="Enter UserName" />
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-bold">Description</label>
-                            <textarea class="form-control" id="editDescription" name="description"></textarea>
+                            <label class="font-weight-bold">Password</label>
+                            <input class="form-control" id="editPassword" name="password" type="text" placeholder="Enter Password" />
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-bold">Seri</label>
-                       
+                            <label class="font-weight-bold">Re Password</label>
+                            <input class="form-control" id="editRePassword" name="rePassword" type="text" placeholder="Enter Re Password" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">UserType</label>
+                            <input class="form-control" id="editUserType" name="userType" type="text" placeholder="Enter User Type" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Status</label>
+                            <input class="form-control" id="editStatus" name="status" type="text" placeholder="Enter Status" />
                         </div>
                         <div class="form-group">
                             <input hidden="true" class="form-control" id="editAvatar" name="avatar" type="text" />
@@ -81,8 +69,6 @@
 </div>
 
 <script>
-    var arrEditLinkDownload = [];
-    var countEditLinkDownLoad = 0;
     var editLinkDownload, editTypeLinkDownload, checkedEdit;
     $('#btnEditDownloadLink').on('click', () => {
         editLinkDownload = $('#editLinkDownload').val();

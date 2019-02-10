@@ -160,7 +160,8 @@ router.get('/group/:group/:page', function (req, res) {
                 cate: req.params.group,
                 currentPage: req.params.page,
                 cateAll: cateAll,
-                maxPage: maxPage
+                maxPage: maxPage,
+                title: req.params.group + " | Shared.com"
               });
             });
         })
