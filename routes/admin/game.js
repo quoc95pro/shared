@@ -9,7 +9,7 @@ var Seri = require('../../models/seri');
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
     Category.find({}, ['-_id', 'name', 'group', 'ename'], function (err, category) {
-      
+
       if (err) {
         console.log(err);
       }
@@ -193,6 +193,36 @@ router.post('/category', (req, res) => {
           cate.save((err, cate) => {
             if (err) res.send({ errors: err });
             res.send({ success_msg: 'Add Category success !!! ' });
+          });
+        }
+      });
+  } else {
+    res.redirect('admin/login');
+  }
+});
+
+// Add Seri
+
+router.post('/seri', (req, res) => {
+
+  if (req.isAuthenticated()) {
+    var name = req.body.seriName;
+    var eName = req.body.seriEname
+
+    Seri.find({ name: name })
+      .count()
+      .exec((err, count) => {
+        if (err) res.send({ errors: err });
+        if (count > 0) {
+          res.send({ success_msg: 'Seri đã tồn tại !!! ' });
+        } else {
+          var seri = new Seri({
+            name: name,
+            eName: eName
+          });
+          seri.save((err, seri) => {
+            if (err) res.send({ errors: err });
+            res.send({ success_msg: 'Add Seri success !!! ' });
           });
         }
       });

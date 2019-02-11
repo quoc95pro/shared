@@ -2,9 +2,8 @@ var mongoose = require('mongoose');
 
 // Seri Schema
 var SeriSchema = mongoose.Schema({
-	name: {
-		type: String
-	}
+	name: { type: String },
+	eName: { type: String }
 });
 
 var Seri = module.exports = mongoose.model('Seri', SeriSchema);

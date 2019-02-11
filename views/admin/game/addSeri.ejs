@@ -1,0 +1,63 @@
+<div class="modal" tabindex="-1" role="dialog" id="addSeriModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content  modal-lg">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Seri</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form id="addSeriForm" method="post" action="/games/seri">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" id="addSeriName" name="seriName" type="text" placeholder="Enter Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Ename</label>
+                            <input class="form-control" id="addSeriEname" name="seriEname" type="text" placeholder="Enter Name" />
+                        </div>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Add" />
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#addSeriForm').submit(function () {
+        $(this).ajaxSubmit({
+
+            error: function (xhr) {
+                alert(xhr);
+            },
+
+            success: function (response) {
+                if (response.success_msg != null) {
+                    $.jnoty(response.success_msg, {
+                        theme: 'jnoty-success',
+                        life: 3000,
+                        icon: 'fa fa-check-circle',
+                        position: 'top-right'
+                    });
+                }
+                else {
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+
+
+                    });
+                }
+            }
+        });
+        return false;
+    });
+</script>
