@@ -153,6 +153,7 @@ window.operateEvents = {
     'click .edit': function (e, value, row, index) {
         document.getElementById('editId').value = row._id;
         document.getElementById('editName').value = row.name;
+        document.getElementById('editEName').value = row.ename;
         var options = [];
         $.ajax({
             url: "games/category"

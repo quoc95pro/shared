@@ -7,6 +7,9 @@ var GameSchema = mongoose.Schema({
 	name: {
 		type: String
 	},
+	ename:  {
+		type: String
+	},
 	category: [{
 		name: String,
 		ename: String,

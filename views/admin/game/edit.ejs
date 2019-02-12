@@ -16,6 +16,10 @@
                             <input class="form-control" id="editName" name="name" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
+                                <label class="font-weight-bold">EName</label>
+                                <input class="form-control" id="editEName" name="ename" type="text" placeholder="Enter EName" />
+                            </div>
+                        <div class="form-group">
                             <label class="font-weight-bold">Category</label>
                             <select class="form-control" id="editCategory" name="category" multiple="multiple">
                                 <% category.forEach(function(cate) { %>
@@ -93,6 +97,9 @@
 </div>
 
 <script>
+    $('#editName').on('input',function () {
+       $('#editEName').val(change_alias($('#editName').val()));
+    });
     var arrEditLinkDownload = [];
     var countEditLinkDownLoad = 0;
     var editLinkDownload, editTypeLinkDownload, checkedEdit;

@@ -15,6 +15,10 @@
                             <input class="form-control" id="addName" name="name" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
+                            <label class="font-weight-bold">EName</label>
+                            <input class="form-control" id="addEName" name="ename" type="text" placeholder="Enter EName" />
+                        </div>
+                        <div class="form-group">
                             <label class="font-weight-bold">Category</label>
                             <select class="form-control" id="addCategory" name="category" multiple="multiple">
                                 <% 
@@ -106,6 +110,26 @@
 </div>
 
 <script>
+    function change_alias(alias) {
+        var str = alias;
+        str = str.toLowerCase();
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, "-");
+        str = str.replace(/ + /g, " ");
+        str = str.trim();
+        str = str.replace(/ /g, "-");
+        return str;
+    }
+
+    $('#addName').on('input',function () {
+       $('#addEName').val(change_alias($('#addName').val()));
+    });
     var arrLinkDownload = [];
     var countLinkDownLoad = 0;
     var linkDownload, typeLinkDownload, checked;
@@ -173,16 +197,16 @@
                     });
                 }
                 else {
-                    // response.errors.forEach(err => {
-                    //     $.jnoty(err.msg, {
-                    //         theme: 'jnoty-danger',
-                    //         life: 3000,
-                    //         icon: 'fa fa-check-circle',
-                    //         position: 'top-right'
-                    //     });
-                    // });
-                        console.log(response);
-                        
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 5000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    });
+                     console.log(response);
+
                 }
                 $table.bootstrapTable('refresh');
             }
