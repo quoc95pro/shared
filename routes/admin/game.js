@@ -188,7 +188,7 @@ router.delete('/', function (req, res, next) {
 // Get Category
 
 router.get('/category', function (req, res, next) {
-  Category.find({}, ['-_id', 'name', 'group', 'ename'], function (err, category) {
+  Category.find({}, ['-_id', 'name', 'group', 'eName'], function (err, category) {
     if (err) {
       console.log(err);
     }
