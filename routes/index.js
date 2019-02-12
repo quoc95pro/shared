@@ -51,8 +51,8 @@ router.get('/data', function (req, res, next) {
   });
 });
 
-router.get('/detail/:id', function (req, res) {
-  Game.findById(req.params.id, function (err, game) {
+router.get('/detail/:ename', function (req, res) {
+  Game.findOne({ename: req.params.ename}, function (err, game) {
     if (err) {
       console.log(err);
     }

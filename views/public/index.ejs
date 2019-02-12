@@ -20,7 +20,7 @@
         <% newestGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
-                <a href="/detail/<%= g._id %>">
+                <a href="/detail/<%= g.ename %>">
                     <div class='box' style="background-image: url('<%= g.avatar[0].link %>')">
                         <span></span>
                         <span></span>
@@ -28,7 +28,7 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g.ename %>">
                         <%= g.name %></a></p>
                 <p class="Game-Category">
                     <% g.category.forEach(function(c) { %>
@@ -63,7 +63,7 @@
         <% topDownloadGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
-                <a href="/detail/<%= g._id %>">
+                <a href="/detail/<%= g.ename %>">
                     <div class='box' style="background-image: url('<%= g.avatar[0].link %>')">
                         <span></span>
                         <span></span>
@@ -71,7 +71,7 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g.ename %>">
                         <%= g.name %></a></p>
                 <p class="Game-Category">
                     <% g.category.forEach(function(c) { %>
@@ -106,7 +106,7 @@
         <% topViewGame.forEach(function(g) { %>
         <div class="col-md-4 col-lg-3 col-sm-6 col-index">
             <div class="index-item">
-                <a href="/detail/<%= g._id %>">
+                <a href="/detail/<%= g.ename %>">
                     <div class='box' style="background-image: url('<%= g.avatar[0].link %>')">
                         <span></span>
                         <span></span>
@@ -114,7 +114,7 @@
                         <span></span>
                     </div>
                 </a>
-                <p class="Game-Name"><a href="/detail/<%= g._id %>">
+                <p class="Game-Name"><a href="/detail/<%= g.ename %>">
                         <%= g.name %></a></p>
                 <p class="Game-Category">
                     <% g.category.forEach(function(c) { %>
