@@ -100,7 +100,7 @@ router.get('/countDownloads/:id', function (req, res) {
 });
 
 router.get('/category/:cate/:page', function (req, res) {
-  Game.find({ 'category.name': req.params.cate })
+  Game.find({ 'category.ename': req.params.cate })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
