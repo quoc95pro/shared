@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 // Category Schema
 var CategorySchema = mongoose.Schema({
+	egroup: { type: String },
 	name: { type: String },
 	eName: { type: String },
 	group: { type: String }
