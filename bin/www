@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('shared:server');
 var http = require('http');
+var	geoip = require('geoip-lite');
+var Statistic = require('../models/statistic');
 
 /**
  * Get port from environment and store in Express.
@@ -20,7 +22,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+var io = require('socket.io').listen(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -88,3 +90,52 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+io.sockets.on('connection', function (socket) {
+	let clientCount = io.engine.clientsCount;
+	io.sockets.emit("user count", clientCount);
+	// console.log('Headers: ' + JSON.stringify(socket.request.headers));
+	var ip = '';
+	if (socket.handshake.address.substr(0, 7) == "::ffff:") {
+		ip = socket.handshake.address.substr(7);
+	}
+  var url = socket.handshake.headers.referer;  
+	var geo = geoip.lookup('118.69.248.82');
+	var browser = socket.request.headers["user-agent"];
+	var language = socket.request.headers["accept-language"];
+	var country = (geo ? geo.country : "Unknown");
+  var region = (geo ? geo.region : "Unknown");
+  var timezone = (geo ? geo.timezone : "Unknown");
+  var city = (geo ? geo.city : "Unknown");
+  var ll = {
+    long: (geo ? geo.ll[0] : "Unknown"),
+    lat: (geo ? geo.ll[1] : "Unknown")
+  };
+
+  var statistic = new Statistic({
+    ip: ip,
+    url: url,
+    browser: browser,
+    language: language,
+    country: country,
+    region: region,
+    timezone: timezone,
+    city: city,
+    ll: ll
+  })
+
+  statistic.save( (err, st) => {
+    if (err) {
+      console.log(err);
+    } else {
+     console.log(st.ip + '-'+st.region + '-' +st.country);
+    }
+  });
+
+
+  socket.on('disconnect', function (data) {
+		io.sockets.emit("user count", clientCount);
+	});
+
+});

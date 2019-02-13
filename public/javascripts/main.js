@@ -156,3 +156,11 @@ var init = function () {
 
 doc.on('ready', init());
 
+$(document).ready(function () {
+	var socket = io.connect();
+
+	socket.on("user count", count => {
+		$('.countUser').html(count);
+	});
+
+});
