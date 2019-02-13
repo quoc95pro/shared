@@ -11,6 +11,7 @@ var GameSchema = mongoose.Schema({
 		type: String
 	},
 	category: [{
+		egroup: String ,
 		name: String,
 		eName: String,
 		group: String
