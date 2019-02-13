@@ -35,7 +35,7 @@ router.get('/', function (req, res, next) {
                 topDownloadGame: topDownloadGame,
                 newestGame: newestGame,
                 moment: moment,
-                title:'Shared.Com | Free Games '
+                title:'taigamekhung.com - Free Games '
               });
             });
         });
@@ -69,7 +69,7 @@ router.get('/detail/:ename', function (req, res) {
       if (err) console.error(err.message);
       Category.find({})
         .exec((err, cateAll) => {
-          res.render('public/detail', { game: game, moment: moment, cateAll: cateAll, title: game.name + " | Shared.com" });
+          res.render('public/detail', { game: game, moment: moment, cateAll: cateAll, title: game.name + " - taigamekhung.com" });
         });
     });
   });
@@ -126,7 +126,7 @@ router.get('/category/:cate/:page', function (req, res) {
                 currentPage: req.params.page,
                 cateAll: cateAll,
                 maxPage: maxPage,
-                title: req.params.cate + " | Shared.com"
+                title: req.params.cate + " - taigamekhung.com"
               });
             });
 
@@ -161,7 +161,7 @@ router.get('/group/:group/:page', function (req, res) {
                 currentPage: req.params.page,
                 cateAll: cateAll,
                 maxPage: maxPage,
-                title: req.params.group + " | Shared.com"
+                title: req.params.group + " - taigamekhung.com"
               });
             });
         })
