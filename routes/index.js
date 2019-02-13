@@ -100,14 +100,14 @@ router.get('/countDownloads/:id', function (req, res) {
 });
 
 router.get('/category/:cate/:page', function (req, res) {
-  Game.find({ 'category.ename': req.params.cate })
+  Game.find({ 'category.eName': req.params.cate })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
       if (err) {
         console.log(err);
       }
-      Game.find({ 'category.name': req.params.cate })
+      Game.find({ 'category.eName': req.params.cate })
         .count((err, countRow) => {
           if (err) {
             console.log(err);
@@ -135,14 +135,14 @@ router.get('/category/:cate/:page', function (req, res) {
 });
 
 router.get('/group/:group/:page', function (req, res) {
-  Game.find({ 'category.group': req.params.group })
+  Game.find({ 'category.egroup': req.params.group })
     .limit(14)
     .skip(req.params.page * 14 - 14)
     .exec((err, game) => {
       if (err) {
         console.log(err);
       }
-      Game.find({ 'category.group': req.params.group })
+      Game.find({ 'category.egroup': req.params.group })
         .count((err, countRow) => {
           if (err) {
             console.log(err);
@@ -180,7 +180,7 @@ router.get('/search/:name', function (req, res) {
 });
 
 router.get('/cateGroup', function (req, res) {
-  Category.distinct('group')
+  Category.distinct('egroup')
     .exec(function (err, cate) {
       if (err) {
         console.log(err);
