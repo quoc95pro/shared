@@ -180,7 +180,7 @@ router.get('/search/:name', function (req, res) {
 });
 
 router.get('/cateGroup', function (req, res) {
-  Category.distinct('egroup')
+  Category.aggregate([{ $group: { _id: { egroup: "$egroup", group: "$group" } } }])
     .exec(function (err, cate) {
       if (err) {
         console.log(err);
