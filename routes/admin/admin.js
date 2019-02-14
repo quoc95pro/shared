@@ -4,6 +4,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../../models/user');
+var Statistic = require('../../models/statistic');
 
 /* GET admin page */
 router.get('/', function (req, res, next) {
@@ -98,6 +99,15 @@ router.post('/register', function (req, res, next) {
     res.location('/');
     res.redirect('/');
   }
+});
+
+router.get('/statistic', function (req, res, next) {
+  Statistic.find({}, function (err, statistic) {
+    if (err) {
+      console.log(err);
+    }
+    res.send(statistic);
+  });
 });
 
 // Logout User
