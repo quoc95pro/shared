@@ -97,9 +97,10 @@ io.sockets.on('connection', function (socket) {
 	io.sockets.emit("user count", clientCount);
 	// console.log('Headers: ' + JSON.stringify(socket.request.headers));
 	var ip = '';
-	if (socket.request.connection.remoteAddress.substr(0, 7) == "::ffff:") {
-		ip = socket.request.connection.remoteAddress.substr(7);
-	}
+	if (socket.handshake.headers["x-real-ip"].substr(0, 7) == "::ffff:") {
+		ip = socket.handshake.headers["x-real-ip"].substr(7);
+  }
+  
   var url = socket.handshake.headers.referer;  
 	var geo = geoip.lookup(ip);
 	var browser = socket.request.headers["user-agent"];
