@@ -96,10 +96,11 @@ io.sockets.on('connection', function (socket) {
 	let clientCount = io.engine.clientsCount;
 	io.sockets.emit("user count", clientCount);
 	// console.log('Headers: ' + JSON.stringify(socket.request.headers));
-	var ip = '';
-	if (socket.handshake.headers["x-real-ip"].substr(0, 7) == "::ffff:") {
-		ip = socket.handshake.headers["x-real-ip"].substr(7);
+	var ip = socket.handshake.header('x-forwarded-for') || req.connection.remoteAddress;;
+	if (ip.substr(0, 7) == "::ffff:") {
+		ip = ip.substr(7);
   }
+  console.log(socket.handshake.header('x-forwarded-for') || req.connection.remoteAddress);
   
   var url = socket.handshake.headers.referer;  
 	var geo = geoip.lookup(ip);
