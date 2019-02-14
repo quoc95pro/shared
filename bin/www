@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('shared:server');
 var http = require('http');
-var	geoip = require('geoip-lite');
+var geoip = require('geoip-lite');
 var Statistic = require('../models/statistic');
 
 /**
@@ -93,20 +93,21 @@ function onListening() {
 
 
 io.sockets.on('connection', function (socket) {
-	let clientCount = io.engine.clientsCount;
-	io.sockets.emit("user count", clientCount);
-	// console.log('Headers: ' + JSON.stringify(socket.request.headers));
-	var ip = socket.handshake.header('x-forwarded-for') || req.connection.remoteAddress;;
-	if (ip.substr(0, 7) == "::ffff:") {
-		ip = ip.substr(7);
-  }
-  console.log(socket.handshake.header('x-forwarded-for') || req.connection.remoteAddress);
-  
-  var url = socket.handshake.headers.referer;  
-	var geo = geoip.lookup(ip);
-	var browser = socket.request.headers["user-agent"];
-	var language = socket.request.headers["accept-language"];
-	var country = (geo ? geo.country : "Unknown");
+  let clientCount = io.engine.clientsCount;
+  io.sockets.emit("user count", clientCount);
+  // console.log('Headers: ' + JSON.stringify(socket.request.headers));
+  // var ip = socket.handshake.header('x-forwarded-for') || req.connection.remoteAddress;;
+  // if (ip.substr(0, 7) == "::ffff:") {
+  // 	ip = ip.substr(7);
+  // }
+
+  // var url = socket.handshake.headers.referer;  
+  var ip = socket.handshake.headers["x-real-ip"];
+  var url = socket.handshake.headers["x-real-port"];
+  var geo = geoip.lookup(ip);
+  var browser = socket.request.headers["user-agent"];
+  var language = socket.request.headers["accept-language"];
+  var country = (geo ? geo.country : "Unknown");
   var region = (geo ? geo.region : "Unknown");
   var timezone = (geo ? geo.timezone : "Unknown");
   var city = (geo ? geo.city : "Unknown");
@@ -127,17 +128,17 @@ io.sockets.on('connection', function (socket) {
     ll: ll
   })
 
-  statistic.save( (err, st) => {
+  statistic.save((err, st) => {
     if (err) {
       console.log(err);
     } else {
-     console.log(st.ip + '-'+st.region + '-' +st.country);
+      console.log(st.ip + '-' + st.region + '-' + st.country);
     }
   });
 
 
   socket.on('disconnect', function (data) {
-		io.sockets.emit("user count", clientCount);
-	});
+    io.sockets.emit("user count", clientCount);
+  });
 
 });
