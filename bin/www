@@ -97,11 +97,11 @@ io.sockets.on('connection', function (socket) {
 	io.sockets.emit("user count", clientCount);
 	// console.log('Headers: ' + JSON.stringify(socket.request.headers));
 	var ip = '';
-	if (socket.handshake.address.substr(0, 7) == "::ffff:") {
-		ip = socket.handshake.address.substr(7);
+	if (socket.request.connection.remoteAddress.substr(0, 7) == "::ffff:") {
+		ip = socket.request.connection.remoteAddress.substr(7);
 	}
   var url = socket.handshake.headers.referer;  
-	var geo = geoip.lookup('118.69.248.82');
+	var geo = geoip.lookup(ip);
 	var browser = socket.request.headers["user-agent"];
 	var language = socket.request.headers["accept-language"];
 	var country = (geo ? geo.country : "Unknown");
