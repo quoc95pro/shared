@@ -10,10 +10,14 @@ var flash = require('connect-flash');
 var mongoose = require("mongoose");
 var config = require("./config");
 
+
+
+
 var app = express();
 
+
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes//admin/users');
+var usersRouter = require('./routes/admin/users');
 var adminRouter = require('./routes/admin/admin');
 var gamesRouter = require('./routes/admin/game');
 

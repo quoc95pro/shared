@@ -5,6 +5,28 @@ var Category = require('../models/category');
 var moment = require('moment');
 var request = require('request');
 var async = require("async");
+const SitemapGenerator = require('sitemap-generator');
+var generator = SitemapGenerator('https://taigamekhung.com', {
+  maxDepth: 0,
+  lastMod: true,
+  priorityMap: [
+    1.0,
+    0.9,
+    0.8
+  ],
+  filepath: './sitemap.xml',
+  maxEntriesPerFile: 50000,
+  stripQuerystring: true
+});
+
+router.get('/sitemap.xml', (req, res, next) => {
+  // register event listeners
+  generator.on('done', () => {
+  });
+
+  // start the crawler
+  generator.start();
+});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -35,7 +57,7 @@ router.get('/', function (req, res, next) {
                 topDownloadGame: topDownloadGame,
                 newestGame: newestGame,
                 moment: moment,
-                title:'taigamekhung.com - Free Games '
+                title: 'taigamekhung.com - Free Games '
               });
             });
         });
@@ -52,14 +74,14 @@ router.get('/data', function (req, res, next) {
 });
 
 router.get('/detail/:ename', function (req, res) {
-  Game.findOne({ename: req.params.ename}, function (err, game) {
+  Game.findOne({ ename: req.params.ename }, function (err, game) {
     if (err) {
       console.log(err);
     }
 
     async.forEachOf(game.downloadLink, (value, key, callback) => {
 
-      request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link.replace('&','%26'), function (error, response, body) {
+      request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link.replace('&', '%26'), function (error, response, body) {
 
         if (error) console.log(error);
         game.downloadLink[key].link = JSON.parse(body).shortenedUrl;
