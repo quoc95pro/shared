@@ -9,9 +9,33 @@ var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 var mongoose = require("mongoose");
 var config = require("./config");
+const SitemapGenerator = require('sitemap-generator');
 
 
+var schedule = require('node-schedule');
 
+var j = schedule.scheduleJob('0 1 * * *', function(){
+  var generator = SitemapGenerator('https://taigamekhung.com', {
+  maxDepth: 0,
+  lastMod: true,
+  changeFreq: 'daily',
+  priorityMap: [
+    1.0,
+    0.9,
+    0.8
+  ],
+  filepath: './public/sitemap.xml',
+  maxEntriesPerFile: 50000,
+  stripQuerystring: true
+});
+  // register event listeners
+  generator.on('done', () => {
+    console.log('done');
+  });
+
+  // start the crawler
+  generator.start();
+});
 
 var app = express();
 

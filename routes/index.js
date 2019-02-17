@@ -5,28 +5,6 @@ var Category = require('../models/category');
 var moment = require('moment');
 var request = require('request');
 var async = require("async");
-const SitemapGenerator = require('sitemap-generator');
-var generator = SitemapGenerator('https://taigamekhung.com', {
-  maxDepth: 0,
-  lastMod: true,
-  priorityMap: [
-    1.0,
-    0.9,
-    0.8
-  ],
-  filepath: './sitemap.xml',
-  maxEntriesPerFile: 50000,
-  stripQuerystring: true
-});
-
-router.get('/sitemap.xml', (req, res, next) => {
-  // register event listeners
-  generator.on('done', () => {
-  });
-
-  // start the crawler
-  generator.start();
-});
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -94,7 +72,8 @@ router.get('/detail/:ename', function (req, res) {
           res.render('public/detail', { game: game, moment: moment, cateAll: cateAll, title: game.name + " - taigamekhung.com" });
         });
     });
-  });
+
+     });
 });
 
 router.get('/countViews/:id', function (req, res) {
