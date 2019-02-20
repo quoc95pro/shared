@@ -160,7 +160,7 @@ $(document).ready(function () {
 	var socket = io.connect();
 
 	socket.on("user count", count => {
-		$('.countUser').html(count);
+		$('.countUser').html(count + ' Guest Online');
 	});
 
 });

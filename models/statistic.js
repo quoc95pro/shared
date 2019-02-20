@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var StatisticSchema = mongoose.Schema({
 	ip: { type: String },
     url: { type: String },
+    date: {type: Date},
     browser: { type: String },
     language: { type: String },
     country: { type: String },

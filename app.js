@@ -11,10 +11,9 @@ var mongoose = require("mongoose");
 var config = require("./config");
 const SitemapGenerator = require('sitemap-generator');
 
-
 var schedule = require('node-schedule');
 
-var j = schedule.scheduleJob('0 1 * * *', function(){
+var j = schedule.scheduleJob('0 15 * * *', function(){
   var generator = SitemapGenerator('https://taigamekhung.com', {
   maxDepth: 0,
   lastMod: true,

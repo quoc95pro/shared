@@ -96,7 +96,7 @@ io.sockets.on('connection', function (socket) {
   let clientCount = io.engine.clientsCount;
   io.sockets.emit("user count", clientCount);
   // console.log('Headers: ' + JSON.stringify(socket.request.headers));
-  var ip = socket.handshake.headers["x-real-ip"];
+  var ip = socket.handshake.headers["x-real-ip"] || '';
   if (ip.substr(0, 7) == "::ffff:") {
   	ip = ip.substr(7);
   }
@@ -104,6 +104,7 @@ io.sockets.on('connection', function (socket) {
 
   var url = socket.handshake.headers.referer;  
   var geo = geoip.lookup(ip);
+  var date = new Date();
   var browser = socket.request.headers["user-agent"];
   var language = socket.request.headers["accept-language"];
   var country = (geo ? geo.country : "Unknown");
@@ -118,6 +119,7 @@ io.sockets.on('connection', function (socket) {
   var statistic = new Statistic({
     ip: ip,
     url: url,
+    date: date,
     browser: browser,
     language: language,
     country: country,
