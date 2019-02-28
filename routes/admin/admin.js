@@ -102,7 +102,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.get('/statistic', function (req, res, next) {
-  Statistic.find({}, ['-_id', 'ip', 'country', 'timezone','city'], function (err, statistic) {
+  Statistic.find({}, ['-_id', 'ip', 'country', 'timezone', 'city'], function (err, statistic) {
     if (err) {
       console.log(err);
     }
