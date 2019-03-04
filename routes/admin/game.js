@@ -10,7 +10,7 @@ const { check } = require('express-validator/check');
 /* GET Game Page. */
 router.get('/', function (req, res, next) {
   if (req.isAuthenticated()) {
-    Category.find({}, ['-_id', 'name', 'group', 'ename'], function (err, category) {
+    Category.find({}, ['-_id', 'name', 'group', 'eName','egroup'], function (err, category) {
 
       if (err) {
         console.log(err);
