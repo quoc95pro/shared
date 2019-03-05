@@ -51,7 +51,7 @@ await browser.close();
 }
 
 
-var j = schedule.scheduleJob('28 22 * * *', function(){
+var j = schedule.scheduleJob('12 23 * * *', function(){
   var generator = SitemapGenerator('https://taigamekhung.com', {
   maxDepth: 0,
   lastMod: true,
@@ -93,7 +93,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-mongoose.connect(config.getDBConnectionString());
+mongoose.connect(config.getDBConnectionString(), {useCreateIndex: true, useNewUrlParser: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
