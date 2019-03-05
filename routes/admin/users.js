@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
 var User = require('../../models/user');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.render('admin/users/index', { title: 'Login' });
 });
-
 
 router.get('/login', function (req, res, next) {
   res.render('admin/login', { title: 'Login' });
