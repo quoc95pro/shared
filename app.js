@@ -51,7 +51,7 @@ await browser.close();
 }
 
 
-var j = schedule.scheduleJob('36 8 * * *', function(){
+var j = schedule.scheduleJob('49 22 * * *', function(){
   var generator = SitemapGenerator('https://taigamekhung.com', {
   maxDepth: 0,
   lastMod: true,
