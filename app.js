@@ -16,7 +16,7 @@ var Cash = require('./models/cash');
 
 
 async function getInfo123Link() {
-const browser = await puppeteer.launch({headless: false, args:['--no-sandbox --disable-setuid-sandbox']});
+const browser = await puppeteer.launch({headless: false});
 const page = await browser.newPage();
 await page.goto('https://123link.co/auth/signin', { waitUntil: 'networkidle0' }); // wait until page load
 await page.type('#username', 'quoc1995pro@gmail.com');
@@ -51,7 +51,7 @@ await browser.close();
 }
 
 
-var j = schedule.scheduleJob('9 22 * * *', function(){
+var j = schedule.scheduleJob('10 22 * * *', function(){
   var generator = SitemapGenerator('https://taigamekhung.com', {
   maxDepth: 0,
   lastMod: true,
