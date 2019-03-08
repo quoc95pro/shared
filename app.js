@@ -16,7 +16,7 @@ var Cash = require('./models/cash');
 
 
 async function getInfo123Link() {
-const browser = await puppeteer.launch({headless: false, args:['--no-sandbox','--disable-setuid-sandbox']});
+const browser = await puppeteer.launch({headless: false});
 const page = await browser.newPage();
 await page.goto('https://123link.co/auth/signin', { waitUntil: 'networkidle0' }); // wait until page load
 await page.type('#username', 'quoc1995pro@gmail.com');
@@ -51,27 +51,27 @@ await browser.close();
 }
 
 
-var j = schedule.scheduleJob('5 * * * *', function(){
-//   var generator = SitemapGenerator('https://taigamekhung.com', {
-//   maxDepth: 0,
-//   lastMod: true,
-//   changeFreq: 'daily',
-//   priorityMap: [
-//     1.0,
-//     0.9,
-//     0.8
-//   ],
-//   filepath: './public/sitemap.xml',
-//   maxEntriesPerFile: 50000,
-//   stripQuerystring: true
-// });
-//   // register event listeners
-//   generator.on('done', () => {
-//     console.log('done');
-//   });
+var j = schedule.scheduleJob('0 15 * * *', function(){
+  var generator = SitemapGenerator('https://taigamekhung.com', {
+  maxDepth: 0,
+  lastMod: true,
+  changeFreq: 'daily',
+  priorityMap: [
+    1.0,
+    0.9,
+    0.8
+  ],
+  filepath: './public/sitemap.xml',
+  maxEntriesPerFile: 50000,
+  stripQuerystring: true
+});
+  // register event listeners
+  generator.on('done', () => {
+    console.log('done');
+  });
 
-//   // start the crawler
-//   generator.start();
+  // start the crawler
+  generator.start();
   getInfo123Link()
 });
 
