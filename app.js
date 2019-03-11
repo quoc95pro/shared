@@ -16,7 +16,7 @@ var Cash = require('./models/cash');
 
 
 async function getInfo123Link() {
-const browser = await puppeteer.launch({headless: false});
+const browser = await puppeteer.launch({headless: false, args: ['--no-sandbox']});
 const page = await browser.newPage();
 await page.goto('https://123link.co/auth/signin', { waitUntil: 'networkidle0' }); // wait until page load
 await page.type('#username', 'quoc1995pro@gmail.com');
