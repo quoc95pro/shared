@@ -51,27 +51,27 @@ await browser.close();
 }
 
 
-var j = schedule.scheduleJob('* 3 * * *', function(){
-//   var generator = SitemapGenerator('https://taigamekhung.com', {
-//   maxDepth: 0,
-//   lastMod: true,
-//   changeFreq: 'daily',
-//   priorityMap: [
-//     1.0,
-//     0.9,
-//     0.8
-//   ],
-//   filepath: './public/sitemap.xml',
-//   maxEntriesPerFile: 50000,
-//   stripQuerystring: true
-// });
-//   // register event listeners
-//   generator.on('done', () => {
-//     console.log('done');
-//   });
+var j = schedule.scheduleJob('0 15 * * *', function(){
+  var generator = SitemapGenerator('https://taigamekhung.com', {
+  maxDepth: 0,
+  lastMod: true,
+  changeFreq: 'daily',
+  priorityMap: [
+    1.0,
+    0.9,
+    0.8
+  ],
+  filepath: './public/sitemap.xml',
+  maxEntriesPerFile: 50000,
+  stripQuerystring: true
+});
+  // register event listeners
+  generator.on('done', () => {
+    console.log('done');
+  });
 
-//   // start the crawler
-//   generator.start();
+  // start the crawler
+  generator.start();
   getInfo123Link()
 });
 
