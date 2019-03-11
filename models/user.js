@@ -21,9 +21,6 @@ var UserSchema = mongoose.Schema({
     },
     userType:{
         type: Number
-    },
-    status:{
-        type: String
     }
 });
 

@@ -36,7 +36,7 @@ passport.use(new LocalStrategy(function (username, password, done) {
     if (!user) {
       return done(null, false, { message: 'Unknown User' });
     }
-    
+
     User.comparePassword(password, user.password, function (err, isMatch) {
       if (err) return done(err);
       if (isMatch) {
@@ -48,50 +48,50 @@ passport.use(new LocalStrategy(function (username, password, done) {
   });
 }));
 
-router.post('/register', function (req, res, next) {
-  var name = req.body.name;
-  var email = req.body.email;
-  var username = req.body.username;
-  var password = req.body.password;
-  var userType = 1;
-  var status = 'inactive';
-  var profileimage = 'noimage.jpg';
+router.post('/user',
+  passport.authenticate('local', { failureRedirect: '/admin/login', failureFlash: 'zzzz' }),
+  function (req, res, next) {
+    var name = req.body.name;
+    var mail = req.body.mail;
+    var username = req.body.username;
+    var pass = req.body.pass;
+    var level = req.body.level;
+    var avatar = req.body.avatar;
 
-  // Form Validator
-  req.checkBody('name', 'Name field is required').notEmpty();
-  req.checkBody('email', 'Email field is required').notEmpty();
-  req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('username', 'Username field is required').notEmpty();
-  req.checkBody('password', 'Password field is required').notEmpty();
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+    // Form Validator
+    req.checkBody('name', 'Name field is required').notEmpty();
+    req.checkBody('mail', 'Email field is required').notEmpty();
+    req.checkBody('mail', 'Email is not valid').isEmail();
+    req.checkBody('username', 'Username field is required').notEmpty();
+    req.checkBody('pass', 'Password field is required').notEmpty();
+    req.checkBody('pass2', 'Passwords do not match').equals(pass);
 
-  // Check Errors
-  var errors = req.validationErrors();
+    // Check Errors
+    var errors = req.validationErrors();
 
-  if (errors) {
-    res.render('public/register', {
-      errors: errors
-    });
-  } else {
-    var newUser = new User({
-      name: name,
-      email: email,
-      username: username,
-      password: password,
-      profileimage: profileimage,
-      userType: userType,
-      status: status
-    });
+    if (errors) {
+      res.render('public/register', {
+        errors: errors
+      });
+    } else {
+      var newUser = new User({
+        name: name,
+        email: mail,
+        username: username,
+        password: pass,
+        profileimage: avatar,
+        userType: level
+      });
 
-    User.createUser(newUser, function (err, user) {
-      if (err) throw err;
-      console.log(user);
-    });
+      User.createUser(newUser, function (err, user) {
+        if (err) throw err;
+        console.log(user);
+      });
 
-    req.flash('success_msg', 'You are now registered and can login');
-    res.redirect('/');
-  }
-});
+      req.flash('success_msg', 'You are now registered and can login');
+      res.redirect('/');
+    }
+  });
 
 router.get('/data', function (req, res, next) {
   User.find({}, ['-password'], (error, data) => {

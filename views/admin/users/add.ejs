@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="addModal">
+<div class="modal" tabindex="-1" role="dialog" id="addUserModal">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content  modal-lg">
             <div class="modal-header">
@@ -9,22 +9,42 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="addForm" method="post" action="/games">
+                    <form id="addForm" method="post" action="/user">
                         <div class="form-group">
                             <label class="font-weight-bold">Name</label>
                             <input class="form-control" id="addName" name="name" type="text" placeholder="Enter Name" />
                         </div>
-
                         <div class="form-group">
-                            <label class="font-weight-bold">Seri</label>
+                            <label class="font-weight-bold">Mail</label>
+                            <input class="form-control" id="addEmail" name="mail" type="text"
+                                placeholder="Enter Email" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Username</label>
+                            <input class="form-control" id="addUsername" name="username" type="text"
+                                placeholder="Enter Username" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Password</label>
+                            <input class="form-control" id="addPassWord" name="pass" type="text"
+                                placeholder="Enter PassWord" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Re Password</label>
+                            <input class="form-control" id="addPassword2" name="pass2" type="text"
+                                placeholder="Re Password" />
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Level</label>
+                            <input class="form-control" id="addName" name="level" type="text" placeholder="Enter Name" />
                         </div>
                         <div class="form-group">
                             <input hidden="true" class="form-control" id="addAvatar" name="avatar" type="text" />
                         </div>
                     </form>
                     <!-- Image Upload -->
-                    <form method="post" action="#" name='photo' id='imageuploadform' enctype="multipart/form-data">
-                        <input hidden="true" id="fileupload" type="file" name="image[]" multiple>
+                    <form method="post" action="#" name='photo' id='imageuploadform'>
+                        <input hidden="true" id="fileupload" type="file" name="image">
 
                         <div id="divleft">
                             <button id="btnupload" class="btn btn-primary">Upload Image</button>
@@ -34,7 +54,6 @@
                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div id="result">
-
                         </div>
                     </form>
                     <!-- End Image Upload -->
@@ -47,59 +66,12 @@
 </div>
 
 <script>
-    var arrLinkDownload = [];
-    var countLinkDownLoad = 0;
-    var linkDownload, typeLinkDownload, checked;
-    $('#btnDownloadLink').on('click', () => {
-        linkDownload = $('#linkDownload').val();
-        typeLinkDownload = $('#typeLinkDownload').val();
-        checked = false;
-
-        for (let a = 0; a < arrLinkDownload.length; a++) {
-            if (arrLinkDownload[a].link == linkDownload && arrLinkDownload[a].typeLink == typeLinkDownload) {
-                checked = true;
-            }
-        }
-        if (checked == false) {
-            $('#list-add-downloadLink').append('<div class="col-md-9" id="link-item-' + countLinkDownLoad + '">link : <a href="' + linkDownload + '">' + linkDownload + '</a> Type : ' + typeLinkDownload + '</div><div class="col-md-3"><a class="remove" onclick="removeLink(' + countLinkDownLoad + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
-            arrLinkDownload.push({ link: linkDownload, typeLink: typeLinkDownload });
-            $('#addDownloadLink').val(JSON.stringify(arrLinkDownload));
-            countLinkDownLoad++;
-        } else {
-            alert('Link da ton tai');
-        }
-    });
-
-    function removeLink(i) {
-        var currentUrl = $('#link-item-' + i).children().attr('href');
-        for (let a = 0; a < arrLinkDownload.length; a++) {
-            if (arrLinkDownload[a].link == currentUrl) {
-                arrLinkDownload.splice(a, 1);
-                $('#addDownloadLink').val(JSON.stringify(arrLinkDownload));
-                $('#link-item-' + i).next().remove();
-                $('#link-item-' + i).remove();
-            }
-        }
-    }
-
     $('#addSubmit').on('click', () => {
         $('#addForm').submit();
     });
 
-    $('#add').on('click', function () {
-        $('#addCategory').multiselect({
-            enableClickableOptGroups: true
-        });
-        CKEDITOR.instances['addSystemRequirements'].setData("<p><strong>CPU:</strong> Core i7 6700</p><p><strong>CPU SPEED:</strong> 2.0 GHz</p><p><strong>RAM:</strong> 16 GB</p><p><strong>OS:</strong> Windows 7/Vista/XP PC (32 or 64 bit)</p><p><strong>VIDEO CARD:</strong> DirectX 9.0c compliant video card with 512 MB of RAM - NVIDIA GeForce 7600 GT & ATI Radeon X1800.</p><p><strong>PIXEL SHADER:</strong> 3.0</p><p><strong>VERTEX SHADER:</strong> 3.0</p><p><strong>SOUND CARD:</strong> Có</p><p><strong>FREE DISK SPACE:</strong> 16 GB</p><p><strong>DEDICATED VIDEO RAM:</strong> 512 MB</p>");
-        $('#addModal').modal('show');
-    });
-
     $('#addForm').submit(function () {
-        for (instance in CKEDITOR.instances)
-            CKEDITOR.instances[instance].updateElement();
-
         $(this).ajaxSubmit({
-
             error: function (xhr) {
                 alert(JSON.stringify(xhr));
             },
@@ -114,16 +86,14 @@
                     });
                 }
                 else {
-                    // response.errors.forEach(err => {
-                    //     $.jnoty(err.msg, {
-                    //         theme: 'jnoty-danger',
-                    //         life: 3000,
-                    //         icon: 'fa fa-check-circle',
-                    //         position: 'top-right'
-                    //     });
-                    // });
-                        console.log(response);
-                        
+                    response.errors.forEach(err => {
+                        $.jnoty(err.msg, {
+                            theme: 'jnoty-danger',
+                            life: 3000,
+                            icon: 'fa fa-check-circle',
+                            position: 'top-right'
+                        });
+                    });
                 }
                 $table.bootstrapTable('refresh');
             }
@@ -183,9 +153,9 @@
                 processData: false,
 
                 success: function (data) {
-                    imgData.push({ link: data.data.link });
-                    $('#addAvatar').val(JSON.stringify(imgData));
-                    $('#result').append('<div class="img-item" id="uploadedImage' + i + '"><i class="close fa fa-remove" onclick="removeImage(' + i + ')"></i><img src="' + data.data.link + '" width="200px"/></div>');
+                    $('#addAvatar').val(data.data.link);
+                    $('#result').empty();
+                    $('#result').append('<div class="img-item" id="uploadedImage' + i + '"><i class="close fa fa-remove" onclick="removeImage()"></i><img src="' + data.data.link + '" width="200px"/></div>');
                     if (count.reduce(getSum) / (count.length).toFixed(0) == 100) {
                         $.jnoty('Upload Images Success !!', {
                             theme: 'jnoty-success',
@@ -197,13 +167,12 @@
                 },
 
                 error: function (data) {
-                    //$.jnoty(data.responseJSON.data.error.message, {
-                    //    theme: 'jnoty-danger',
-                    //    life: 3000,
-                    //    icon: 'fa fa-check-circle',
-                    //    position: 'top-right'
-                    //});
-                    console.log(data);
+                    $.jnoty(data.responseJSON.data.error.message, {
+                       theme: 'jnoty-danger',
+                       life: 3000,
+                       icon: 'fa fa-check-circle',
+                       position: 'top-right'
+                    });
                 }
             });
         }
@@ -218,16 +187,8 @@
         return total + num;
     }
 
-    function removeImage(i) {
-
-        var currentUrl = $('#uploadedImage' + i + ' img').attr("src");
-        for (let a = 0; a < imgData.length; a++) {
-            if (imgData[a].link == currentUrl) {
-                imgData.splice(a, 1);
-                $('#addAvatar').val(JSON.stringify(imgData));
-                $('#uploadedImage' + i).remove();
-            }
-        }
-
+    function removeImage() {
+                $('#addAvatar').val('');
+                $('#result').empty();
     }
 </script>
