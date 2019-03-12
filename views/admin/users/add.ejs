@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form id="addForm" method="post" action="/user">
+                    <form id="addForm" method="post" action="/users">
                         <div class="form-group">
                             <label class="font-weight-bold">Name</label>
                             <input class="form-control" id="addName" name="name" type="text" placeholder="Enter Name" />
@@ -26,17 +26,25 @@
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Password</label>
-                            <input class="form-control" id="addPassWord" name="pass" type="text"
+                            <input class="form-control" id="addPassWord" name="pass" type="password"
                                 placeholder="Enter PassWord" />
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Re Password</label>
-                            <input class="form-control" id="addPassword2" name="pass2" type="text"
+                            <input class="form-control" id="addPassword2" name="pass2" type="password"
                                 placeholder="Re Password" />
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Level</label>
-                            <input class="form-control" id="addName" name="level" type="text" placeholder="Enter Name" />
+                            <select name="" id="addLevel" name="level" class="form-control">
+                                <%
+                                    for(let i = 1; i < 10 ; i++){
+                                        %>
+                                        <option value="<%=i%>"><%=i%></option>
+                                        <%
+                                    }
+                                %>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input hidden="true" class="form-control" id="addAvatar" name="avatar" type="text" />
@@ -93,7 +101,7 @@
                             icon: 'fa fa-check-circle',
                             position: 'top-right'
                         });
-                    });
+                    });                    
                 }
                 $table.bootstrapTable('refresh');
             }

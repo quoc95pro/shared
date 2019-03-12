@@ -7,39 +7,23 @@ var request = require('request');
 var async = require("async");
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  Game.find({})
-    .limit(8)
-    .sort({ views: -1 })
-    .exec((err, topViewGame) => {
-      if (err) {
-        console.log(err);
-      }
-      Game.find({})
-        .limit(8)
-        .sort({ downloads: -1 })
-        .exec((err, topDownloadGame) => {
-          if (err) {
-            console.log(err);
-          }
-          Game.find({})
-            .limit(8)
-            .sort({ postedDate: -1 })
-            .exec((err, newestGame) => {
-              if (err) {
-                console.log(err);
-              }
-              res.render('public/index', {
-                title: 'Index',
-                topViewGame: topViewGame,
-                topDownloadGame: topDownloadGame,
-                newestGame: newestGame,
-                moment: moment,
-                title: 'taigamekhung.com - Free Games '
-              });
-            });
-        });
+router.get('/', async (req, res, next) => {
+  try {
+    let topViewGame = await Game.find({}).limit(8).sort({ views: -1 }).exec();
+    let topDownloadGame = await Game.find({}).limit(8).sort({ downloads: -1 }).exec();
+    let newestGame = await Game.find({}).limit(8).sort({ postedDate: -1 }).exec();
+
+    res.render('public/index', {
+      topViewGame: topViewGame,
+      topDownloadGame: topDownloadGame,
+      newestGame: newestGame,
+      moment: moment,
+      title: 'taigamekhung.com - Free Games '
     });
+  } catch (error) {
+    res.render('public/error');
+    console.log(error);
+  }
 });
 // Data test
 router.get('/data', function (req, res, next) {
@@ -51,7 +35,7 @@ router.get('/data', function (req, res, next) {
   });
 });
 
-router.get('/detail/:ename', function (req, res) {
+router.get('/detail/:ename', async (req, res) => {
   Game.findOne({ ename: req.params.ename }, function (err, game) {
     if (err) {
       console.log(err);
@@ -73,7 +57,7 @@ router.get('/detail/:ename', function (req, res) {
         });
     });
 
-     });
+  });
 });
 
 router.get('/countViews/:id', function (req, res) {
@@ -100,73 +84,58 @@ router.get('/countDownloads/:id', function (req, res) {
   });
 });
 
-router.get('/category/:cate/:page', function (req, res) {
-  Game.find({ 'category.eName': req.params.cate })
-    .limit(14)
-    .skip(req.params.page * 14 - 14)
-    .exec((err, game) => {
-      if (err) {
-        console.log(err);
-      }
-      Game.find({ 'category.eName': req.params.cate })
-        .count((err, countRow) => {
-          if (err) {
-            console.log(err);
-          }
-          var maxPage = Math.floor(countRow / 14);
-          if (countRow % 14 >= 1) {
-            maxPage += 1;
-          }
+router.get('/category/:cate/:page', async (req, res) => {
+  try {
+    let game = await Game.find({ 'category.eName': req.params.cate }).limit(14).skip(req.params.page * 14 - 14).exec();
+    let countRow = await Game.find({ 'category.eName': req.params.cate }).count();
+    let cateAll = await Category.find({}).exec();
 
-          Category.find({})
-            .exec((err, cateAll) => {
-              res.render('public/category', {
-                game: game,
-                type: 'category',
-                cate: req.params.cate,
-                currentPage: req.params.page,
-                cateAll: cateAll,
-                maxPage: maxPage,
-                title: req.params.cate + " - taigamekhung.com"
-              });
-            });
+    var maxPage = Math.floor(countRow / 14);
+    if (countRow % 14 >= 1) {
+      maxPage += 1;
+    }
 
-        })
-    })
+    res.render('public/category', {
+      game: game,
+      type: 'category',
+      cate: req.params.cate,
+      currentPage: req.params.page,
+      cateAll: cateAll,
+      maxPage: maxPage,
+      title: req.params.cate + " - taigamekhung.com"
+    });
+
+  } catch (error) {
+    res.render('public/error');
+    console.log(error);
+  }
 });
 
-router.get('/group/:group/:page', function (req, res) {
-  Game.find({ 'category.egroup': req.params.group })
-    .limit(14)
-    .skip(req.params.page * 14 - 14)
-    .exec((err, game) => {
-      if (err) {
-        console.log(err);
-      }
-      Game.find({ 'category.egroup': req.params.group })
-        .count((err, countRow) => {
-          if (err) {
-            console.log(err);
-          }
-          var maxPage = Math.floor(countRow / 14);
-          if (countRow % 14 >= 1) {
-            maxPage += 1;
-          }
+router.get('/group/:group/:page', async (req, res) => {
+  try {
+    let game = await Game.find({ 'category.egroup': req.params.group }).limit(14).skip(req.params.page * 14 - 14).exec();
+    let countRow = await Game.find({ 'category.egroup': req.params.group }).count();
+    let cateAll = await Category.find({}).exec();
 
-          Category.find({})
-            .exec((err, cateAll) => {
-              res.render('public/category', {
-                game: game,
-                type: 'group',
-                cate: req.params.group,
-                currentPage: req.params.page,
-                cateAll: cateAll,
-                maxPage: maxPage,
-                title: req.params.group + " - taigamekhung.com"
-              });
-            });
-        })
-    })
+    var maxPage = Math.floor(countRow / 14);
+    if (countRow % 14 >= 1) {
+      maxPage += 1;
+    }
+
+    res.render('public/category', {
+      game: game,
+      type: 'group',
+      cate: req.params.group,
+      currentPage: req.params.page,
+      cateAll: cateAll,
+      maxPage: maxPage,
+      title: req.params.group + " - taigamekhung.com"
+    });
+
+  } catch (error) {
+    res.render('public/error');
+    console.log(error);
+  }
 });
 
 router.get('/search/:name', function (req, res) {

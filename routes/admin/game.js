@@ -8,29 +8,23 @@ const { check } = require('express-validator/check');
 
 
 /* GET Game Page. */
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res) => {
   if (req.isAuthenticated()) {
-    Category.find({}, ['-_id', 'name', 'group', 'eName','egroup'], function (err, category) {
 
-      if (err) {
-        console.log(err);
-      }
-
-      Seri.find({}, function (err, seri) {
-        if (err) {
-          console.log(err);
-        }
-        res.render('admin/game/index', { category: category, seri: seri });
-      });
-
-    });
+    try {
+      let category = await Category.find({}, ['-_id', 'name', 'group', 'eName','egroup']);
+      let seri = await Seri.find({});
+      res.render('admin/game/index', { category: category, seri: seri });
+    } catch (error) {
+      res.render('admin/game/index', { error : error });
+    }
+    
   } else {
     res.redirect('admin/login');
   }
 });
 
 // Add game
-
 router.post('/', function (req, res, next) {
   if (req.isAuthenticated()) {
 
