@@ -28,6 +28,7 @@ router.post('/', (req, res, next) => {
     req.checkBody('username', 'Username field is required').notEmpty();
     req.checkBody('pass', 'Password field is required').notEmpty();
     req.checkBody('pass2', 'Passwords do not match').equals(pass);
+    req.checkBody('pass', 'Password field is min 5 character').isLength({ min: 5 });
 
     // Check Errors
     var errors = req.validationErrors();
@@ -52,6 +53,67 @@ router.post('/', (req, res, next) => {
         }
       });
     }
+  } else {
+    res.redirect('admin/login');
+  }
+});
+
+// Edit user
+router.put('/', function (req, res, next) {
+
+  if (req.isAuthenticated()) {
+    // Form Validator
+    req.checkBody('name', 'Name field is required').notEmpty();
+    req.checkBody('mail', 'Email field is required').notEmpty();
+    req.checkBody('mail', 'Email is not valid').isEmail();
+    req.checkBody('username', 'Username field is required').notEmpty();
+    req.checkBody('pass', 'Password field is required').notEmpty();
+    req.checkBody('pass2', 'Passwords do not match').equals(req.body.pass);
+    req.checkBody('pass', 'Password field is min 5 character').isLength({ min: 5 });
+    // Check Errors
+    var errors = req.validationErrors();
+
+    if (errors) {
+      res.send({ errors: errors });
+    } else {
+      let id = req.body.id;
+      let name = req.body.name;
+      let mail = req.body.mail;
+      let username = req.body.username;
+      let pass = req.body.pass;
+      let level = req.body.level;
+      let avatar = req.body.avatar;
+
+      User.getUserById(id, function (err, user) {
+        if (err) res.send({ errors: err });
+        user.name = name;
+        user.email = mail;
+        user.username = username;
+        user.password = pass;
+        user.userType = level;
+        user.profileimage = avatar;
+        User.findByIdAndUpdate(id, user, () => {
+          if (err) res.send({ errors: err });
+          res.send({ success_msg: 'Edit success' });
+        });
+      });
+    }
+  } else {
+    res.redirect('admin/login');
+  }
+});
+
+// Delete user
+
+router.delete('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    var id = req.body.id;
+    User.findByIdAndDelete(id, (err, a) => {
+      if (err) res.send({ errors: err });
+      res.send({ success_msg: 'Deleted : ' + a.name });
+    });
+  } else {
+    res.redirect('admin/login');
   }
 });
 
@@ -63,14 +125,5 @@ router.get('/data', function (req, res, next) {
     res.send(data);
   });
 });
-
-// Logout User
-router.get('/logout', function (req, res) {
-  req.logout();
-  req.flash('success_msg', 'You are now logged out');
-  res.redirect('/users/login');
-});
-
-
 
 module.exports = router;

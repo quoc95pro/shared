@@ -55,12 +55,6 @@ function initTable() {
                     sortable: true,
                     align: 'center',
                     footerFormatter: totalPriceFormatter
-                }, {
-                    field: 'status',
-                    title: 'Status',
-                    sortable: true,
-                    align: 'center',
-                    footerFormatter: totalPriceFormatter
                 },
                 {
                     field: 'operate',
@@ -99,7 +93,7 @@ function initTable() {
         var message = 'a ';
         $table.bootstrapTable('getSelections').forEach(obj => {
             $.ajax({
-                url: "/games",
+                url: "/users",
                 method: "delete",
                 data: { id: obj._id }
             })
@@ -168,6 +162,16 @@ function operateFormatter(value, row, index) {
 
 window.operateEvents = {
     'click .edit': function (e, value, row, index) {
+        document.getElementById('editId').value = row._id;
+        document.getElementById('editName').value = row.name;
+        document.getElementById('editEmail').value = row.email;
+        document.getElementById('editUserName').value = row.username;
+        document.getElementById('editPassword').value = '******';
+        document.getElementById('editPassword2').value = '******';
+        document.getElementById('editLevel').value = row.userType;
+        document.getElementById('editAvatar').value = row.profileimage;
+        $('#resultEdit').empty();
+        $('#resultEdit').append('<div class="img-item"><i class="close fa fa-remove" onclick="removeImageEdit()"></i><img src="' + row.profileimage + '" width="200px"/></div>');
         $('#editModal').modal('show');
     },
     'click .remove': function (e, value, row, index) {
@@ -177,7 +181,7 @@ window.operateEvents = {
         });
 
         $.ajax({
-            url: "/games",
+            url: "/users",
             method: "delete",
             data: { id: row._id }
         })

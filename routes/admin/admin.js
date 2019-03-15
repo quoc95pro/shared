@@ -5,11 +5,13 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../../models/user');
 var Statistic = require('../../models/statistic');
+var Cash = require('../../models/cash');
 
 /* GET admin page */
-router.get('/', function (req, res, next) {
+router.get('/', async (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('admin/index');
+    let lastCash = await Cash.find({}).limit(1).sort({ date: -1 }).exec();
+    res.render('admin/index', {lastCash: lastCash});
   } else {
     res.redirect('admin/login');
   }
@@ -56,7 +58,8 @@ passport.use(new LocalStrategy(function (username, password, done) {
 
 
 router.get('/statistic', function (req, res, next) {
-  Statistic.find({}, ['-_id', 'ip', 'country', 'timezone', 'city'], function (err, statistic) {
+  Statistic.aggregate([{ $group: { _id: { ip: '$ip',convertedDate: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }, country: '$country',timezone: '$timezone',city: '$city' } } }])
+  .sort({ date: -1 }).exec( function (err, statistic) {
     if (err) {
       console.log(err);
     }
