@@ -28,12 +28,12 @@
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-2">
-                                <i class="pe-7s-cart"></i>
+                                <i class="pe-7s-download"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
                                     <div class="stat-text"><span class="count"><%=lastCash[0].views%></span></div>
-                                    <div class="stat-heading">Views</div>
+                                    <div class="stat-heading">Downloads</div>
                                 </div>
                             </div>
                         </div>
@@ -46,12 +46,17 @@
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-3">
-                                <i class="pe-7s-browser"></i>
+                                <i class="pe-7s-glasses"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">349</span></div>
-                                    <div class="stat-heading">Templates</div>
+                                    <div class="stat-text"><span class="count"><%if(views[0]){%>
+                                            <%=views[0].count%>
+                                            <%} else {%>
+                                            <%=0%>
+                                            <%}%>    
+                                    </span></div>
+                                    <div class="stat-heading">Visitors</div>
                                 </div>
                             </div>
                         </div>
@@ -64,12 +69,12 @@
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-4">
-                                <i class="pe-7s-users"></i>
+                                <i class="pe-7s-play"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">2986</span></div>
-                                    <div class="stat-heading">Clients</div>
+                                    <div class="stat-text"><span class="count"><%=countGame%></span></div>
+                                    <div class="stat-heading">Games</div>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +167,8 @@
                                             <td class="serial">1.</td>
                                             <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    <a href="#"><img class="rounded-circle"
+                                                            src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
                                                             alt=""></a>
                                                 </div>
                                             </td>
@@ -178,7 +184,8 @@
                                             <td class="serial">2.</td>
                                             <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    <a href="#"><img class="rounded-circle"
+                                                            src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
                                                             alt=""></a>
                                                 </div>
                                             </td>
@@ -194,7 +201,8 @@
                                             <td class="serial">3.</td>
                                             <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    <a href="#"><img class="rounded-circle"
+                                                            src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
                                                             alt=""></a>
                                                 </div>
                                             </td>
@@ -210,7 +218,8 @@
                                             <td class="serial">4.</td>
                                             <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    <a href="#"><img class="rounded-circle"
+                                                            src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
                                                             alt=""></a>
                                                 </div>
                                             </td>
@@ -226,7 +235,8 @@
                                             <td class="serial">5.</td>
                                             <td class="avatar pb-0">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    <a href="#"><img class="rounded-circle"
+                                                            src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
                                                             alt=""></a>
                                                 </div>
                                             </td>
@@ -322,7 +332,8 @@
 
                                             <li>
                                                 <label>
-                                                    <input type="checkbox" checked><i class="check-box"></i><span>Creating
+                                                    <input type="checkbox" checked><i
+                                                        class="check-box"></i><span>Creating
                                                         component page</span>
                                                     <a href='#' class="fa fa-times"></a>
                                                     <a href='#' class="fa fa-pencil"></a>
@@ -348,7 +359,8 @@
                                     <li>
                                         <div class="msg-received msg-container">
                                             <div class="avatar">
-                                                <img src="https://colorlib.com/polygon/elaadmin/images/admin.jpg" alt="">
+                                                <img src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    alt="">
                                                 <div class="send-time">11.11 am</div>
                                             </div>
                                             <div class="msg-box">
@@ -367,7 +379,8 @@
                                     <li>
                                         <div class="msg-sent msg-container">
                                             <div class="avatar">
-                                                <img src="https://colorlib.com/polygon/elaadmin/images/admin.jpg" alt="">
+                                                <img src="https://colorlib.com/polygon/elaadmin/images/admin.jpg"
+                                                    alt="">
                                                 <div class="send-time">11.11 am</div>
                                             </div>
                                             <div class="msg-box">
@@ -442,8 +455,10 @@
                     <div class="modal-body"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                        <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                        <button type="button" class="btn btn-success save-event waves-effect waves-light">Create
+                            event</button>
+                        <button type="button" class="btn btn-danger delete-event waves-effect waves-light"
+                            data-dismiss="modal">Delete</button>
                     </div>
                 </div>
             </div>
@@ -462,11 +477,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label class="control-label">Category Name</label>
-                                    <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
+                                    <input class="form-control form-white" placeholder="Enter name" type="text"
+                                        name="category-name" />
                                 </div>
                                 <div class="col-md-6">
                                     <label class="control-label">Choose Category Color</label>
-                                    <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
+                                    <select class="form-control form-white" data-placeholder="Choose a color..."
+                                        name="category-color">
                                         <option value="success">Success</option>
                                         <option value="danger">Danger</option>
                                         <option value="info">Info</option>
@@ -492,3 +509,55 @@
 </div>
 <!-- /.content -->
 <% include partials/footer %>
+<script>
+    jQuery(document).ready(function ($) {
+        var today = new Date();
+        "use strict";
+        // Traffic Chart using chartist
+        if ($('#traffic-chart').length) {
+
+            $.ajax({
+            url: "/admin/today",
+            method: "get"
+        })
+            .done(function (response) {
+                console.log(response);
+                
+                var chart = new Chartist.Line('#traffic-chart', {
+                labels: [response[0]._id, response[1]._id, response[2]._id, response[3]._id, response[4]._id, response[5]._id, response[6]._id],
+                series: [
+                    [response[0].count, response[1].count, response[2].count, response[3].count, response[4].count, response[5].count, response[6].count],
+                    [response[0].views, response[1].views, response[2].views, response[3].views, response[4].views, response[5].views, response[6].views],
+                    [response[0].earned, response[1].earned, response[2].earned, response[3].earned, response[4].earned, response[5].earned, response[6].earned]
+                ]
+            }, {
+                    low: 0,
+                    showArea: true,
+                    showLine: false,
+                    showPoint: false,
+                    fullWidth: true,
+                    axisX: {
+                        showGrid: true
+                    }
+                });
+
+                chart.on('draw', function (data) {
+                if (data.type === 'line' || data.type === 'area') {
+                    data.element.animate({
+                        d: {
+                            begin: 2000 * data.index,
+                            dur: 2000,
+                            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                            to: data.path.clone().stringify(),
+                            easing: Chartist.Svg.Easing.easeOutQuint
+                        }
+                    });
+                }
+            }); 
+
+            });
+
+        }
+    });
+      
+</script>

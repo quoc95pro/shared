@@ -92,7 +92,7 @@ function onListening() {
 }
 
 
-io.sockets.on('connection', function (socket) {
+io.sockets.on('connection', function (socket) {  
   let clientCount = io.engine.clientsCount;
   io.sockets.emit("user count", clientCount);
   // console.log('Headers: ' + JSON.stringify(socket.request.headers));

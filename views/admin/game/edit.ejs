@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">Download Link</label>
-                            <input class="form-control" id="editLinkDownloads" name="downloadLink" type="text"
+                            <input hidden="true" class="form-control" id="editLinkDownloads" name="downloadLink" type="text"
                                 placeholder="Download Link" />
                         </div>
 
@@ -114,7 +114,7 @@
             }
         }
         if (checkedEdit == false) {
-            $('#list-edit-downloadLink').append('<div class="col-md-9" id="link-edit-item-' + countEditLinkDownLoad + '">link : <a href="' + editLinkDownload + '">' + editLinkDownload + '</a> Type : ' + editTypeLinkDownload + '</div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + countEditLinkDownLoad + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
+            $('#list-edit-downloadLink').append('<div class="col-md-9 added-link" id="link-edit-item-' + countEditLinkDownLoad + '">link : <a href="' + editLinkDownload + '">' + editLinkDownload + '</a> Type : <span>' + editTypeLinkDownload + '</span></div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + countEditLinkDownLoad + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
             arrEditLinkDownload.push({ link: editLinkDownload, typeLink: editTypeLinkDownload });
             $('#editLinkDownloads').val(JSON.stringify(arrEditLinkDownload));
             countEditLinkDownLoad++;

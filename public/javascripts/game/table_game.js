@@ -211,7 +211,7 @@ window.operateEvents = {
         arrEditLinkDownload = row.downloadLink;
         $('#list-edit-downloadLink').empty();
         for (let index = 0; index < arrEditLinkDownload.length; index++) {
-            $('#list-edit-downloadLink').append('<div class="col-md-9" id="link-edit-item-' + index + '">link : <a href="' + row.downloadLink[index].link + '">' + arrEditLinkDownload[index].link + '</a> Type : ' + arrEditLinkDownload[index].typeLink + '</div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + index + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
+            $('#list-edit-downloadLink').append('<div class="col-md-9 added-link" id="link-edit-item-' + index + '">link : <a href="' + row.downloadLink[index].link + '">' + arrEditLinkDownload[index].link + '</a> Type : ' + arrEditLinkDownload[index].typeLink + '</div><div class="col-md-3"><a class="remove" onclick="removeEditLink(' + index + ')" href="#" title="Remove"><i class="fa fa-trash"></i></a></div>');
             countEditLinkDownLoad ++;
         }
         
