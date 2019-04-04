@@ -45,8 +45,13 @@ router.get('/detail/:ename', async (req, res) => {
 
       request('https://123link.co/api?api=56fe0dae1ba5b43b8514b1565c9e97412ff3c21e&url=' + value.link.replace('&', '%26'), function (error, response, body) {
 
-        if (error) console.log(error);
-        game.downloadLink[key].link = JSON.parse(body).shortenedUrl;
+        if (error) {
+          console.log('short link err: ' + error);
+        } else if(JSON.parse(body).status == 'success'){
+          game.downloadLink[key].link = JSON.parse(body).shortenedUrl;
+        } else {
+          console.log(game.name + ': ' + JSON.stringify(body));
+        }
         callback();
       });
     }, err => {
