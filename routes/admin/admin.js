@@ -89,6 +89,11 @@ passport.use(new LocalStrategy(function (username, password, done) {
   });
 }));
 
+router.get('/ip', async (req, res, next) => {
+    let arr = await Statistic.find({country: {$ne: 'Unknown'},'ip':{'$not': /66.249/ }},['-_id', 'ip', 'date', 'country']).exec(); 
+    res.send(arr);
+});
+
 
 router.get('/statistic', async (req, res, next) => {
   let today = new Date();
